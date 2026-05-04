@@ -1,51 +1,52 @@
 ---
-description: Generate a custom checklist for the current feature based on user requirements.
+description: توليد قائمة تحقق مخصّصة للميزة الحالية بناءً على طلب المستخدم والسياق.
 scripts:
   sh: scripts/bash/check-prerequisites.sh --json
   ps: scripts/powershell/check-prerequisites.ps1 -Json
 ---
 
-## Checklist Purpose: "Unit Tests for English"
+## غرض قائمة التحقق: «اختبارات وحدية لجودة المتطلبات»
 
-**CRITICAL CONCEPT**: Checklists are **UNIT TESTS FOR REQUIREMENTS WRITING** - they validate the quality, clarity, and completeness of requirements in a given domain.
+**الفكرة الأساسية**: قوائم التحقق هنا **ليست اختبار تنفيذ** — بل **اختبارات وحدية لكتابة المتطلبات**: تتحقق من جودة ووضوح واكتمال المتطلبات في المجال المحدد.
 
-**NOT for verification/testing**:
+**ليس للتحقق من سلوك المنتج**:
 
-- ❌ NOT "Verify the button clicks correctly"
-- ❌ NOT "Test error handling works"
-- ❌ NOT "Confirm the API returns 200"
-- ❌ NOT checking if code/implementation matches the spec
+- ❌ ليس «تأكد أن الزر ينقر بشكل صحيح»
+- ❌ ليس «اختبر أن معالجة الخطأ تعمل»
+- ❌ ليس «تأكد أن الـ API يرجع 200»
+- ❌ ليس التحقق من تطابق الشيفرة مع المواصفة
 
-**FOR requirements quality validation**:
+**للتحقق من جودة المتطلبات نفسها**:
 
-- ✅ "Are visual hierarchy requirements defined for all card types?" (completeness)
-- ✅ "Is 'prominent display' quantified with specific sizing/positioning?" (clarity)
-- ✅ "Are hover state requirements consistent across all interactive elements?" (consistency)
-- ✅ "Are accessibility requirements defined for keyboard navigation?" (coverage)
-- ✅ "Does the spec define what happens when logo image fails to load?" (edge cases)
+- ✅ «هل عُرّفت متطلبات التسلسل الهرمي البصري لكل أنواع البطاقات؟» (اكتمال)
+- ✅ «هل جُمّع مصطلح «عرض بارز» بقياسات/مواضع محددة؟» (وضوح)
+- ✅ «هل متطلبات حالة التمرير متسقة عبر كل العناصر التفاعلية؟» (اتساق)
+- ✅ «هل عُرّفت متطلبات إمكانية الوصول للتنقل بلوحة المفاتيح؟» (تغطية)
+- ✅ «هل المواصفة تحدد ماذا يحدث عند فشل تحميل شعار؟» (حالات طرفية)
 
-**Metaphor**: If your spec is code written in English, the checklist is its unit test suite. You're testing whether the requirements are well-written, complete, unambiguous, and ready for implementation - NOT whether the implementation works.
+**تشبيه**: إن كانت المواصفة «شيفرة» بلغة طبيعية، فقائمة التحقق هي «اختبارات وحدها» — تختبر هل المتطلبات مكتوبة جيداً وكاملة وغير غامضة وجاهزة للتنفيذ، **لا** هل التنفيذ يعمل.
 
-## User Input
+## إدخال المستخدم
 
 ```text
 $ARGUMENTS
 ```
 
-You **MUST** consider the user input before proceeding (if not empty).
+راعِ مدخل المستخدم قبل المتابعة (إن لم يكن فارغاً).
 
-## Pre-Execution Checks
+## قبل ما تبدأ
 
-**Check for extension hooks (before checklist generation)**:
-- Check if `.specify/extensions.yml` exists in the project root.
-- If it exists, read it and look for entries under the `hooks.before_checklist` key
-- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
-- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- For each executable hook, output the following based on its `optional` flag:
-  - **Optional hook** (`optional: true`):
+**خطافات الامتداد (قبل توليد القائمة)**:
+
+- تحقق من وجود `.specify/extensions.yml` في جذر المشروع.
+- إن وُجد، اقرأه وابحث عن المفتاح `hooks.before_checklist`.
+- إن تعذر تحليل YAML أو كان غير صالح، تخطَّ فحص الخطافات بصمت وتابع بشكل طبيعي.
+- صفِّ الخطافات التي `enabled: false` صراحةً. الخطافات بلا حقل `enabled` تُعامل كمفعّلة افتراضياً.
+- لكل خطاف متبقٍ، **لا** تحاول تفسير أو تقييم تعبيرات `condition`:
+  - إن لم يكن للخطاف حقل `condition` أو كان فارغاً/null، اعتبر الخطاف قابلاً للتنفيذ.
+  - إن عرّف الخطاف `condition` غير فارغ، تخطَّ الخطاف واترك تقييم الشرط لتنفيذ HookExecutor.
+- لكل خطاف قابل للتنفيذ، اطبع ما يلي حسب `optional`:
+  - **خطاف اختياري** (`optional: true`):
     ```
     ## Extension Hooks
 
@@ -56,7 +57,7 @@ You **MUST** consider the user input before proceeding (if not empty).
     Prompt: {prompt}
     To execute: `/{command}`
     ```
-  - **Mandatory hook** (`optional: false`):
+  - **خطاف إلزامي** (`optional: false`):
     ```
     ## Extension Hooks
 
@@ -66,243 +67,218 @@ You **MUST** consider the user input before proceeding (if not empty).
 
     Wait for the result of the hook command before proceeding to the Execution Steps.
     ```
-- If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+- إن لم يُسجَّل خطافات أو لم يوجد `.specify/extensions.yml`، تخطَّ بصمت.
 
-## Execution Steps
+## الخطوات
 
-1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS list.
-   - All file paths must be absolute.
-   - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **إعداد**: شغّل `{SCRIPT}` من جذر المستودع واقرأ JSON للحصول على FEATURE_DIR وقائمة AVAILABLE_DOCS.
+   - كل المسارات يجب أن تكون مطلقة.
+   - للاقتباس المفرد داخل الوسائط مثل "I'm Groot" استخدم الهروب: مثل 'I'\''m Groot' (أو مزدوج إن أمكن: "I'm Groot").
 
-2. **Clarify intent (dynamic)**: Derive up to THREE initial contextual clarifying questions (no pre-baked catalog). They MUST:
-   - Be generated from the user's phrasing + extracted signals from spec/plan/tasks
-   - Only ask about information that materially changes checklist content
-   - Be skipped individually if already unambiguous in `$ARGUMENTS`
-   - Prefer precision over breadth
+2. **توضيح النية (ديناميكي)**: استنتج حتى **ثلاثة** أسئلة توضيحية سياقية (بلا كتالوج جاهز). يجب أن:
+   - تُولَّد من صياغة المستخدم + إشارات مستخرجة من spec/plan/tasks
+   - تسأل فقط عما يغيّر محتوى القائمة جوهرياً
+   - تُتخطّى إن كان الجواب واضحاً أصلاً في `$ARGUMENTS`
+   - تفضّل الدقة على الاتساع
 
-   Generation algorithm:
-   1. Extract signals: feature domain keywords (e.g., auth, latency, UX, API), risk indicators ("critical", "must", "compliance"), stakeholder hints ("QA", "review", "security team"), and explicit deliverables ("a11y", "rollback", "contracts").
-   2. Cluster signals into candidate focus areas (max 4) ranked by relevance.
-   3. Identify probable audience & timing (author, reviewer, QA, release) if not explicit.
-   4. Detect missing dimensions: scope breadth, depth/rigor, risk emphasis, exclusion boundaries, measurable acceptance criteria.
-   5. Formulate questions chosen from these archetypes:
-      - Scope refinement (e.g., "Should this include integration touchpoints with X and Y or stay limited to local module correctness?")
-      - Risk prioritization (e.g., "Which of these potential risk areas should receive mandatory gating checks?")
-      - Depth calibration (e.g., "Is this a lightweight pre-commit sanity list or a formal release gate?")
-      - Audience framing (e.g., "Will this be used by the author only or peers during PR review?")
-      - Boundary exclusion (e.g., "Should we explicitly exclude performance tuning items this round?")
-      - Scenario class gap (e.g., "No recovery flows detected—are rollback / partial failure paths in scope?")
+   خوارزمية التوليد:
+   1. استخرج إشارات: كلمات مجال الميزة (مثل auth، زمن استجابة، UX، API)، مؤشرات مخاطر («حرج»، «يجب»، امتثال)، تلميحات أصحاب المصلحة («QA»، مراجعة، فريق أمن)، ومخرجات صريحة (a11y، rollback، عقود).
+   2. جمّع الإشارات في مجالات تركيز مرشحة (حد أقصى 4) مرتبة بالأهمية.
+   3. حدّد الجمهور والتوقيت المرجّح (مؤلف، مراجع، QA، إصدار) إن لم يكن صريحاً.
+   4. اكتشف الأبعاد الناقصة: اتساع النطاق، عمق/صرامة، تركيز المخاطر، حدود الاستبعاد، معايير قبول قابلة للقياس.
+   5. صِغ أسئلة من أنماط مثل:
+      - ضبط النطاق (مثال: هل يشمل نقاط تكامل مع X وY أم يقتصر على صحة الوحدة المحلية؟)
+      - أولوية المخاطر (أي مجالات مخاطر يجب أن تكون بوابات إلزامية؟)
+      - معايرة العمق (قائمة خفيفة قبل commit أم بوابة إصدار رسمية؟)
+      - إطار الجمهور (للمؤلف فقط أم للأقران في مراجعة PR؟)
+      - استبعاد حدودي (هل نستبعد عناصر ضبط الأداء هذه الجولة؟)
+      - فجوة فئات السيناريو (مثال: لا تدفقات استرداد — هل مسارات الفشل الجزئي/التراجع في النطاق؟)
 
-   Question formatting rules:
-   - If presenting options, generate a compact table with columns: Option | Candidate | Why It Matters
-   - Limit to A–E options maximum; omit table if a free-form answer is clearer
-   - Never ask the user to restate what they already said
-   - Avoid speculative categories (no hallucination). If uncertain, ask explicitly: "Confirm whether X belongs in scope."
+   قواعد صياغة الأسئلة:
+   - عند عرض خيارات، أنشئ جدولاً مضغوطاً: خيار | مرشح | لماذا يهم
+   - حد أقصى A–E؛ احذف الجدول إن كان السؤال الحر أوضح
+   - لا تطلب إعادة ما قاله المستخدم
+   - بلا فئات تخمينية. عند الشك اسأل صراحة: «أكّد هل X ضمن النطاق».
 
-   Defaults when interaction impossible:
-   - Depth: Standard
-   - Audience: Reviewer (PR) if code-related; Author otherwise
-   - Focus: Top 2 relevance clusters
+   افتراضات عند تعذر التفاعل:
+   - العمق: قياسي
+   - الجمهور: مراجع (PR) إن كان مرتبطاً بالشيفرة؛ وإلا المؤلف
+   - التركيز: أعلى مجالين صلة
 
-   Output the questions (label Q1/Q2/Q3). After answers: if ≥2 scenario classes (Alternate / Exception / Recovery / Non-Functional domain) remain unclear, you MAY ask up to TWO more targeted follow‑ups (Q4/Q5) with a one-line justification each (e.g., "Unresolved recovery path risk"). Do not exceed five total questions. Skip escalation if user explicitly declines more.
+   اطبع الأسئلة (Q1/Q2/Q3). بعد الإجابات: إن بقيت فئتا سيناريو أو أكثر (بديل / استثناء / استرداد / غير وظيفي) غير واضحة، يمكنك حتى سؤالين إضافيين (Q4/Q5) مع سطر تبرير لكل (مثال: «مخاطرة مسار استرداد غير محسوم»). لا تتجاوز خمسة أسئلة. لا تصعّد إذا رفض المستخدم صراحة المزيد.
 
-3. **Understand user request**: Combine `$ARGUMENTS` + clarifying answers:
-   - Derive checklist theme (e.g., security, review, deploy, ux)
-   - Consolidate explicit must-have items mentioned by user
-   - Map focus selections to category scaffolding
-   - Infer any missing context from spec/plan/tasks (do NOT hallucinate)
+3. **فهم الطلب**: ادمج `$ARGUMENTS` + إجابات التوضيح:
+   - استنتج موضوع القائمة (أمن، مراجعة، نشر، ux، …)
+   - اجمع عناصر must-have الصريحة
+   - اربط مجالات التركيز بهيكل الفئات
+   - استنتج السياق الناقص من spec/plan/tasks (بلا هلوسة)
 
-4. **Load feature context**: Read from FEATURE_DIR:
-   - spec.md: Feature requirements and scope
-   - plan.md (if exists): Technical details, dependencies
-   - tasks.md (if exists): Implementation tasks
+4. **تحميل سياق الميزة**: اقرأ من FEATURE_DIR:
+   - spec.md: المتطلبات والنطاق
+   - plan.md (إن وُجد): التفاصيل التقنية والتبعيات
+   - tasks.md (إن وُجد): مهام التنفيذ
 
-   **Context Loading Strategy**:
-   - Load only necessary portions relevant to active focus areas (avoid full-file dumping)
-   - Prefer summarizing long sections into concise scenario/requirement bullets
-   - Use progressive disclosure: add follow-on retrieval only if gaps detected
-   - If source docs are large, generate interim summary items instead of embedding raw text
+   **استراتيجية التحميل**:
+   - حمّل فقط الأجزاء اللازمة لمجالات التركيز النشطة (تجنب لصق الملف كاملاً)
+   - فضّل تلخيص الأقسام الطويلة إلى نقاط سيناريو/متطلبات
+   - كشف تدريجي: جلب إضافي فقط عند اكتشاف فجوات
+   - إن كانت المصادر ضخمة، ولّد عناصر قائمة وسيطة بدل نص خام
 
-5. **Generate checklist** - Create "Unit Tests for Requirements":
-   - Create `FEATURE_DIR/checklists/` directory if it doesn't exist
-   - Generate unique checklist filename:
-     - Use short, descriptive name based on domain (e.g., `ux.md`, `api.md`, `security.md`)
-     - Format: `[domain].md`
-   - File handling behavior:
-     - If file does NOT exist: Create new file and number items starting from CHK001
-     - If file exists: Append new items to existing file, continuing from the last CHK ID (e.g., if last item is CHK015, start new items at CHK016)
-   - Never delete or replace existing checklist content - always preserve and append
+5. **توليد القائمة** — «اختبارات وحدية للمتطلبات»:
+   - أنشئ المجلد `FEATURE_DIR/checklists/` إن لم يكن موجوداً
+   - اسم ملف فريد ووصفي:
+     - قصير حسب المجال (مثل `ux.md`، `api.md`، `security.md`)
+     - الصيغة: `[domain].md`
+   - سلوك الملف:
+     - إن لم يوجد الملف: أنشئه وابدأ الترقيم من CHK001
+     - إن وُجد: ألحق عناصر جديدة، وتابع من آخر CHK (مثال آخر عنصر CHK015 → ابدأ CHK016)
+   - لا تحذف ولا تستبدل المحتوى القديم — احفظ وألحق دائماً
 
-   **CORE PRINCIPLE - Test the Requirements, Not the Implementation**:
-   Every checklist item MUST evaluate the REQUIREMENTS THEMSELVES for:
-   - **Completeness**: Are all necessary requirements present?
-   - **Clarity**: Are requirements unambiguous and specific?
-   - **Consistency**: Do requirements align with each other?
-   - **Measurability**: Can requirements be objectively verified?
-   - **Coverage**: Are all scenarios/edge cases addressed?
+   **المبدأ الأساسي — اختبر المتطلبات لا التنفيذ**:
+   كل عنصر يقيّم **المتطلبات نفسها** من حيث:
+   - **الاكتمال**: هل كل المتطلبات اللازمة موجودة؟
+   - **الوضوح**: هل المتطلبات غير غامضة ومحددة؟
+   - **الاتساق**: هل المتطلبات متوافقة؟
+   - **القابلية للقياس**: هل يمكن التحقق منها موضوعياً؟
+   - **التغطية**: هل السيناريوهات/الحالات الطرفية مغطاة؟
 
-   **Category Structure** - Group items by requirement quality dimensions:
-   - **Requirement Completeness** (Are all necessary requirements documented?)
-   - **Requirement Clarity** (Are requirements specific and unambiguous?)
-   - **Requirement Consistency** (Do requirements align without conflicts?)
-   - **Acceptance Criteria Quality** (Are success criteria measurable?)
-   - **Scenario Coverage** (Are all flows/cases addressed?)
-   - **Edge Case Coverage** (Are boundary conditions defined?)
-   - **Non-Functional Requirements** (Performance, Security, Accessibility, etc. - are they specified?)
-   - **Dependencies & Assumptions** (Are they documented and validated?)
-   - **Ambiguities & Conflicts** (What needs clarification?)
+   **هيكل الفئات** — حسب أبعاد جودة المتطلبات:
+   - اكتمال المتطلبات
+   - وضوح المتطلبات
+   - اتساق المتطلبات
+   - جودة معايير القبول (قابلة للقياس؟)
+   - تغطية السيناريوهات
+   - تغطية الحالات الطرفية
+   - المتطلبات غير الوظيفية (أداء، أمن، إمكانية وصول — هل هي مبيّنة؟)
+   - التبعيات والافتراضات (موثّقة ومتحقق منها؟)
+   - الغموض والتعارض (ما يحتاج توضيحاً؟)
 
-   **HOW TO WRITE CHECKLIST ITEMS - "Unit Tests for English"**:
+   **كتابة عناصر القائمة**:
 
-   ❌ **WRONG** (Testing implementation):
-   - "Verify landing page displays 3 episode cards"
-   - "Test hover states work on desktop"
-   - "Confirm logo click navigates home"
+   ❌ **خطأ** (اختبار تنفيذ):
+   - «تحقق أن الصفحة تعرض 3 بطاقات حلقات»
+   - «اختبر أن حالات التمرير تعمل على سطح المكتب»
+   - «أكّد أن النقر على الشعار يذهب للرئيسية»
 
-   ✅ **CORRECT** (Testing requirements quality):
-   - "Are the exact number and layout of featured episodes specified?" [Completeness]
-   - "Is 'prominent display' quantified with specific sizing/positioning?" [Clarity]
-   - "Are hover state requirements consistent across all interactive elements?" [Consistency]
-   - "Are keyboard navigation requirements defined for all interactive UI?" [Coverage]
-   - "Is the fallback behavior specified when logo image fails to load?" [Edge Cases]
-   - "Are loading states defined for asynchronous episode data?" [Completeness]
-   - "Does the spec define visual hierarchy for competing UI elements?" [Clarity]
+   ✅ **صحيح** (اختبار جودة المتطلبات):
+   - «هل عُيّن عدد وتخطيط الحلقات المميزة صراحة؟ [اكتمال]»
+   - «هل جُمّع «العرض البارز» بقياسات/موضع محدد؟ [وضوح]»
+   - «هل متطلبات التمرير متسقة عبر كل العناصر التفاعلية؟ [اتساق]»
+   - «هل عُرّفت متطلبات التنقل بلوحة المفاتيح لكل واجهة تفاعلية؟ [تغطية]»
+   - «هل سلوك احتياطي محدد عند فشل تحميل صورة الشعار؟ [حالة طرفية]»
+   - «هل عُرّفت حالات التحميل لبيانات الحلقات غير المتزامنة؟ [اكتمال]»
+   - «هل عُرّف التسلسل الهرمي البصري عند تنافس عناصر الواجهة؟ [وضوح]`
 
-   **ITEM STRUCTURE**:
-   Each item should follow this pattern:
-   - Question format asking about requirement quality
-   - Focus on what's WRITTEN (or not written) in the spec/plan
-   - Include quality dimension in brackets [Completeness/Clarity/Consistency/etc.]
-   - Reference spec section `[Spec §X.Y]` when checking existing requirements
-   - Use `[Gap]` marker when checking for missing requirements
+   **بنية العنصر**:
+   - صيغة سؤال عن جودة المتطلب
+   - ركّز على ما **مكتوب** (أو غير مكتوب) في spec/plan
+   - أضف بُعد الجودة بين أقواس [اكتمال/وضوح/اتساق/…]
+   - أشر إلى قسم المواصفة `[Spec §X.Y]` عند التحقق من متطلب موجود
+   - استخدم وسم `[Gap]` عند البحث عن نقص
 
-   **EXAMPLES BY QUALITY DIMENSION**:
+   **أمثلة حسب البعد**:
 
-   Completeness:
-   - "Are error handling requirements defined for all API failure modes? [Gap]"
-   - "Are accessibility requirements specified for all interactive elements? [Completeness]"
-   - "Are mobile breakpoint requirements defined for responsive layouts? [Gap]"
+   اكتمال:
+   - «هل عُرّفت متطلبات معالجة الأخطاء لكل أوضاع فشل الـ API؟ [Gap]»
+   - «هل متطلبات إمكانية الوصول مبيّنة لكل العناصر التفاعلية؟ [اكتمال]»
 
-   Clarity:
-   - "Is 'fast loading' quantified with specific timing thresholds? [Clarity, Spec §NFR-2]"
-   - "Are 'related episodes' selection criteria explicitly defined? [Clarity, Spec §FR-5]"
-   - "Is 'prominent' defined with measurable visual properties? [Ambiguity, Spec §FR-4]"
+   وضوح:
+   - «هل جُمّع «تحميل سريع» بعتبات زمنية محددة؟ [وضوح، Spec §NFR-2]»
+   - «هل معايير اختيار «حلقات ذات صلة» صريحة؟ [وضوح، Spec §FR-5]»
 
-   Consistency:
-   - "Do navigation requirements align across all pages? [Consistency, Spec §FR-10]"
-   - "Are card component requirements consistent between landing and detail pages? [Consistency]"
+   اتساق:
+   - «هل متطلبات التنقل متوافقة عبر الصفحات؟ [اتساق، Spec §FR-10]»
 
-   Coverage:
-   - "Are requirements defined for zero-state scenarios (no episodes)? [Coverage, Edge Case]"
-   - "Are concurrent user interaction scenarios addressed? [Coverage, Gap]"
-   - "Are requirements specified for partial data loading failures? [Coverage, Exception Flow]"
+   تغطية:
+   - «هل عُرّفت متطلبات حالة الصفر (لا حلقات)؟ [تغطية، حالة طرفية]»
 
-   Measurability:
-   - "Are visual hierarchy requirements measurable/testable? [Acceptance Criteria, Spec §FR-1]"
-   - "Can 'balanced visual weight' be objectively verified? [Measurability, Spec §FR-2]"
+   قابلية القياس:
+   - «هل متطلبات التسلسل الهرمي البصري قابلة للقياس/التحقق؟ [معايير قبول، Spec §FR-1]»
 
-   **Scenario Classification & Coverage** (Requirements Quality Focus):
-   - Check if requirements exist for: Primary, Alternate, Exception/Error, Recovery, Non-Functional scenarios
-   - For each scenario class, ask: "Are [scenario type] requirements complete, clear, and consistent?"
-   - If scenario class missing: "Are [scenario type] requirements intentionally excluded or missing? [Gap]"
-   - Include resilience/rollback when state mutation occurs: "Are rollback requirements defined for migration failures? [Gap]"
+   **تصنيف السيناريوهات** (تركيز جودة المتطلبات):
+   - تحقق من وجود متطلبات لـ: أساسي، بديل، استثناء/خطأ، استرداد، غير وظيفي
+   - لكل فئة: «هل متطلبات [النوع] كاملة وواضحة ومتسقة؟»
+   - إن فئة ناقصة: «هل استبعاد متطلبات [النوع] مقصود أم ناقص؟ [Gap]»
+   - عند تغيير حالة: «هل عُرّفت متطلبات التراجع عند فشل الهجرة؟ [Gap]»
 
-   **Traceability Requirements**:
-   - MINIMUM: ≥80% of items MUST include at least one traceability reference
-   - Each item should reference: spec section `[Spec §X.Y]`, or use markers: `[Gap]`, `[Ambiguity]`, `[Conflict]`, `[Assumption]`
-   - If no ID system exists: "Is a requirement & acceptance criteria ID scheme established? [Traceability]"
+   **التتبع**:
+   - حد أدنى: ≥80٪ من العناصر تتضمن مرجع تتبع واحد على الأقل
+   - مرجع: `[Spec §X.Y]` أو `[Gap]` / `[Ambiguity]` / `[Conflict]` / `[Assumption]`
+   - إن لا يوجد نظام معرّفات: «هل أُقيم نظام معرّفات للمتطلبات ومعايير القبول؟ [تتبع]»
 
-   **Surface & Resolve Issues** (Requirements Quality Problems):
-   Ask questions about the requirements themselves:
-   - Ambiguities: "Is the term 'fast' quantified with specific metrics? [Ambiguity, Spec §NFR-1]"
-   - Conflicts: "Do navigation requirements conflict between §FR-10 and §FR-10a? [Conflict]"
-   - Assumptions: "Is the assumption of 'always available podcast API' validated? [Assumption]"
-   - Dependencies: "Are external podcast API requirements documented? [Dependency, Gap]"
-   - Missing definitions: "Is 'visual hierarchy' defined with measurable criteria? [Gap]"
+   **إبراز المشكلات**:
+   - غموض، تعارض، افتراضات، تبعيات خارجية، تعاريف ناقصة — كأسئلة عن **المتطلبات** لا الشيفرة
 
-   **Content Consolidation**:
-   - Soft cap: If raw candidate items > 40, prioritize by risk/impact
-   - Merge near-duplicates checking the same requirement aspect
-   - If >5 low-impact edge cases, create one item: "Are edge cases X, Y, Z addressed in requirements? [Coverage]"
+   **دمج المحتوى**:
+   - إن تجاوزت المرشحات ~40 عنصراً، رتّب حسب المخاطر/الأثر
+   - ادمج التكرارات القريبة
+   - إن >5 حالات طرفية منخفضة الأثر، اجمع في عنصر واحد
 
-   **🚫 ABSOLUTELY PROHIBITED** - These make it an implementation test, not a requirements test:
-   - ❌ Any item starting with "Verify", "Test", "Confirm", "Check" + implementation behavior
-   - ❌ References to code execution, user actions, system behavior
-   - ❌ "Displays correctly", "works properly", "functions as expected"
-   - ❌ "Click", "navigate", "render", "load", "execute"
-   - ❌ Test cases, test plans, QA procedures
-   - ❌ Implementation details (frameworks, APIs, algorithms)
+   **ممنوع تماماً** — يحوّل القائمة لاختبار تنفيذ:
+   - ❌ عنصر يبدأ بـ Verify/Test/Confirm/Check + سلوك تنفيذ
+   - ❌ إشارة لتشغيل شيفرة أو فعل مستخدم أو سلوك نظام
+   - ❌ «يعرض بشكل صحيح»، «يعمل كما يُنتظر»
+   - ❌ «انقر»، «تنقّل»، «ارسم»، «حمّل»، «نفّذ»
+   - ❌ خطط اختبار إجرائية تفصيلية
+   - ❌ تفاصيل إطار عمل/خوارزميات
 
-   **✅ REQUIRED PATTERNS** - These test requirements quality:
-   - ✅ "Are [requirement type] defined/specified/documented for [scenario]?"
-   - ✅ "Is [vague term] quantified/clarified with specific criteria?"
-   - ✅ "Are requirements consistent between [section A] and [section B]?"
-   - ✅ "Can [requirement] be objectively measured/verified?"
-   - ✅ "Are [edge cases/scenarios] addressed in requirements?"
-   - ✅ "Does the spec define [missing aspect]?"
+   **أنماط مطلوبة**:
+   - ✅ «هل عُرّفت/حدّدت/وُثّقت [نوع المتطلب] لـ [سيناريو]؟»
+   - ✅ «هل جُمّع [مصطلح غامض] بمعايير محددة؟»
+   - ✅ «هل المتطلبات متسقة بين [قسم A] و[قسم B]؟»
+   - ✅ «هل يمكن قياس/التحقق من [متطلب] موضوعياً؟»
+   - ✅ «هل [حالات/سيناريوهات] مغطاة في المتطلبات؟»
 
-6. **Structure Reference**: Generate the checklist following the canonical template in `templates/checklist-template.md` for title, meta section, category headings, and ID formatting. If template is unavailable, use: H1 title, purpose/created meta lines, `##` category sections containing `- [ ] CHK### <requirement item>` lines with globally incrementing IDs starting at CHK001.
+6. **مرجع الهيكل**: ولّد القائمة وفق القالب في `templates/checklist-template.md` للعنوان والميتا والعناوين وترقيم CHK. إن تعذر القالب: عنوان H1، سطور غرض/تاريخ، أقسام `##` مع `- [ ] CHK### <عنصر>` وترقيم متصاعد عالمي من CHK001.
 
-7. **Report**: Output full path to checklist file, item count, and summarize whether the run created a new file or appended to an existing one. Summarize:
-   - Focus areas selected
-   - Depth level
-   - Actor/timing
-   - Any explicit user-specified must-have items incorporated
+7. **تقرير**: اطبع المسار الكامل لملف القائمة، عدد العناصر، وملخصاً: ملف جديد أم إلحاق. لخّص مجالات التركيز، العمق، الفاعل/التوقيت، وعناصر must-have الصريحة.
 
-**Important**: Each `__SPECKIT_COMMAND_CHECKLIST__` command invocation uses a short, descriptive checklist filename and either creates a new file or appends to an existing one. This allows:
+**مهم**: كل استدعاء لأمر __SPECKIT_COMMAND_CHECKLIST__ يستخدم اسماً قصيراً وصفيّاً وإما ينشئ ملفاً جديداً أو يلحق بملف قائم. يسمح ذلك بـ:
 
-- Multiple checklists of different types (e.g., `ux.md`, `test.md`, `security.md`)
-- Simple, memorable filenames that indicate checklist purpose
-- Easy identification and navigation in the `checklists/` folder
+- قوائم متعددة الأنواع (`ux.md`، `test.md`، `security.md`)
+- أسماء سهلة التذكر
+- تنقّل أوضح في `checklists/`
 
-To avoid clutter, use descriptive types and clean up obsolete checklists when done.
+لتفادي الفوضى استخدم أنواعاً وصفية واحذف القوائم المنتهية عند الانتهاء.
 
-## Example Checklist Types & Sample Items
+## أمثلة أنواع قوائم وعيّنات
 
-**UX Requirements Quality:** `ux.md`
+**جودة متطلبات UX:** `ux.md`
 
-Sample items (testing the requirements, NOT the implementation):
+- «هل متطلبات التسلسل الهرمي البصري معرّفة بمعايير قابلة للقياس؟ [وضوح، Spec §FR-1]»
+- «هل عدد وموضع عناصر الواجهة محددان صراحة؟ [اكتمال، Spec §FR-1]»
+- «هل متطلبات حالات التفاعل (تمرير، تركيز، نشط) متسقة؟ [اتساق]»
+- «هل متطلبات إمكانية الوصول مبيّنة لكل العناصر التفاعلية؟ [تغطية، Gap]»
+- «هل سلوك احتياطي محدد عند فشل تحميل الصور؟ [حالة طرفية، Gap]»
+- «هل يمكن قياس «العرض البارز» موضوعياً؟ [قابلية قياس، Spec §FR-4]»
 
-- "Are visual hierarchy requirements defined with measurable criteria? [Clarity, Spec §FR-1]"
-- "Is the number and positioning of UI elements explicitly specified? [Completeness, Spec §FR-1]"
-- "Are interaction state requirements (hover, focus, active) consistently defined? [Consistency]"
-- "Are accessibility requirements specified for all interactive elements? [Coverage, Gap]"
-- "Is fallback behavior defined when images fail to load? [Edge Case, Gap]"
-- "Can 'prominent display' be objectively measured? [Measurability, Spec §FR-4]"
+**جودة متطلبات API:** `api.md`
 
-**API Requirements Quality:** `api.md`
+- «هل صيغ أخطاء الاستجابة مبيّنة لكل سيناريوهات الفشل؟ [اكتمال]»
+- «هل متطلبات تحديد المعدّل مكمّمة بعتبات محددة؟ [وضوح]»
+- «هل متطلبات المصادقة متسقة عبر كل النقاط؟ [اتساق]»
+- «هل عُرّفت إعادة المحاولة/المهلة للتبعيات الخارجية؟ [تغطية، Gap]»
+- «هل استراتيجية الإصدارات موثّقة في المتطلبات؟ [Gap]»
 
-Sample items:
+**جودة متطلبات الأداء:** `performance.md`
 
-- "Are error response formats specified for all failure scenarios? [Completeness]"
-- "Are rate limiting requirements quantified with specific thresholds? [Clarity]"
-- "Are authentication requirements consistent across all endpoints? [Consistency]"
-- "Are retry/timeout requirements defined for external dependencies? [Coverage, Gap]"
-- "Is versioning strategy documented in requirements? [Gap]"
+- «هل متطلبات الأداء مكمّمة بمقاييس محددة؟ [وضوح]»
+- «هل أهداف الأداء مبيّنة لكل رحلات المستخدم الحرجة؟ [تغطية]»
+- «هل متطلبات الأداء تحت أحمال مختلفة مبيّنة؟ [اكتمال]»
+- «هل يمكن التحقق من متطلبات الأداء موضوعياً؟ [قابلية قياس]»
+- «هل عُرّفت متطلبات التدهور تحت حمل عالٍ؟ [حالة طرفية، Gap]»
 
-**Performance Requirements Quality:** `performance.md`
+**جودة متطلبات الأمن:** `security.md`
 
-Sample items:
+- «هل متطلبات المصادقة مبيّنة لكل الموارد المحمية؟ [تغطية]»
+- «هل متطلبات حماية البيانات مبيّنة للمعلومات الحساسة؟ [اكتمال]»
+- «هل نموذج التهديد موثّق والمتطلبات متوافقة معه؟ [تتبع]»
+- «هل متطلبات الأمن متسقة مع التزامات الامتثال؟ [اتساق]»
+- «هل عُرّفت متطلبات الاستجابة لفشل/خرق أمني؟ [Gap، تدفق استثناء]»
 
-- "Are performance requirements quantified with specific metrics? [Clarity]"
-- "Are performance targets defined for all critical user journeys? [Coverage]"
-- "Are performance requirements under different load conditions specified? [Completeness]"
-- "Can performance requirements be objectively measured? [Measurability]"
-- "Are degradation requirements defined for high-load scenarios? [Edge Case, Gap]"
+## أمثلة مضادة: ماذا لا تفعل
 
-**Security Requirements Quality:** `security.md`
-
-Sample items:
-
-- "Are authentication requirements specified for all protected resources? [Coverage]"
-- "Are data protection requirements defined for sensitive information? [Completeness]"
-- "Is the threat model documented and requirements aligned to it? [Traceability]"
-- "Are security requirements consistent with compliance obligations? [Consistency]"
-- "Are security failure/breach response requirements defined? [Gap, Exception Flow]"
-
-## Anti-Examples: What NOT To Do
-
-**❌ WRONG - These test implementation, not requirements:**
+**❌ خطأ — اختبار تنفيذ لا متطلبات:**
 
 ```markdown
 - [ ] CHK001 - Verify landing page displays 3 episode cards [Spec §FR-001]
@@ -311,38 +287,38 @@ Sample items:
 - [ ] CHK004 - Check that related episodes section shows 3-5 items [Spec §FR-005]
 ```
 
-**✅ CORRECT - These test requirements quality:**
+**✅ صحيح — اختبار جودة المتطلبات:**
 
 ```markdown
-- [ ] CHK001 - Are the number and layout of featured episodes explicitly specified? [Completeness, Spec §FR-001]
-- [ ] CHK002 - Are hover state requirements consistently defined for all interactive elements? [Consistency, Spec §FR-003]
-- [ ] CHK003 - Are navigation requirements clear for all clickable brand elements? [Clarity, Spec §FR-010]
-- [ ] CHK004 - Is the selection criteria for related episodes documented? [Gap, Spec §FR-005]
-- [ ] CHK005 - Are loading state requirements defined for asynchronous episode data? [Gap]
-- [ ] CHK006 - Can "visual hierarchy" requirements be objectively measured? [Measurability, Spec §FR-001]
+- [ ] CHK001 - هل عُيّن عدد وتخطيط الحلقات المميزة صراحة؟ [اكتمال، Spec §FR-001]
+- [ ] CHK002 - هل متطلبات حالة التمرير متسقة عبر كل العناصر التفاعلية؟ [اتساق، Spec §FR-003]
+- [ ] CHK003 - هل متطلبات التنقل واضحة لكل عناصر العلامة القابلة للنقر؟ [وضوح، Spec §FR-010]
+- [ ] CHK004 - هل معايير اختيار الحلقات ذات الصلة موثّقة؟ [Gap، Spec §FR-005]
+- [ ] CHK005 - هل عُرّفت متطلبات حالة التحميل لبيانات الحلقات غير المتزامنة؟ [Gap]
+- [ ] CHK006 - هل يمكن قياس متطلبات «التسلسل الهرمي البصري» موضوعياً؟ [قابلية قياس، Spec §FR-001]
 ```
 
-**Key Differences:**
+**الفرق:**
 
-- Wrong: Tests if the system works correctly
-- Correct: Tests if the requirements are written correctly
-- Wrong: Verification of behavior
-- Correct: Validation of requirement quality
-- Wrong: "Does it do X?"
-- Correct: "Is X clearly specified?"
+- خطأ: يختبر هل النظام يعمل
+- صحيح: يختبر هل المتطلبات مكتوبة جيداً
+- خطأ: تحقق من السلوك
+- صحيح: تحقق من جودة صياغة المتطلبات
+- خطأ: «هل يفعل X؟»
+- صحيح: «هل X محدد بوضوح في المتطلبات؟»
 
-## Post-Execution Checks
+## بعد الانتهاء
 
-**Check for extension hooks (after checklist generation)**:
-Check if `.specify/extensions.yml` exists in the project root.
-- If it exists, read it and look for entries under the `hooks.after_checklist` key
-- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
-- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- For each executable hook, output the following based on its `optional` flag:
-  - **Optional hook** (`optional: true`):
+**خطافات الامتداد (بعد توليد القائمة)**:
+
+تحقق من `.specify/extensions.yml` في جذر المشروع.
+
+- إن وُجد، اقرأ `hooks.after_checklist`.
+- إن تعذر تحليل YAML أو كان غير صالح، تخطَّ بصمت.
+- صفِّ `enabled: false`. بلا `enabled` = مفعّل.
+- لا تُقيم `condition` — نفس قواعد ما قبل التنفيذ.
+- لكل خطاف قابل للتنفيذ:
+  - **اختياري** (`optional: true`):
     ```
     ## Extension Hooks
 
@@ -353,7 +329,7 @@ Check if `.specify/extensions.yml` exists in the project root.
     Prompt: {prompt}
     To execute: `/{command}`
     ```
-  - **Mandatory hook** (`optional: false`):
+  - **إلزامي** (`optional: false`):
     ```
     ## Extension Hooks
 
@@ -361,4 +337,4 @@ Check if `.specify/extensions.yml` exists in the project root.
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
     ```
-- If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+- إن لا خطافات، تخطَّ بصمت.
