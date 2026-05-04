@@ -1,128 +1,116 @@
-# Feature Specification: [FEATURE NAME]
+# مواصفة الميزة: [FEATURE NAME]
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
-**Input**: User description: "$ARGUMENTS"
+**فرع الميزة**: `[###-feature-name]`  
+**تاريخ الإنشاء**: [DATE]  
+**الحالة**: مسودة  
+**المدخل**: من المستخدم: "$ARGUMENTS"
 
-## User Scenarios & Testing *(mandatory)*
+## سيناريوهات المستخدم والاختبار *(إلزامي)*
 
 <!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
+  مهم: رتّب قصص المستخدم كمسارات حسب الأهمية.
+  كل قصة يجب أن تكون قابلة للاختبار بشكل مستقل — تنفيذ قصة واحدة يعطي MVP ذا قيمة.
+  الأولويات P1، P2، P3... حيث P1 الأهم.
 -->
 
-### User Story 1 - [Brief Title] (Priority: P1)
+### قصة مستخدم 1 - [عنوان موجز] (الأولوية: P1)
 
-[Describe this user journey in plain language]
+[صف رحلة المستخدم بلغة بسيطة]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**لم هذه الأولوية**: [القيمة وسبب مستوى الأولوية]
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**اختبار مستقل**: [كيف يُختبر هذا المسار بانفراده]
 
-**Acceptance Scenarios**:
+**سيناريوهات القبول**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **بفرض** [حالة أولية] — **عند** [إجراء] — **يُتوقع** [نتيجة]
+2. **بفرض** [حالة أولية] — **عند** [إجراء] — **يُتوقع** [نتيجة]
 
 ---
 
-### User Story 2 - [Brief Title] (Priority: P2)
+### قصة مستخدم 2 - [عنوان موجز] (الأولوية: P2)
 
-[Describe this user journey in plain language]
+[صف رحلة المستخدم بلغة بسيطة]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**لم هذه الأولوية**: [اشرح القيمة والأولوية]
 
-**Independent Test**: [Describe how this can be tested independently]
+**اختبار مستقل**: [كيف يُختبر بانفراده]
 
-**Acceptance Scenarios**:
+**سيناريوهات القبول**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-### User Story 3 - [Brief Title] (Priority: P3)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **بفرض** [حالة أولية] — **عند** [إجراء] — **يُتوقع** [نتيجة]
 
 ---
 
-[Add more user stories as needed, each with an assigned priority]
+### قصة مستخدم 3 - [عنوان موجز] (الأولوية: P3)
 
-### Edge Cases
+[صف رحلة المستخدم بلغة بسيطة]
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
+**لم هذه الأولوية**: [اشرح القيمة والأولوية]
 
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+**اختبار مستقل**: [كيف يُختبر بانفراده]
 
-## Requirements *(mandatory)*
+**سيناريوهات القبول**:
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
+1. **بفرض** [حالة أولية] — **عند** [إجراء] — **يُتوقع** [نتيجة]
 
-### Functional Requirements
+---
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+[أضف قصصاً حسب الحاجة مع أولوية لكل منها]
 
-*Example of marking unclear requirements:*
-
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
-
-### Key Entities *(include if feature involves data)*
-
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
-
-## Success Criteria *(mandatory)*
+### حالات حدية
 
 <!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
+  مطلوب: عبّئ عناصر نائبة بالحالات الحدية الصحيحة.
 -->
 
-### Measurable Outcomes
+- ماذا يحدث عند [شرط حدّي]؟
+- كيف يتعامل النظام مع [سيناريو خطأ]؟
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
-
-## Assumptions
+## المتطلبات *(إلزامي)*
 
 <!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right assumptions based on reasonable defaults
-  chosen when the feature description did not specify certain details.
+  مطلوب: عبّئ المتطلبات الوظيفية الصحيحة.
 -->
 
-- [Assumption about target users, e.g., "Users have stable internet connectivity"]
-- [Assumption about scope boundaries, e.g., "Mobile support is out of scope for v1"]
-- [Assumption about data/environment, e.g., "Existing authentication system will be reused"]
-- [Dependency on existing system/service, e.g., "Requires access to the existing user profile API"]
+### المتطلبات الوظيفية
+
+- **FR-001**: يجب أن يقوم النظام بـ [قدرة محددة، مثل "تمكين المستخدمين من إنشاء حسابات"]
+- **FR-002**: يجب أن يقوم النظام بـ [قدرة محددة، مثل "التحقق من عناوين البريد"]
+- **FR-003**: يجب أن يتمكن المستخدمون من [تفاعل رئيسي، مثل "إعادة تعيين كلمة المرور"]
+- **FR-004**: يجب أن يقوم النظام بـ [متطلب بيانات، مثل "الاحتفاظ بتفضيلات المستخدم"]
+- **FR-005**: يجب أن يقوم النظام بـ [سلوك، مثل "تسجيل كل أحداث الأمن"]
+
+*مثال لمتطلب غير واضح:*
+
+- **FR-006**: يجب مصادقة المستخدمين عبر [NEEDS CLARIFICATION: طريقة المصادقة غير محددة - بريد/كلمة مرور، SSO، OAuth؟]
+- **FR-007**: يجب أن يحتفظ النظام ببيانات المستخدم لمدة [NEEDS CLARIFICATION: فترة الاحتفاظ غير محددة]
+
+### الكيانات الرئيسية *(أدرج إن وُجدت بيانات)*
+
+- **[كيان 1]**: [ماذا يمثل، صفات رئيسية دون تفاصيل تنفيذ]
+- **[كيان 2]**: [ماذا يمثل، العلاقات بكيانات أخرى]
+
+## معايير النجاح *(إلزامي)*
+
+<!--
+  مطلوب: معايير قابلة للقياس، بلا تكنولوجيا محددة.
+-->
+
+### نتائج قابلة للقياس
+
+- **SC-001**: [مقياس، مثل "يمكن إتمام إنشاء الحساب في أقل من دقيقتين"]
+- **SC-002**: [مقياس، مثل "النظام يخدم 1000 مستخدم متزامن دون تدهور"]
+- **SC-003**: [رضا مستخدم، مثل "90% يكملون المهمة الأساسية من أول محاولة"]
+- **SC-004**: [مقياس عمل، مثل "خفض تذاكر الدعم المتعلقة بـ [X] بنسبة 50%"]
+
+## الافتراضات
+
+<!--
+  مطلوب: افتراضات معقولة عندما لم يحدد الوصف تفاصيل.
+-->
+
+- [افتراض عن المستخدمين، مثل "اتصال إنترنت مستقر"]
+- [افتراض عن النطاق، مثل "دعم الجوال خارج النطاق للإصدار 1"]
+- [افتراض عن البيئة، مثل "إعادة استخدام نظام المصادقة الحالي"]
+- [تبعية، مثل "يتطلب الوصول إلى API ملف المستخدم الحالي"]

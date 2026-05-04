@@ -24,27 +24,27 @@ while [ $i -le $# ]; do
             ;;
         --short-name)
             if [ $((i + 1)) -gt $# ]; then
-                echo 'Error: --short-name requires a value' >&2
+                echo 'خطأ: --short-name يتطلب قيمة' >&2
                 exit 1
             fi
             i=$((i + 1))
             next_arg="${!i}"
             # Check if the next argument is another option (starts with --)
             if [[ "$next_arg" == --* ]]; then
-                echo 'Error: --short-name requires a value' >&2
+                echo 'خطأ: --short-name يتطلب قيمة' >&2
                 exit 1
             fi
             SHORT_NAME="$next_arg"
             ;;
         --number)
             if [ $((i + 1)) -gt $# ]; then
-                echo 'Error: --number requires a value' >&2
+                echo 'خطأ: --number يتطلب قيمة' >&2
                 exit 1
             fi
             i=$((i + 1))
             next_arg="${!i}"
             if [[ "$next_arg" == --* ]]; then
-                echo 'Error: --number requires a value' >&2
+                echo 'خطأ: --number يتطلب قيمة' >&2
                 exit 1
             fi
             BRANCH_NUMBER="$next_arg"
@@ -53,18 +53,18 @@ while [ $i -le $# ]; do
             USE_TIMESTAMP=true
             ;;
         --help|-h)
-            echo "Usage: $0 [--json] [--dry-run] [--allow-existing-branch] [--short-name <name>] [--number N] [--timestamp] <feature_description>"
+            echo "الاستخدام: $0 [--json] [--dry-run] [--allow-existing-branch] [--short-name <name>] [--number N] [--timestamp] <feature_description>"
             echo ""
-            echo "Options:"
-            echo "  --json              Output in JSON format"
-            echo "  --dry-run           Compute branch name and paths without creating branches, directories, or files"
-            echo "  --allow-existing-branch  Switch to branch if it already exists instead of failing"
-            echo "  --short-name <name> Provide a custom short name (2-4 words) for the branch"
-            echo "  --number N          Specify branch number manually (overrides auto-detection)"
-            echo "  --timestamp         Use timestamp prefix (YYYYMMDD-HHMMSS) instead of sequential numbering"
-            echo "  --help, -h          Show this help message"
+            echo "الخيارات:"
+            echo "  --json              المخرجات بصيغة JSON"
+            echo "  --dry-run           احسب اسم الفرع والمسارات دون إنشاء فروع أو ملفات"
+            echo "  --allow-existing-branch  انتقل للفرع إن وُجد بدلاً من الفشل"
+            echo "  --short-name <name> اسماً قصيراً مخصصاً (2-4 كلمات) للفرع"
+            echo "  --number N          رقم الفرع يدوياً (يتجاوز الاكتشاف التلقائي)"
+            echo "  --timestamp         بادئة زمنية (YYYYMMDD-HHMMSS) بدلاً من الترقيم التسلسلي"
+            echo "  --help, -h          عرض هذه المساعدة"
             echo ""
-            echo "Examples:"
+            echo "أمثلة:"
             echo "  $0 'Add user authentication system' --short-name 'user-auth'"
             echo "  $0 'Implement OAuth2 integration for API' --number 5"
             echo "  $0 --timestamp --short-name 'user-auth' 'Add user authentication'"
@@ -79,14 +79,14 @@ done
 
 FEATURE_DESCRIPTION="${ARGS[*]}"
 if [ -z "$FEATURE_DESCRIPTION" ]; then
-    echo "Usage: $0 [--json] [--dry-run] [--allow-existing-branch] [--short-name <name>] [--number N] [--timestamp] <feature_description>" >&2
+    echo "الاستخدام: $0 [--json] [--dry-run] [--allow-existing-branch] [--short-name <name>] [--number N] [--timestamp] <feature_description>" >&2
     exit 1
 fi
 
 # Trim whitespace and validate description is not empty (e.g., user passed only whitespace)
 FEATURE_DESCRIPTION=$(echo "$FEATURE_DESCRIPTION" | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')
 if [ -z "$FEATURE_DESCRIPTION" ]; then
-    echo "Error: Feature description cannot be empty or contain only whitespace" >&2
+    echo "خطأ: وصف الميزة لا يمكن أن يكون فارغاً أو مسافات فقط" >&2
     exit 1
 fi
 

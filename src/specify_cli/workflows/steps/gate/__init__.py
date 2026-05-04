@@ -24,7 +24,7 @@ class GateStep(StepBase):
     type_key = "gate"
 
     def execute(self, config: dict[str, Any], context: StepContext) -> StepResult:
-        message = config.get("message", "Review required.")
+        message = config.get("message", "مطلوب مراجعة.")
         if isinstance(message, str) and "{{" in message:
             message = evaluate_expression(message, context)
 
@@ -70,7 +70,7 @@ class GateStep(StepBase):
     @staticmethod
     def _prompt(message: str, options: list[str]) -> str:
         """Display gate message and prompt for a choice."""
-        print("\n  ┌─ Gate ─────────────────────────────────────")
+        print("\n  ┌─ بوابة ─────────────────────────────────────")
         print(f"  │ {message}")
         print("  │")
         for i, opt in enumerate(options, 1):
@@ -79,7 +79,7 @@ class GateStep(StepBase):
 
         while True:
             try:
-                raw = input(f"  Choose [1-{len(options)}]: ").strip()
+                raw = input(f"  اختر [1-{len(options)}]: ").strip()
             except (EOFError, KeyboardInterrupt):
                 print()
                 return options[-1]  # default to last (usually reject)
@@ -88,7 +88,7 @@ class GateStep(StepBase):
             # Also accept the option name directly
             if raw.lower() in [o.lower() for o in options]:
                 return next(o for o in options if o.lower() == raw.lower())
-            print(f"  Invalid choice. Enter 1-{len(options)} or an option name.")
+            print(f"  اختيار غير صالح. أدخل رقماً بين 1 و{len(options)} أو اسم الخيار.")
 
     def validate(self, config: dict[str, Any]) -> list[str]:
         errors = super().validate(config)

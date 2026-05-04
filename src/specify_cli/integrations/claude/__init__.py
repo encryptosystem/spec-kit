@@ -15,23 +15,22 @@ from ..manifest import IntegrationManifest
 # Note injected into hook sections so Claude maps dot-notation command
 # names (from extensions.yml) to the hyphenated skill names it uses.
 _HOOK_COMMAND_NOTE = (
-    "- When constructing slash commands from hook command names, "
-    "replace dots (`.`) with hyphens (`-`). "
-    "For example, `speckit.git.commit` → `/speckit-git-commit`.\n"
+    "- لما تبني أمر slash من اسم أمر الخطاف: استبدل النقطة (`.`) بشرطة (`-`). "
+    "مثال: `speckit.git.commit` يصير `/speckit-git-commit`.\n"
 )
 
 # Mapping of command template stem → argument-hint text shown inline
 # when a user invokes the slash command in Claude Code.
 ARGUMENT_HINTS: dict[str, str] = {
-    "specify": "Describe the feature you want to specify",
-    "plan": "Optional guidance for the planning phase",
-    "tasks": "Optional task generation constraints",
-    "implement": "Optional implementation guidance or task filter",
-    "analyze": "Optional focus areas for analysis",
-    "clarify": "Optional areas to clarify in the spec",
-    "constitution": "Principles or values for the project constitution",
-    "checklist": "Domain or focus area for the checklist",
-    "taskstoissues": "Optional filter or label for GitHub issues",
+    "specify": "صف الميزة التي تريد مواصفتها",
+    "plan": "إرشادات اختيارية لمرحلة التخطيط",
+    "tasks": "قيود اختيارية لتوليد المهام",
+    "implement": "إرشادات تنفيذ اختيارية أو تصفية مهام",
+    "analyze": "مجالات تركيز اختيارية للتحليل",
+    "clarify": "مجالات اختيارية لتوضيح المواصفات",
+    "constitution": "مبادئ أو قيم دستور المشروع",
+    "checklist": "المجال أو التركيز لقائمة التحقق",
+    "taskstoissues": "مرشح اختياري أو تسمية لقضايا GitHub",
 }
 
 
@@ -167,7 +166,7 @@ class ClaudeIntegration(SkillsIntegration):
         and inserts the note on the line before it, matching its indentation.
         Skips if the note is already present.
         """
-        if "replace dots" in content:
+        if "استبدل النقطة" in content or "استبدل النقاط" in content or "replace dots" in content:
             return content
 
         def repl(m: re.Match[str]) -> str:
@@ -183,11 +182,11 @@ class ClaudeIntegration(SkillsIntegration):
                 + eol
             )
 
-        return re.sub(
-            r"(?m)^(\s*)(- For each executable hook, output the following[^\r\n]*)(\r\n|\n|$)",
-            repl,
-            content,
+        pattern = (
+            r"(?m)^(\s*)(- (?:For each executable hook, output the following"
+            r"|لكل خطاف قابل للتنفيذ، أخرج ما يلي)[^\r\n]*)(\r\n|\n|$)"
         )
+        return re.sub(pattern, repl, content)
 
     def post_process_skill_content(self, content: str) -> str:
         """Inject Claude-specific frontmatter flags and hook notes."""

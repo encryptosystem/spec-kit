@@ -1315,7 +1315,13 @@ class TestDescriptionQuoting:
         """Whitespace-only descriptions must still be rejected after trimming."""
         result = run_script(git_repo, "--dry-run", "--short-name", "feat", "   ")
         assert result.returncode != 0
-        assert "empty" in result.stderr.lower() or "whitespace" in result.stderr.lower()
+        err = result.stderr.lower()
+        assert (
+            "empty" in err
+            or "whitespace" in err
+            or "فارغ" in result.stderr
+            or "مسافات" in result.stderr
+        )
 
     def test_plain_description_still_works(self, git_repo: Path):
         """Plain description without special characters continues to work."""

@@ -1,15 +1,17 @@
 ---
-description: Create or update the project constitution.
+description: إنشاء دستور المشروع أو تحديثه.
 ---
 
-## User Input
+> **اللغة**: اكتب الدستور والملخص بالعربية الفصحى.
+
+## إدخال المستخدم
 
 ```text
 $ARGUMENTS
 ```
 
-## Outline
+## الخطوات
 
-1. Create or update the project constitution and store it in `.specify/memory/constitution.md`.
-   - Project name, guiding principles, non-negotiable rules
-   - Derive from user input and existing repo context (README, docs)
+1. أنشئ دستور المشروع أو حدّثه وخزّنه في `.specify/memory/constitution.md`.
+   - اسم المشروع، المبادئ التوجيهية، القواعد غير القابلة للتفاوض
+   - اشتق من إدخال المستخدم وسياق المستودع (README، docs)

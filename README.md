@@ -1,11 +1,11 @@
 <div align="center">
     <img src="./media/logo_large.webp" alt="Spec Kit Logo" width="200" height="200"/>
     <h1>🌱 Spec Kit</h1>
-    <h3><em>Build high-quality software faster.</em></h3>
+    <h3><em>ابنِ برمجيات عالية الجودة بشكل أسرع.</em></h3>
 </div>
 
 <p align="center">
-    <strong>An open source toolkit that allows you to focus on product scenarios and predictable outcomes instead of vibe coding every piece from scratch.</strong>
+    <strong>مجموعة أدوات مفتوحة المصدر تساعدك على التركيز على سيناريوهات المنتج ونتائج متوقعة بدلاً من «البرمجة بالحدس» لكل جزء من الصفر.</strong>
 </p>
 
 <p align="center">
@@ -17,10 +17,10 @@
 
 ---
 
-## Table of Contents
+## جدول المحتويات
 
-- [🤔 What is Spec-Driven Development?](#-what-is-spec-driven-development)
-- [⚡ Get Started](#-get-started)
+- [🤔 ما هو التطوير المعتمد على المواصفات؟](#-what-is-spec-driven-development)
+- [⚡ البدء السريع](#-get-started)
 - [📽️ Video Overview](#️-video-overview)
 - [🧩 Community Extensions](#-community-extensions)
 - [🎨 Community Presets](#-community-presets)
@@ -40,17 +40,17 @@
 - [🙏 Acknowledgements](#-acknowledgements)
 - [📄 License](#-license)
 
-## 🤔 What is Spec-Driven Development?
+## 🤔 ما هو التطوير المعتمد على المواصفات (Spec-Driven Development)؟
 
-Spec-Driven Development **flips the script** on traditional software development. For decades, code has been king — specifications were just scaffolding we built and discarded once the "real work" of coding began. Spec-Driven Development changes this: **specifications become executable**, directly generating working implementations rather than just guiding them.
+بدل ما المواصفة «ورقة جانبية» والكود هو الحقيقة الوحيدة، الـ SDD يخلي **المواصفة مصدراً للتنفيذ**: نص واضح يترجم مباشرة إلى خطوات وتنفيذ، مو بس «توجيه عام» قبل البرمجة.
 
-## ⚡ Get Started
+## ⚡ البدء السريع
 
-### 1. Install Specify CLI
+### 1. تثبيت Specify CLI
 
-Choose your preferred installation method:
+اختر طريقة التثبيت المناسبة:
 
-> **Important:** The only official, maintained packages for Spec Kit are published from this GitHub repository. Any packages with the same name on PyPI are **not** affiliated with this project and are not maintained by the Spec Kit maintainers. Always install directly from GitHub as shown below.
+> **مهم:** الحزم الرسمية والمدعومة لـ Spec Kit تُنشر من هذا المستودع على GitHub فقط. أي حزم بنفس الاسم على PyPI **ليست** تابعة لهذا المشروع. ثبّت دائماً من GitHub كما يلي.
 
 #### Option 1: Persistent Installation (Recommended)
 

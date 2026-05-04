@@ -1,19 +1,21 @@
 ---
-description: Create a plan and store it in plan.md.
+description: إنشاء خطة وتخزينها في plan.md.
 ---
 
-## User Input
+> **اللغة**: اكتب الخطة بالعربية الفصحى؛ احتفظ بمسارات الملفات بالإنجليزية عند الحاجة.
+
+## إدخال المستخدم
 
 ```text
 $ARGUMENTS
 ```
 
-## Outline
+## الخطوات
 
-1. Read `.specify/feature.json` to get the feature directory path.
+1. اقرأ `.specify/feature.json` لمعرفة مسار مجلد الميزة.
 
-2. **Load context**: `.specify/memory/constitution.md` and `<feature_directory>/spec.md`.
+2. **حمّل السياق**: `.specify/memory/constitution.md` و`<feature_directory>/spec.md`.
 
-3. Create an implementation plan and store it in `<feature_directory>/plan.md`.
-   - Technical context: tech stack, dependencies, project structure
-   - Design decisions, architecture, file structure
+3. أنشئ خطة تنفيذ وخزّنها في `<feature_directory>/plan.md`.
+   - سياق تقني: المكدس، التبعيات، هيكل المشروع
+   - قرارات التصميم، البنية، هيكل الملفات
