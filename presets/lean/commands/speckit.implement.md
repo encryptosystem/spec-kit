@@ -1,22 +1,24 @@
 ---
-description: Execute the implementation plan by processing all tasks in tasks.md.
+description: تنفيذ خطة التنفيذ بمعالجة كل المهام في tasks.md.
 ---
 
-## User Input
+> **اللغة**: أبلغ التقدم والأخطاء بالعربية الفصحى.
+
+## إدخال المستخدم
 
 ```text
 $ARGUMENTS
 ```
 
-## Outline
+## الخطوات
 
-1. Read `.specify/feature.json` to get the feature directory path.
+1. اقرأ `.specify/feature.json` لمعرفة مسار مجلد الميزة.
 
-2. **Load context**: `.specify/memory/constitution.md` and `<feature_directory>/spec.md` and `<feature_directory>/plan.md` and `<feature_directory>/tasks.md`.
+2. **حمّل السياق**: `.specify/memory/constitution.md` و`<feature_directory>/spec.md` و`<feature_directory>/plan.md` و`<feature_directory>/tasks.md`.
 
-3. **Execute tasks** in order:
-   - Complete each task before moving to the next
-   - Mark completed tasks by changing `- [ ]` to `- [x]` in `<feature_directory>/tasks.md`
-   - Halt on failure and report the issue
+3. **نفّذ المهام** بالترتيب:
+   - أكمل كل مهمة قبل التالية
+   - علّم المهام المكتملة بتغيير `- [ ]` إلى `- [x]` في `<feature_directory>/tasks.md`
+   - توقّف عند الفشل وأبلغ عن المشكلة
 
-4. **Validate**: Verify all tasks are completed and the implementation matches the spec.
+4. **تحقق**: تأكد من إكمال كل المهام ومطابقة التنفيذ للمواصفة.

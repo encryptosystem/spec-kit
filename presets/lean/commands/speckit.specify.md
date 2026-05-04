@@ -1,23 +1,27 @@
 ---
-description: Create a specification and store it in spec.md.
+description: مواصفة مختصرة — تُحفظ في spec.md.
 ---
 
-## User Input
+> **المخرجات**: اشرح للمستخدم بالعربية؛ المسارات والمجلدات كما يتوقعها المشروع.
+
+## إدخال المستخدم
 
 ```text
 $ARGUMENTS
 ```
 
-## Outline
+راعِ مدخل المستخدم أعلاه إن وُجد؛ لا تتجاهله قبل ما تكمّل.
 
-1. **Ask the user** for the feature directory path (e.g., `specs/my-feature`). Do not proceed until provided.
+## الخطوات
 
-2. Create the directory and write `.specify/feature.json`:
+1. **اسأل عن مسار الميزة** (مثل `specs/my-feature`). ما تكمل إلا بعد ما يعطيك إياه.
+
+2. أنشئ المجلد واكتب `.specify/feature.json`:
    ```json
    { "feature_directory": "<feature_directory>" }
    ```
 
-3. Create a specification from the user input and store it in `<feature_directory>/spec.md`.
-   - Overview, functional requirements, user scenarios, success criteria
-   - Every requirement must be testable
-   - Make informed defaults for unspecified details
+3. اكتب المواصفة من مدخل المستخدم في `<feature_directory>/spec.md`:
+   - نظرة عامة، متطلبات، سيناريوهات، معايير نجاح
+   - كل متطلب لازم يكون قابل للاختبار
+   - للتفاصيل الناقصة: افترض معقولاً واذكرها في الافتراضات

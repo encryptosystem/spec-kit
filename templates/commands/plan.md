@@ -1,38 +1,40 @@
 ---
-description: Execute the implementation planning workflow using the plan template to generate design artifacts.
+description: خطة التنفيذ — من القالب إلى ملفات التصميم (plan، research، إلخ).
 handoffs: 
-  - label: Create Tasks
+  - label: المهام
     agent: speckit.tasks
-    prompt: Break the plan into tasks
+    prompt: حوّل الخطة لقائمة مهام مرتّبة
     send: true
-  - label: Create Checklist
+  - label: قائمة تحقق
     agent: speckit.checklist
-    prompt: Create a checklist for the following domain...
+    prompt: اعمل checklist للمجال…
 scripts:
   sh: scripts/bash/setup-plan.sh --json
   ps: scripts/powershell/setup-plan.ps1 -Json
 ---
 
-## User Input
+> **المخرجات**: خطّط واكتب الملفات **بالعربية** (مباشرة). المسارات وأسماء الملفات تقنية = **إنجليزي** كالعادة.
+
+## إدخال المستخدم
 
 ```text
 $ARGUMENTS
 ```
 
-You **MUST** consider the user input before proceeding (if not empty).
+راعِ مدخل المستخدم أعلاه إن وُجد؛ لا تتجاهله قبل ما تكمّل.
 
-## Pre-Execution Checks
+## قبل ما تبدأ
 
-**Check for extension hooks (before planning)**:
-- Check if `.specify/extensions.yml` exists in the project root.
-- If it exists, read it and look for entries under the `hooks.before_plan` key
-- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
-- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- For each executable hook, output the following based on its `optional` flag:
-  - **Optional hook** (`optional: true`):
+**التحقق من خطافات الامتداد (قبل التخطيط)**:
+- تحقق من وجود `.specify/extensions.yml` في جذر المشروع.
+- إن وُجد، اقرأه وابحث عن `hooks.before_plan`
+- إن تعذّر تحليل YAML أو كان غير صالح، تخطَّ بصمت
+- استبعد الخطافات ذات `enabled: false`. بلا `enabled` → مفعّل افتراضياً.
+- لكل خطاف متبقٍ، **لا** تُقيم `condition`:
+  - بلا `condition` أو فارغ → قابل للتنفيذ
+  - `condition` غير فارغ → تخطَّ
+- لكل خطاف قابل للتنفيذ، أخرج حسب `optional`:
+  - **خطاف اختياري** (`optional: true`):
     ```
     ## Extension Hooks
 
@@ -43,7 +45,7 @@ You **MUST** consider the user input before proceeding (if not empty).
     Prompt: {prompt}
     To execute: `/{command}`
     ```
-  - **Mandatory hook** (`optional: false`):
+  - **خطاف إلزامي** (`optional: false`):
     ```
     ## Extension Hooks
 
@@ -53,34 +55,32 @@ You **MUST** consider the user input before proceeding (if not empty).
 
     Wait for the result of the hook command before proceeding to the Outline.
     ```
-- If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+- إن لا خطافات أو لا ملف، تخطَّ بصمت
 
-## Outline
+## الخطوات
 
-1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **الإعداد**: شغّل `{SCRIPT}` من جذر المستودع وحلّل JSON للحقول FEATURE_SPEC، IMPL_PLAN، SPECS_DIR، BRANCH. للاقتباسات المفردة في الوسائط مثل "I'm Groot"، استخدم الهروب: مثل `'I'\''m Groot'` (أو اقتباس مزدوج إن أمكن: "I'm Groot").
 
-2. **Load context**: Read FEATURE_SPEC and `/memory/constitution.md`. Load IMPL_PLAN template (already copied).
+2. **تحميل السياق**: اقرأ FEATURE_SPEC و`/memory/constitution.md`. حمّل قالب IMPL_PLAN (منسوخ مسبقاً).
 
-3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
-   - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
-   - Fill Constitution Check section from constitution
-   - Evaluate gates (ERROR if violations unjustified)
-   - Phase 0: Generate research.md (resolve all NEEDS CLARIFICATION)
-   - Phase 1: Generate data-model.md, contracts/, quickstart.md
-   - Phase 1: Update agent context by running the agent script
-   - Re-evaluate Constitution Check post-design
+3. **نفّذ سير عمل الخطة**: اتبع هيكل قالب IMPL_PLAN لـ:
+   - ملء السياق التقني (علّم المجهول بـ "NEEDS CLARIFICATION")
+   - ملء قسم Constitution Check من الدستور
+   - تقييم البوابات (خطأ إن كانت المخالفات غير مبررة)
+   - المرحلة 0: توليد research.md (حل كل NEEDS CLARIFICATION)
+   - المرحلة 1: توليد data-model.md، contracts/، quickstart.md
+   - المرحلة 1: حدّث سياق الوكيل بتشغيل سكربت الوكيل
+   - أعد تقييم Constitution Check بعد التصميم
 
-4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, and generated artifacts.
+4. **توقّف وأبلغ**: ينتهي الأمر بعد تخطيط المرحلة 2. أبلغ عن الفرع، مسار IMPL_PLAN، والمخرجات المولّدة.
 
-5. **Check for extension hooks**: After reporting, check if `.specify/extensions.yml` exists in the project root.
-   - If it exists, read it and look for entries under the `hooks.after_plan` key
-   - If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
-   - Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-   - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-     - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-     - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-   - For each executable hook, output the following based on its `optional` flag:
-     - **Optional hook** (`optional: true`):
+5. **خطافات بعد التخطيط**: بعد الإبلاغ، تحقق من `.specify/extensions.yml` في جذر المشروع.
+   - إن وُجد، اقرأ `hooks.after_plan`
+   - YAML غير صالح → تخطَّ بصمت
+   - استبعد `enabled: false`؛ بلا `enabled` → مفعّل
+   - لا تُقيم `condition`؛ نفس قواعد ما قبل التنفيذ
+   - لكل خطاف قابل للتنفيذ:
+     - **اختياري** (`optional: true`):
        ```
        ## Extension Hooks
 
@@ -91,7 +91,7 @@ You **MUST** consider the user input before proceeding (if not empty).
        Prompt: {prompt}
        To execute: `/{command}`
        ```
-     - **Mandatory hook** (`optional: false`):
+     - **إلزامي** (`optional: false`):
        ```
        ## Extension Hooks
 
@@ -99,18 +99,18 @@ You **MUST** consider the user input before proceeding (if not empty).
        Executing: `/{command}`
        EXECUTE_COMMAND: {command}
        ```
-   - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+   - لا خطافات → تخطَّ بصمت
 
-## Phases
+## المراحل
 
-### Phase 0: Outline & Research
+### المرحلة 0: المخطط والبحث
 
-1. **Extract unknowns from Technical Context** above:
-   - For each NEEDS CLARIFICATION → research task
-   - For each dependency → best practices task
-   - For each integration → patterns task
+1. **استخرج المجهوليات من السياق التقني**:
+   - كل NEEDS CLARIFICATION → مهمة بحث
+   - كل تبعية → مهمة أفضل الممارسات
+   - كل تكامل → مهمة أنماط
 
-2. **Generate and dispatch research agents**:
+2. **ولِّد وكلِّف وكلاء بحث**:
 
    ```text
    For each unknown in Technical Context:
@@ -119,34 +119,22 @@ You **MUST** consider the user input before proceeding (if not empty).
      Task: "Find best practices for {tech} in {domain}"
    ```
 
-3. **Consolidate findings** in `research.md` using format:
-   - Decision: [what was chosen]
-   - Rationale: [why chosen]
-   - Alternatives considered: [what else evaluated]
+3. **ادمج النتائج** في `research.md` بالصيغة:
+   - Decision / Rationale / Alternatives considered
 
-**Output**: research.md with all NEEDS CLARIFICATION resolved
+**المخرج**: research.md بكل NEEDS CLARIFICATION محلولة
 
-### Phase 1: Design & Contracts
+### المرحلة 1: التصميم والعقود
 
-**Prerequisites:** `research.md` complete
+**متطلبات مسبقة:** اكتمال `research.md`
 
-1. **Extract entities from feature spec** → `data-model.md`:
-   - Entity name, fields, relationships
-   - Validation rules from requirements
-   - State transitions if applicable
+1. **استخرج الكيانات من مواصفة الميزة** → `data-model.md`
+2. **عرّف عقود الواجهات** → `/contracts/` عند الحاجة
+3. **تحديث سياق الوكيل**: حدّث المرجع بين `<!-- SPECKIT START -->` و`<!-- SPECKIT END -->` في `__CONTEXT_FILE__` ليشير إلى ملف الخطة من الخطوة 1
 
-2. **Define interface contracts** (if project has external interfaces) → `/contracts/`:
-   - Identify what interfaces the project exposes to users or other systems
-   - Document the contract format appropriate for the project type
-   - Examples: public APIs for libraries, command schemas for CLI tools, endpoints for web services, grammars for parsers, UI contracts for applications
-   - Skip if project is purely internal (build scripts, one-off tools, etc.)
+**المخرج**: data-model.md، /contracts/*، quickstart.md، ملف سياق الوكيل محدّث
 
-3. **Agent context update**:
-   - Update the plan reference between the `<!-- SPECKIT START -->` and `<!-- SPECKIT END -->` markers in `__CONTEXT_FILE__` to point to the plan file created in step 1 (the IMPL_PLAN path)
+## قواعد أساسية
 
-**Output**: data-model.md, /contracts/*, quickstart.md, updated agent context file
-
-## Key rules
-
-- Use absolute paths for filesystem operations; use project-relative paths for references in documentation and agent context files
-- ERROR on gate failures or unresolved clarifications
+- استخدم مسارات مطلقة لعمليات الملفات؛ مسارات نسبية للمشروع في الوثائق وملفات السياق
+- خطأ عند فشل البوابات أو التوضيحات غير المحلولة

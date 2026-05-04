@@ -1,35 +1,37 @@
 ---
-description: Create or update the feature specification from a natural language feature description.
+description: مواصفة الميزة — إنشاء أو تحديث من وصف نصّي (أي لغة).
 handoffs: 
-  - label: Build Technical Plan
+  - label: الخطة التقنية
     agent: speckit.plan
-    prompt: Create a plan for the spec. I am building with...
-  - label: Clarify Spec Requirements
+    prompt: "ابنِ خطة من المواصفة؛ السياق: أنا أشتغل على…"
+  - label: توضيح المواصفة
     agent: speckit.clarify
-    prompt: Clarify specification requirements
+    prompt: غطِّ النواقص في المواصفة
     send: true
 ---
 
-## User Input
+> **المخرجات**: المواصفات، الـ checklist، والملخصات **بالعربية** (واضحة ومباشرة). الـ slugs، المسارات، والمعرّفات التقنية تبقى **إنجليزي** كالمعتاد (مثل `user-auth`، `specs/` …).
+
+## إدخال المستخدم
 
 ```text
 $ARGUMENTS
 ```
 
-You **MUST** consider the user input before proceeding (if not empty).
+راعِ مدخل المستخدم أعلاه إن وُجد؛ لا تتجاهله قبل ما تكمّل.
 
-## Pre-Execution Checks
+## قبل ما تبدأ
 
-**Check for extension hooks (before specification)**:
-- Check if `.specify/extensions.yml` exists in the project root.
-- If it exists, read it and look for entries under the `hooks.before_specify` key
-- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
-- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- For each executable hook, output the following based on its `optional` flag:
-  - **Optional hook** (`optional: true`):
+**التحقق من خطافات الامتداد (قبل المواصفات)**:
+- تحقق من وجود `.specify/extensions.yml` في جذر المشروع.
+- إن وُجد، اقرأه وابحث عن الإدخالات تحت المفتاح `hooks.before_specify`
+- YAML غير قابل للقراءة؟ تجاهل فحص الخطافات بصمت وكمل.
+- تجاهل الخطافات اللي `enabled` فيها `false`. بدون حقل `enabled` = مفعّل.
+- لكل خطاف متبقٍ، **لا** تحاول تفسير أو تقييم تعبيرات `condition` للخطاف:
+  - إن لم يكن للخطاف حقل `condition` أو كان فارغاً/null، اعتبر الخطاف قابلاً للتنفيذ
+  - إن عرّف الخطاف `condition` غير فارغ، تخطَّ الخطاف واترك تقييم الشرط لتنفيذ HookExecutor
+- لكل خطاف قابل للتنفيذ، أخرج ما يلي حسب علامة `optional`:
+  - **خطاف اختياري** (`optional: true`):
     ```
     ## Extension Hooks
 
@@ -40,7 +42,7 @@ You **MUST** consider the user input before proceeding (if not empty).
     Prompt: {prompt}
     To execute: `/{command}`
     ```
-  - **Mandatory hook** (`optional: false`):
+  - **خطاف إلزامي** (`optional: false`):
     ```
     ## Extension Hooks
 
@@ -50,199 +52,199 @@ You **MUST** consider the user input before proceeding (if not empty).
 
     Wait for the result of the hook command before proceeding to the Outline.
     ```
-- If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+- إن لم تُسجَّل خطافات أو لم يوجد `.specify/extensions.yml`، تخطَّ بصمت
 
-## Outline
+## الخطوات
 
-The text the user typed after `__SPECKIT_COMMAND_SPECIFY__` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `{ARGS}` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
+وصف الميزة هو النص بعد `__SPECKIT_COMMAND_SPECIFY__` في الرسالة. اعتبره موجوداً في المحادثة حتى لو ظهر `{ARGS}` حرفياً. لا تعيد طلبه إلا إذا كان الأمر فاضياً.
 
-Given that feature description, do this:
+من وصف الميزة، نفّذ التالي:
 
-1. **Generate a concise short name** (2-4 words) for the feature:
-   - Analyze the feature description and extract the most meaningful keywords
-   - Create a 2-4 word short name that captures the essence of the feature
-   - Use action-noun format when possible (e.g., "add-user-auth", "fix-payment-bug")
-   - Preserve technical terms and acronyms (OAuth2, API, JWT, etc.)
-   - Keep it concise but descriptive enough to understand the feature at a glance
-   - Examples:
+1. **ولِّد اسماً قصيراً موجزاً** (2–4 كلمات) للميزة:
+   - حلّل الوصف واستخرج أهم الكلمات المفتاحية
+   - أنشئ اسماً قصيراً يلخص جوهر الميزة
+   - استخدم صيغة فعل-اسم عند الإمكان (مثل `"add-user-auth"`، `"fix-payment-bug"`)
+   - احتفظ بالمصطلحات التقنية والاختصارات (OAuth2، API، JWT، إلخ)
+   - اجعله موجزاً لكن واضحاً
+   - أمثلة:
      - "I want to add user authentication" → "user-auth"
      - "Implement OAuth2 integration for the API" → "oauth2-api-integration"
      - "Create a dashboard for analytics" → "analytics-dashboard"
      - "Fix payment processing timeout bug" → "fix-payment-timeout"
 
-2. **Branch creation** (optional, via hook):
+2. **إنشاء الفرع** (اختياري، عبر خطاف):
 
-   If a `before_specify` hook ran successfully in the Pre-Execution Checks above, it will have created/switched to a git branch and output JSON containing `BRANCH_NAME` and `FEATURE_NUM`. Note these values for reference, but the branch name does **not** dictate the spec directory name.
+   إذا اشتغل خطاف `before_specify` بنجاح، غالباً ينشئ/ينتقل لفرع git ويطلع JSON فيه `BRANCH_NAME` و`FEATURE_NUM` — احتفظ بهم للمرجع. **اسم الفرع ما يفرض** اسم مجلد المواصفات.
 
-   If the user explicitly provided `GIT_BRANCH_NAME`, pass it through to the hook so the branch script uses the exact value as the branch name (bypassing all prefix/suffix generation).
+   إذا المستخدم عيّن `GIT_BRANCH_NAME`، مرّره للخطاف عشان السكربت يستخدمه كاسم فرع حرفي (بدون توليد بادئة/لاحقة).
 
-3. **Create the spec feature directory**:
+3. **إنشاء مجلد ميزة المواصفات**:
 
-   Specs live under the default `specs/` directory unless the user explicitly provides `SPECIFY_FEATURE_DIRECTORY`.
+   افتراضياً المواصفات تحت `specs/`، إلا إذا عرّف المستخدم `SPECIFY_FEATURE_DIRECTORY`.
 
-   **Resolution order for `SPECIFY_FEATURE_DIRECTORY`**:
-   1. If the user explicitly provided `SPECIFY_FEATURE_DIRECTORY` (e.g., via environment variable, argument, or configuration), use it as-is
-   2. Otherwise, auto-generate it under `specs/`:
-      - Check `.specify/init-options.json` for `branch_numbering`
-      - If `"timestamp"`: prefix is `YYYYMMDD-HHMMSS` (current timestamp)
-      - If `"sequential"` or absent: prefix is `NNN` (next available 3-digit number after scanning existing directories in `specs/`)
-      - Construct the directory name: `<prefix>-<short-name>` (e.g., `003-user-auth` or `20260319-143022-user-auth`)
-      - Set `SPECIFY_FEATURE_DIRECTORY` to `specs/<directory-name>`
+   **كيف تحدد `SPECIFY_FEATURE_DIRECTORY`:**
+   1. إذا المستخدم عطاك قيمة (env / args / config) — استخدمها كما هي.
+   2. وإلا ولِّدها تحت `specs/`:
+      - افتح `.specify/init-options.json` وشوف `branch_numbering`
+      - إن `"timestamp"`: البادئة `YYYYMMDD-HHMMSS` (الطابع الزمني الحالي)
+      - إن `"sequential"` أو غائب: البادئة `NNN` (أول رقم ثلاثي متاح بعد مسح المجلدات الموجودة في `specs/`)
+      - ابنِ اسم المجلد: `<prefix>-<short-name>` (مثل `003-user-auth` أو `20260319-143022-user-auth`)
+      - اضبط `SPECIFY_FEATURE_DIRECTORY` إلى `specs/<directory-name>`
 
-   **Create the directory and spec file**:
+   **أنشئ المجلد وملف المواصفات**:
    - `mkdir -p SPECIFY_FEATURE_DIRECTORY`
-   - Copy `templates/spec-template.md` to `SPECIFY_FEATURE_DIRECTORY/spec.md` as the starting point
-   - Set `SPEC_FILE` to `SPECIFY_FEATURE_DIRECTORY/spec.md`
-   - Persist the resolved path to `.specify/feature.json`:
+   - انسخ `templates/spec-template.md` إلى `SPECIFY_FEATURE_DIRECTORY/spec.md` كنقطة بداية
+   - اضبط `SPEC_FILE` إلى `SPECIFY_FEATURE_DIRECTORY/spec.md`
+   - سجّل المسار النهائي في `.specify/feature.json`:
      ```json
      {
        "feature_directory": "<resolved feature dir>"
      }
      ```
-     Write the actual resolved directory path value (for example, `specs/003-user-auth`), not the literal string `SPECIFY_FEATURE_DIRECTORY`.
-     This allows downstream commands (`__SPECKIT_COMMAND_PLAN__`, `__SPECKIT_COMMAND_TASKS__`, etc.) to locate the feature directory without relying on git branch name conventions.
+     اكتب مسار المجلد الفعلي المحلول (مثل `specs/003-user-auth`)، وليس النص الحرفي `SPECIFY_FEATURE_DIRECTORY`.
+     يتيح ذلك للأوامر اللاحقة (`__SPECKIT_COMMAND_PLAN__`، `__SPECKIT_COMMAND_TASKS__`، إلخ) إيجاد مجلد الميزة دون الاعتماد على اسم فرع git.
 
-   **IMPORTANT**:
-   - You must only create one feature per `__SPECKIT_COMMAND_SPECIFY__` invocation
-   - The spec directory name and the git branch name are independent — they may be the same but that is the user's choice
-   - The spec directory and file are always created by this command, never by the hook
+   **مهم**:
+   - أنشئ ميزة واحدة فقط لكل استدعاء `__SPECKIT_COMMAND_SPECIFY__`
+   - اسم مجلد المواصفات واسم فرع git مستقلان — قد يتطابقان لكن ذلك اختيار المستخدم
+   - مجلد المواصفات والملف يُنشآن دائماً بهذا الأمر، وليس بالخطاف
 
-4. Load `templates/spec-template.md` to understand required sections.
+4. اقرأ `templates/spec-template.md` لفهم الأقسام المطلوبة.
 
-5. Follow this execution flow:
-    1. Parse user description from arguments
-       If empty: ERROR "No feature description provided"
-    2. Extract key concepts from description
-       Identify: actors, actions, data, constraints
-    3. For unclear aspects:
-       - Make informed guesses based on context and industry standards
-       - Only mark with [NEEDS CLARIFICATION: specific question] if:
-         - The choice significantly impacts feature scope or user experience
-         - Multiple reasonable interpretations exist with different implications
-         - No reasonable default exists
-       - **LIMIT: Maximum 3 [NEEDS CLARIFICATION] markers total**
-       - Prioritize clarifications by impact: scope > security/privacy > user experience > technical details
-    4. Fill User Scenarios & Testing section
-       If no clear user flow: ERROR "Cannot determine user scenarios"
-    5. Generate Functional Requirements
-       Each requirement must be testable
-       Use reasonable defaults for unspecified details (document assumptions in Assumptions section)
-    6. Define Success Criteria
-       Create measurable, technology-agnostic outcomes
-       Include both quantitative metrics (time, performance, volume) and qualitative measures (user satisfaction, task completion)
-       Each criterion must be verifiable without implementation details
-    7. Identify Key Entities (if data involved)
-    8. Return: SUCCESS (spec ready for planning)
+5. اتبع تدفق التنفيذ:
+    1. حلّل وصف المستخدم من الوسائط
+       إن كان فارغاً: خطأ "لم يُقدَّم وصف للميزة"
+    2. استخرج المفاهيم الرئيسية من الوصف
+       حدّد: الفاعلين، الإجراءات، البيانات، القيود
+    3. للجوانب غير الواضحة:
+       - قدّر افتراضات مستنيرة وفق السياق والمعايير الصناعية
+       - ضع علامة [NEEDS CLARIFICATION: سؤال محدد] فقط إذا:
+         - الاختيار يؤثر جذرياً على نطاق الميزة أو تجربة المستخدم
+         - توجد تفسيرات معقولة متعددة بآثار مختلفة
+         - لا يوجد افتراض معقول
+       - **حد أقصى: 3 علامات [NEEDS CLARIFICATION] إجمالاً**
+       - رتّب التوضيحات حسب الأثر: النطاق > الأمن/الخصوصية > تجربة المستخدم > التفاصيل التقنية
+    4. املأ قسم سيناريوهات المستخدم والاختبار
+       بدون مسار مستخدم واضح: خطأ "ما قدرنا نستنتج سيناريوهات المستخدم"
+    5. ولِّد المتطلبات الوظيفية
+       كل متطلب يجب أن يكون قابلاً للاختبار
+       استخدم افتراضات معقولة للتفاصيل غير المحددة (دوّنها في قسم الافتراضات)
+    6. عرّف معايير النجاح
+       نتائج قابلة للقياس وتتجاهل التكنولوجيا
+       شمل مقاييس كمية (زمن، أداء، حجم) ونوعية (رضا المستخدم، إتمام المهمة)
+       كل معيار قابل للتحقق دون تفاصيل تنفيذ
+    7. حدّد الكيانات الرئيسية (إن وُجدت بيانات)
+    8. أعد: نجاح (المواصفة جاهزة للتخطيط)
 
-6. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings.
+6. اكتب المواصفة إلى SPEC_FILE باستخدام هيكل القالب، مع استبدال العناصر النائبة بتفاصيل مستخرجة من وصف الميزة مع الحفاظ على ترتيب الأقسام والعناوين.
 
-7. **Specification Quality Validation**: After writing the initial spec, validate it against quality criteria:
+7. **التحقق من جودة المواصفة**: بعد الكتابة الأولية، تحقق من معايير الجودة:
 
-   a. **Create Spec Quality Checklist**: Generate a checklist file at `SPECIFY_FEATURE_DIRECTORY/checklists/requirements.md` using the checklist template structure with these validation items:
+   a. **أنشئ قائمة تحقق جودة المواصفات**: ولِّد ملف checklist عند `SPECIFY_FEATURE_DIRECTORY/checklists/requirements.md` باستخدام هيكل قالب الـ checklist مع بنود التحقق التالية:
 
       ```markdown
-      # Specification Quality Checklist: [FEATURE NAME]
+      # قائمة جودة المواصفات: [اسم الميزة]
       
-      **Purpose**: Validate specification completeness and quality before proceeding to planning
-      **Created**: [DATE]
-      **Feature**: [Link to spec.md]
+      **الغرض**: التحقق من اكتمال وجودة المواصفات قبل الانتقال للتخطيط
+      **تاريخ الإنشاء**: [DATE]
+      **الميزة**: [رابط spec.md]
       
-      ## Content Quality
+      ## جودة المحتوى
       
-      - [ ] No implementation details (languages, frameworks, APIs)
-      - [ ] Focused on user value and business needs
-      - [ ] Written for non-technical stakeholders
-      - [ ] All mandatory sections completed
+      - [ ] لا تفاصيل تنفيذ (لغات، أطر، APIs)
+      - [ ] مركّز على قيمة المستخدم واحتياجات العمل
+      - [ ] مكتوب لأصحاب المصلحة غير التقنيين
+      - [ ] اكتملت جميع الأقسام الإلزامية
       
-      ## Requirement Completeness
+      ## اكتمال المتطلبات
       
-      - [ ] No [NEEDS CLARIFICATION] markers remain
-      - [ ] Requirements are testable and unambiguous
-      - [ ] Success criteria are measurable
-      - [ ] Success criteria are technology-agnostic (no implementation details)
-      - [ ] All acceptance scenarios are defined
-      - [ ] Edge cases are identified
-      - [ ] Scope is clearly bounded
-      - [ ] Dependencies and assumptions identified
+      - [ ] لا تبقى علامات [NEEDS CLARIFICATION]
+      - [ ] المتطلبات قابلة للاختبار وغير غامضة
+      - [ ] معايير النجاح قابلة للقياس
+      - [ ] معايير النجاح بلا تفاصيل تقنية (technology-agnostic)
+      - [ ] جميع سيناريوهات القبول معرّفة
+      - [ ] الحالات الحدية محددة
+      - [ ] النطاق محدد بوضوح
+      - [ ] التبعيات والافتراضات محددة
       
-      ## Feature Readiness
+      ## جاهزية الميزة
       
-      - [ ] All functional requirements have clear acceptance criteria
-      - [ ] User scenarios cover primary flows
-      - [ ] Feature meets measurable outcomes defined in Success Criteria
-      - [ ] No implementation details leak into specification
+      - [ ] لكل متطلب وظيفي معايير قبول واضحة
+      - [ ] سيناريوهات المستخدم تغطي المسارات الأساسية
+      - [ ] الميزة تحقق النتائج القابلة للقياس في معايير النجاح
+      - [ ] لا تتسرّب تفاصيل التنفيذ إلى المواصفة
       
-      ## Notes
+      ## ملاحظات
       
-      - Items marked incomplete require spec updates before `__SPECKIT_COMMAND_CLARIFY__` or `__SPECKIT_COMMAND_PLAN__`
+      - البنود غير المكتملة تتطلب تحديث المواصفات قبل `__SPECKIT_COMMAND_CLARIFY__` أو `__SPECKIT_COMMAND_PLAN__`
       ```
 
-   b. **Run Validation Check**: Review the spec against each checklist item:
-      - For each item, determine if it passes or fails
-      - Document specific issues found (quote relevant spec sections)
+   b. **شغّل التحقق**: راجع المواصفات مقابل كل بند:
+      - لكل بند، قرّر نجاحاً أو فشلاً
+      - دوّن المشكلات المحددة (اقتبس أقسام المواصفات ذات الصلة)
 
-   c. **Handle Validation Results**:
+   c. **عالج نتائج التحقق**:
 
-      - **If all items pass**: Mark checklist complete and proceed to step 8
+      - **إن اجتازت كل البنود**: علّم القائمة مكتملة وانتقل للخطوة 8
 
-      - **If items fail (excluding [NEEDS CLARIFICATION])**:
-        1. List the failing items and specific issues
-        2. Update the spec to address each issue
-        3. Re-run validation until all items pass (max 3 iterations)
-        4. If still failing after 3 iterations, document remaining issues in checklist notes and warn user
+      - **إن فشلت بنود (باستثناء [NEEDS CLARIFICATION])**:
+        1. اذكر البنود الفاشلة والمشكلات
+        2. حدّث المواصفة لمعالجة كل مشكلة
+        3. أعد التحقق حتى تنجح كل البنود (حد أقصى 3 دورات)
+        4. إن استمر الفشل بعد 3 دورات، دوّن المشكلات المتبقية في ملاحظات القائمة وحذّر المستخدم
 
-      - **If [NEEDS CLARIFICATION] markers remain**:
-        1. Extract all [NEEDS CLARIFICATION: ...] markers from the spec
-        2. **LIMIT CHECK**: If more than 3 markers exist, keep only the 3 most critical (by scope/security/UX impact) and make informed guesses for the rest
-        3. For each clarification needed (max 3), present options to user in this format:
+      - **إن بقيت علامات [NEEDS CLARIFICATION]**:
+        1. استخرج كل العلامات من المواصفة
+        2. **فحص الحد**: إن زاد العدد عن 3، احتفظ بأهم 3 حسب الأثر (نطاق/أمن/تجربة) وقدّر الباقي
+        3. لكل توضيح مطلوب (حد أقصى 3)، اعرض خيارات للمستخدم بهذا الشكل:
 
            ```markdown
-           ## Question [N]: [Topic]
+           ## سؤال [N]: [الموضوع]
            
-           **Context**: [Quote relevant spec section]
+           **السياق**: [اقتباس من المواصفات]
            
-           **What we need to know**: [Specific question from NEEDS CLARIFICATION marker]
+           **ما نحتاج معرفته**: [سؤال من علامة NEEDS CLARIFICATION]
            
-           **Suggested Answers**:
+           **إجابات مقترحة**:
            
-           | Option | Answer | Implications |
-           |--------|--------|--------------|
-           | A      | [First suggested answer] | [What this means for the feature] |
-           | B      | [Second suggested answer] | [What this means for the feature] |
-           | C      | [Third suggested answer] | [What this means for the feature] |
-           | Custom | Provide your own answer | [Explain how to provide custom input] |
+           | الخيار | الإجابة | الآثار |
+           |--------|---------|--------|
+           | أ      | [إجابة مقترحة أولى] | [ماذا يعني للميزة] |
+           | ب      | [إجابة مقترحة ثانية] | [ماذا يعني للميزة] |
+           | ج      | [إجابة مقترحة ثالثة] | [ماذا يعني للميزة] |
+           | مخصص | قدّم إجابتك | [كيفية تقديم المدخل المخصص]
            
-           **Your choice**: _[Wait for user response]_
+           **اختيارك**: _[انتظر رد المستخدم]_
            ```
 
-        4. **CRITICAL - Table Formatting**: Ensure markdown tables are properly formatted:
-           - Use consistent spacing with pipes aligned
-           - Each cell should have spaces around content: `| Content |` not `|Content|`
-           - Header separator must have at least 3 dashes: `|--------|`
-           - Test that the table renders correctly in markdown preview
-        5. Number questions sequentially (Q1, Q2, Q3 - max 3 total)
-        6. Present all questions together before waiting for responses
-        7. Wait for user to respond with their choices for all questions (e.g., "Q1: A, Q2: Custom - [details], Q3: B")
-        8. Update the spec by replacing each [NEEDS CLARIFICATION] marker with the user's selected or provided answer
-        9. Re-run validation after all clarifications are resolved
+        4. **مهم — تنسيق الجداول**: تأكد من صيغة Markdown للجداول:
+           - مسافات متسقة حول الأنابيب
+           - خلايا بمسافات: `| المحتوى |` وليس `|المحتوى|`
+           - فاصل الرأس بثلاث شرطات على الأقل: `|--------|`
+           - اختبر العرض في معاينة Markdown
+        5. رقّم الأسئلة (س1، س2، س3 — حد أقصى 3)
+        6. اعرض كل الأسئلة معاً قبل انتظار الردود
+        7. انتظر رد المستخدم بخياراته لكل الأسئلة (مثل "س1: أ، س2: مخصص - [تفاصيل]، س3: ب")
+        8. حدّث المواصفة باستبدال كل علامة [NEEDS CLARIFICATION] بالإجابة المختارة
+        9. أعد التحقق بعد حل التوضيحات
 
-   d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
+   d. **حدّث القائمة**: بعد كل دورة تحقق، حدّث ملف القائمة بحالة النجاح/الفشل الحالية
 
-8. **Report completion** to the user with:
-   - `SPECIFY_FEATURE_DIRECTORY` — the feature directory path
-   - `SPEC_FILE` — the spec file path
-   - Checklist results summary
-   - Readiness for the next phase (`__SPECKIT_COMMAND_CLARIFY__` or `__SPECKIT_COMMAND_PLAN__`)
+8. **أبلغ الاكتمال** للمستخدم مع:
+   - `SPECIFY_FEATURE_DIRECTORY` — مسار مجلد الميزة
+   - `SPEC_FILE` — مسار ملف المواصفات
+   - ملخص نتائج قائمة التحقق
+   - الجاهزية للمرحلة التالية (`__SPECKIT_COMMAND_CLARIFY__` أو `__SPECKIT_COMMAND_PLAN__`)
 
-9. **Check for extension hooks**: After reporting completion, check if `.specify/extensions.yml` exists in the project root.
-   - If it exists, read it and look for entries under the `hooks.after_specify` key
-   - If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
-   - Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-   - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-     - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-     - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-   - For each executable hook, output the following based on its `optional` flag:
-     - **Optional hook** (`optional: true`):
+9. **تحقق من خطافات الامتداد**: بعد الإبلاغ، تحقق من وجود `.specify/extensions.yml` في جذر المشروع.
+   - إن وُجد، اقرأه وابحث عن `hooks.after_specify`
+   - YAML ما ينقرأ؟ تخطَّ بصمت
+   - استبعد الخطافات ذات `enabled: false`. الخطافات بلا `enabled` مفعّلة افتراضياً.
+   - لكل خطاف متبقٍ، **لا** تُقيم `condition`:
+     - بلا `condition` أو فارغ → قابل للتنفيذ
+     - `condition` غير فارغ → تخطَّ واترك التقييم لـ HookExecutor
+   - لكل خطاف قابل للتنفيذ، أخرج حسب `optional`:
+     - **خطاف اختياري** (`optional: true`):
        ```
        ## Extension Hooks
 
@@ -253,7 +255,7 @@ Given that feature description, do this:
        Prompt: {prompt}
        To execute: `/{command}`
        ```
-     - **Mandatory hook** (`optional: false`):
+     - **خطاف إلزامي** (`optional: false`):
        ```
        ## Extension Hooks
 
@@ -261,67 +263,67 @@ Given that feature description, do this:
        Executing: `/{command}`
        EXECUTE_COMMAND: {command}
        ```
-   - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+   - إن لا خطافات أو لا ملف، تخطَّ بصمت
 
-**NOTE:** Branch creation is handled by the `before_specify` hook (git extension). Spec directory and file creation are always handled by this core command.
+**ملاحظة:** إنشاء الفرع يتولاه خطاف `before_specify` (امتداد git). إنشاء مجلد وملف المواصفات يبقى دائماً بهذا الأمر الأساسي.
 
-## Quick Guidelines
+## إرشادات سريعة
 
-- Focus on **WHAT** users need and **WHY**.
-- Avoid HOW to implement (no tech stack, APIs, code structure).
-- Written for business stakeholders, not developers.
-- DO NOT create any checklists that are embedded in the spec. That will be a separate command.
+- ركّز على **ماذا** يحتاجه المستخدمون و**لماذا**.
+- تجنّب **كيف** التنفيذ (لا مكدس تقني، ولا APIs، ولا هيكل كود).
+- مكتوب لأصحاب المصلحة في العمل، لا للمطورين فقط.
+- **لا** تنشئ قوائم تحقق مضمّنة في المواصفة؛ ذلك أمر منفصل.
 
-### Section Requirements
+### متطلبات الأقسام
 
-- **Mandatory sections**: Must be completed for every feature
-- **Optional sections**: Include only when relevant to the feature
-- When a section doesn't apply, remove it entirely (don't leave as "N/A")
+- **أقسام إلزامية**: يجب إكمالها لكل ميزة
+- **أقسام اختيارية**: أضفها فقط عند الصلة
+- إن لم ينطبق قسم، احذفه بالكامل (لا تتركه "غير متاح")
 
-### For AI Generation
+### لتوليد الذكاء الاصطناعي
 
-When creating this spec from a user prompt:
+عند إنشاء هذه المواصفة من مطالبة المستخدم:
 
-1. **Make informed guesses**: Use context, industry standards, and common patterns to fill gaps
-2. **Document assumptions**: Record reasonable defaults in the Assumptions section
-3. **Limit clarifications**: Maximum 3 [NEEDS CLARIFICATION] markers - use only for critical decisions that:
-   - Significantly impact feature scope or user experience
-   - Have multiple reasonable interpretations with different implications
-   - Lack any reasonable default
-4. **Prioritize clarifications**: scope > security/privacy > user experience > technical details
-5. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
-6. **Common areas needing clarification** (only if no reasonable default exists):
-   - Feature scope and boundaries (include/exclude specific use cases)
-   - User types and permissions (if multiple conflicting interpretations possible)
-   - Security/compliance requirements (when legally/financially significant)
+1. **قدّر معقولاً**: استخدم السياق والمعايير والأنماط الشائعة لسد الفجوات
+2. **دوّن الافتراضات**: سجّل الافتراضات المعقولة في قسم الافتراضات
+3. **حدّ التوضيحات**: 3 علامات [NEEDS CLARIFICATION] كحد أقصى — للقرارات الحرجة فقط التي:
+   - تؤثر جذرياً على النطاق أو التجربة
+   - لها تفسيرات متعددة بآثار مختلفة
+   - بلا افتراض معقول
+4. **أولوية التوضيحات**: نطاق > أمن/خصوصية > تجربة مستخدم > تفاصيل تقنية
+5. **فكّر كمختبر**: كل متطلب غامض يجب أن يفشل بند "قابل للاختبار وغير غامض"
+6. **مجالات شائعة للتوضيح** (فقط بلا افتراض معقول):
+   - نطاق الميزة والحدود (إدراج/استبعاد حالات)
+   - أنواع المستخدمين والصلاحيات (عند تعارض تفسيرات)
+   - متطلبات الأمن/الامتثال (عند أهمية قانونية/مالية)
 
-**Examples of reasonable defaults** (don't ask about these):
+**أمثلة افتراضات معقولة** (لا تسأل عنها):
 
-- Data retention: Industry-standard practices for the domain
-- Performance targets: Standard web/mobile app expectations unless specified
-- Error handling: User-friendly messages with appropriate fallbacks
-- Authentication method: Standard session-based or OAuth2 for web apps
-- Integration patterns: Use project-appropriate patterns (REST/GraphQL for web services, function calls for libraries, CLI args for tools, etc.)
+- الاحتفاظ بالبيانات: ممارسات معيارية للمجال
+- أهداف الأداء: توقّعات تطبيق ويب/موبايل المعتادة ما لم يُحدد غير ذلك
+- معالجة الأخطاء: رسائل ودية مع مسارات بديلة مناسبة
+- طريقة المصادقة: جلسات قياسية أو OAuth2 لتطبيقات الويب
+- أنماط التكامل: أنماط مناسبة للمشروع (REST/GraphQL للخدمات، استدعاءات للمكتبات، وسائط CLI للأدوات، إلخ)
 
-### Success Criteria Guidelines
+### إرشادات معايير النجاح
 
-Success criteria must be:
+يجب أن تكون معايير النجاح:
 
-1. **Measurable**: Include specific metrics (time, percentage, count, rate)
-2. **Technology-agnostic**: No mention of frameworks, languages, databases, or tools
-3. **User-focused**: Describe outcomes from user/business perspective, not system internals
-4. **Verifiable**: Can be tested/validated without knowing implementation details
+1. **قابلة للقياس**: أرقام محددة (زمن، نسبة، عدد، معدل)
+2. **بلا تكنولوجيا**: لا أطر أو لغات أو قواعد بيانات أو أدوات
+3. **مركّزة على المستخدم**: نتائج من منظور المستخدم/العمل لا البنية الداخلية
+4. **قابلة للتحقق**: يمكن اختبارها دون معرفة التنفيذ
 
-**Good examples**:
+**أمثلة جيدة**:
 
-- "Users can complete checkout in under 3 minutes"
-- "System supports 10,000 concurrent users"
-- "95% of searches return results in under 1 second"
-- "Task completion rate improves by 40%"
+- "يمكن للمستخدمين إتمام الدفع في أقل من 3 دقائق"
+- "النظام يدعم 10,000 مستخدم متزامن"
+- "95% من عمليات البحث تعيد نتائج في أقل من ثانية"
+- "معدل إتمام المهام يتحسن 40%"
 
-**Bad examples** (implementation-focused):
+**أمثلة سيئة** (مركّزة على التنفيذ):
 
-- "API response time is under 200ms" (too technical, use "Users see results instantly")
-- "Database can handle 1000 TPS" (implementation detail, use user-facing metric)
-- "React components render efficiently" (framework-specific)
-- "Redis cache hit rate above 80%" (technology-specific)
+- "زمن استجابة API أقل من 200ms" (تقني جداً؛ استخدم صياغة موجهة للمستخدم)
+- "قاعدة البيانات تتحمل 1000 TPS" (تفصيل تنفيذ؛ استخدم مقياساً للمستخدم)
+- "مكوّنات React تعرض بكفاءة" (خاص بإطار)
+- "معدل إصابة Redis أعلى من 80%" (خاص بتقنية)

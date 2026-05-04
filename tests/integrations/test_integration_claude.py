@@ -505,7 +505,7 @@ class TestClaudeHookCommandNote:
         assert specify_skill.exists()
         content = specify_skill.read_text(encoding="utf-8")
         # specify.md has hook sections
-        assert "replace dots" in content, (
+        assert "استبدل النقطة" in content, (
             "speckit-specify should have dot-to-hyphen hook note"
         )
 
@@ -515,7 +515,7 @@ class TestClaudeHookCommandNote:
 
         content = "---\nname: test\ndescription: test\n---\n\nNo hooks here.\n"
         result = ClaudeIntegration._inject_hook_command_note(content)
-        assert "replace dots" not in result
+        assert "استبدل النقطة" not in result
 
     def test_hook_note_idempotent(self, tmp_path):
         """Injecting the note twice should not duplicate it."""
@@ -539,7 +539,7 @@ class TestClaudeHookCommandNote:
         )
         result = ClaudeIntegration._inject_hook_command_note(content)
         lines = result.splitlines()
-        note_line = [l for l in lines if "replace dots" in l][0]
+        note_line = [l for l in lines if "استبدل النقطة" in l][0]
         assert note_line.startswith("   "), "Note should preserve indentation"
 
     def test_post_process_injects_all_claude_flags(self):
@@ -552,4 +552,4 @@ class TestClaudeHookCommandNote:
         result = i.post_process_skill_content(content)
         assert "user-invocable: true" in result
         assert "disable-model-invocation: false" in result
-        assert "replace dots" in result
+        assert "استبدل النقطة" in result

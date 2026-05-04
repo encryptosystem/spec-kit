@@ -31,7 +31,7 @@ class TestInitIntegrationFlag:
             "init", str(tmp_path / "test-project"), "--ai", "claude", "--integration", "copilot",
         ])
         assert result.exit_code != 0
-        assert "mutually exclusive" in result.output
+        assert "غير متوافقين معاً" in result.output
 
     def test_unknown_integration_rejected(self, tmp_path):
         from typer.testing import CliRunner
@@ -41,7 +41,7 @@ class TestInitIntegrationFlag:
             "init", str(tmp_path / "test-project"), "--integration", "nonexistent",
         ])
         assert result.exit_code != 0
-        assert "Unknown integration" in result.output
+        assert "تكامل غير معروف" in result.output
 
     def test_integration_copilot_creates_files(self, tmp_path):
         from typer.testing import CliRunner
@@ -116,13 +116,13 @@ class TestInitIntegrationFlag:
 
         normalized_output = _normalize_cli_output(result.output)
         assert result.exit_code == 0, result.output
-        assert "Deprecation Warning" in normalized_output
+        assert "تحذير الإهمال" in normalized_output
         assert "--ai" in normalized_output
-        assert "deprecated" in normalized_output
-        assert "no longer be available" in normalized_output
+        assert "مهمل" in normalized_output
+        assert "لن يكون متاحاً" in normalized_output
         assert "0.10.0" in normalized_output
         assert "--integration copilot" in normalized_output
-        assert normalized_output.index("Deprecation Warning") < normalized_output.index("Next Steps")
+        assert normalized_output.index("تحذير الإهمال") < normalized_output.index("الخطوات التالية")
         assert (project / ".github" / "agents" / "speckit.plan.agent.md").exists()
 
     def test_ai_generic_warning_suggests_integration_options_equivalent(self, tmp_path):
@@ -144,11 +144,11 @@ class TestInitIntegrationFlag:
 
         normalized_output = _normalize_cli_output(result.output)
         assert result.exit_code == 0, result.output
-        assert "Deprecation Warning" in normalized_output
+        assert "تحذير الإهمال" in normalized_output
         assert "--integration generic" in normalized_output
         assert "--integration-options" in normalized_output
         assert ".myagent/commands" in normalized_output
-        assert normalized_output.index("Deprecation Warning") < normalized_output.index("Next Steps")
+        assert normalized_output.index("تحذير الإهمال") < normalized_output.index("الخطوات التالية")
         assert (project / ".myagent" / "commands" / "speckit.plan.md").exists()
 
     def test_ai_claude_here_preserves_preexisting_commands(self, tmp_path):

@@ -103,8 +103,8 @@ def _build_ai_assistant_help() -> str:
 
     non_generic_agents = sorted(agent for agent in AGENT_CONFIG if agent != "generic")
     base_help = (
-        f"AI assistant to use: {', '.join(non_generic_agents)}, "
-        "or generic (requires --ai-commands-dir)."
+        f"وكيل الـ AI: {', '.join(non_generic_agents)}, "
+        "أو generic (لازم معه --ai-commands-dir)."
     )
 
     if not AI_ASSISTANT_ALIASES:
@@ -112,14 +112,14 @@ def _build_ai_assistant_help() -> str:
 
     alias_phrases = []
     for alias, target in sorted(AI_ASSISTANT_ALIASES.items()):
-        alias_phrases.append(f"'{alias}' as an alias for '{target}'")
+        alias_phrases.append(f"«{alias}» كنُسخة عن «{target}»")
 
     if len(alias_phrases) == 1:
         aliases_text = alias_phrases[0]
     else:
-        aliases_text = ', '.join(alias_phrases[:-1]) + ' and ' + alias_phrases[-1]
+        aliases_text = '، '.join(alias_phrases[:-1]) + ' و' + alias_phrases[-1]
 
-    return base_help + " Use " + aliases_text + "."
+    return base_help + " يمكنك استخدام " + aliases_text + "."
 AI_ASSISTANT_HELP = _build_ai_assistant_help()
 
 
@@ -148,8 +148,8 @@ def _build_ai_deprecation_warning(
         ai_commands_dir=ai_commands_dir,
     )
     return (
-        "[bold]--ai[/bold] is deprecated and will no longer be available in version 0.10.0 or later.\n\n"
-        f"Use [bold]{replacement}[/bold] instead."
+        "[bold]--ai[/bold] مهمل ولن يكون متاحاً في الإصدار 0.10.0 أو أحدث.\n\n"
+        f"استخدم [bold]{replacement}[/bold] بدلاً منه."
     )
 
 SCRIPT_TYPE_CHOICES = {"sh": "POSIX Shell (bash/zsh)", "ps": "PowerShell"}
@@ -166,7 +166,7 @@ BANNER = """
 ╚══════╝╚═╝     ╚══════╝ ╚═════╝╚═╝╚═╝        ╚═╝
 """
 
-TAGLINE = "GitHub Spec Kit - Spec-Driven Development Toolkit"
+TAGLINE = "GitHub Spec Kit — من المواصفة إلى التنفيذ بخطوات واضحة"
 class StepTracker:
     """Track and render hierarchical steps without emojis, similar to Claude Code tree output.
     Supports live auto-refresh via an attached refresh callback.
@@ -330,19 +330,19 @@ def select_with_arrows(options: dict, prompt_text: str = "Select an option", def
                         selected_key = option_keys[selected_index]
                         break
                     elif key == 'escape':
-                        console.print("\n[yellow]Selection cancelled[/yellow]")
+                        console.print("\n[yellow]تم إلغاء الاختيار[/yellow]")
                         raise typer.Exit(1)
 
                     live.update(create_selection_panel(), refresh=True)
 
                 except KeyboardInterrupt:
-                    console.print("\n[yellow]Selection cancelled[/yellow]")
+                    console.print("\n[yellow]تم إلغاء الاختيار[/yellow]")
                     raise typer.Exit(1)
 
     run_selection_loop()
 
     if selected_key is None:
-        console.print("\n[red]Selection failed.[/red]")
+        console.print("\n[red]فشل الاختيار.[/red]")
         raise typer.Exit(1)
 
     return selected_key
@@ -360,7 +360,7 @@ class BannerGroup(TyperGroup):
 
 app = typer.Typer(
     name="specify",
-    help="Setup tool for Specify spec-driven development projects",
+    help="تهيئة مشاريع Specify — سير عمل موجّه بالمواصفات",
     add_completion=False,
     invoke_without_command=True,
     cls=BannerGroup,
@@ -388,12 +388,12 @@ def _version_callback(value: bool):
 @app.callback()
 def callback(
     ctx: typer.Context,
-    version: bool = typer.Option(False, "--version", "-V", callback=_version_callback, is_eager=True, help="Show version and exit."),
+    version: bool = typer.Option(False, "--version", "-V", callback=_version_callback, is_eager=True, help="عرض الإصدار والخروج."),
 ):
     """Show banner when no subcommand is provided."""
     if ctx.invoked_subcommand is None and "--help" not in sys.argv and "-h" not in sys.argv:
         show_banner()
-        console.print(Align.center("[dim]Run 'specify --help' for usage information[/dim]"))
+        console.print(Align.center("[dim]نفّذ specify --help لعرض طريقة الاستخدام[/dim]"))
         console.print()
 
 def run_command(cmd: list[str], check_return: bool = True, capture: bool = False, shell: bool = False) -> Optional[str]:
@@ -407,10 +407,10 @@ def run_command(cmd: list[str], check_return: bool = True, capture: bool = False
             return None
     except subprocess.CalledProcessError as e:
         if check_return:
-            console.print(f"[red]Error running command:[/red] {' '.join(cmd)}")
-            console.print(f"[red]Exit code:[/red] {e.returncode}")
+            console.print(f"[red]خطأ في تشغيل الأمر:[/red] {' '.join(cmd)}")
+            console.print(f"[red]رمز الخروج:[/red] {e.returncode}")
             if hasattr(e, 'stderr') and e.stderr:
-                console.print(f"[red]Error output:[/red] {e.stderr}")
+                console.print(f"[red]مخرجات الخطأ:[/red] {e.stderr}")
             raise
         return None
 
@@ -479,12 +479,12 @@ def init_git_repo(project_path: Path, quiet: bool = False) -> tuple[bool, Option
         original_cwd = Path.cwd()
         os.chdir(project_path)
         if not quiet:
-            console.print("[cyan]Initializing git repository...[/cyan]")
+            console.print("[cyan]جاري تهيئة مستودع git...[/cyan]")
         subprocess.run(["git", "init"], check=True, capture_output=True, text=True)
         subprocess.run(["git", "add", "."], check=True, capture_output=True, text=True)
         subprocess.run(["git", "commit", "-m", "Initial commit from Specify template"], check=True, capture_output=True, text=True)
         if not quiet:
-            console.print("[green]✓[/green] Git repository initialized")
+            console.print("[green]✓[/green] تمت تهيئة مستودع git")
         return True, None
     except subprocess.CalledProcessError as e:
         error_msg = f"Command: {' '.join(e.cmd)}\nExit code: {e.returncode}"
@@ -493,7 +493,7 @@ def init_git_repo(project_path: Path, quiet: bool = False) -> tuple[bool, Option
         elif e.stdout:
             error_msg += f"\nOutput: {e.stdout.strip()}"
         if not quiet:
-            console.print(f"[red]Error initializing git repository:[/red] {e}")
+            console.print(f"[red]خطأ في تهيئة مستودع git:[/red] {e}")
         return False, error_msg
     finally:
         os.chdir(original_cwd)
@@ -810,7 +810,7 @@ def _install_shared_infra_or_exit(
             invoke_separator=invoke_separator,
         )
     except (ValueError, OSError) as exc:
-        console.print(f"[red]Error:[/red] Failed to install shared infrastructure: {exc}")
+        console.print(f"[red]خطأ:[/red] فشل تثبيت البنية التحتية المشتركة: {exc}")
         raise typer.Exit(1)
 
 
@@ -860,9 +860,9 @@ def ensure_executable_scripts(project_path: Path, tracker: StepTracker | None = 
         (tracker.error if failures else tracker.complete)("chmod", detail)
     else:
         if updated:
-            console.print(f"[cyan]Updated execute permissions on {updated} script(s) recursively[/cyan]")
+            console.print(f"[cyan]تم تحديث صلاحيات التنفيذ لـ {updated} سكربت/سكربتات بشكل متكرر[/cyan]")
         if failures:
-            console.print("[yellow]Some scripts could not be updated:[/yellow]")
+            console.print("[yellow]تعذّر تحديث بعض السكربتات:[/yellow]")
             for f in failures:
                 console.print(f"  - {f}")
 
@@ -893,7 +893,7 @@ def ensure_constitution_from_template(project_path: Path, tracker: StepTracker |
             tracker.add("constitution", "Constitution setup")
             tracker.complete("constitution", "copied from template")
         else:
-            console.print("[cyan]Initialized constitution from template[/cyan]")
+            console.print("[cyan]تمت تهيئة الدستور من القالب[/cyan]")
     except Exception as e:
         if tracker:
             tracker.add("constitution", "Constitution setup")
@@ -947,15 +947,15 @@ def _get_skills_dir(project_path: Path, selected_ai: str) -> Path:
 # Constants kept for backward compatibility with presets and extensions.
 DEFAULT_SKILLS_DIR = ".agents/skills"
 SKILL_DESCRIPTIONS = {
-    "specify": "Create or update feature specifications from natural language descriptions.",
-    "plan": "Generate technical implementation plans from feature specifications.",
-    "tasks": "Break down implementation plans into actionable task lists.",
-    "implement": "Execute all tasks from the task breakdown to build the feature.",
-    "analyze": "Perform cross-artifact consistency analysis across spec.md, plan.md, and tasks.md.",
-    "clarify": "Structured clarification workflow for underspecified requirements.",
-    "constitution": "Create or update project governing principles and development guidelines.",
-    "checklist": "Generate custom quality checklists for validating requirements completeness and clarity.",
-    "taskstoissues": "Convert tasks from tasks.md into GitHub issues.",
+    "specify": "مواصفة الميزة من وصف نصّي.",
+    "plan": "خطة تنفيذ تقنية من الـ spec.",
+    "tasks": "تقسيم الخطة إلى مهام منفّذة.",
+    "implement": "تنفيذ مهام tasks.md لحد ما الميزة تكتمل.",
+    "analyze": "فحص اتساق spec / plan / tasks (قراءة فقط).",
+    "clarify": "أسئلة توضيح ودمجها في المواصفة.",
+    "constitution": "دستور المشروع: مبادئ وقواعد التطوير.",
+    "checklist": "checklist جودة حسب المجال.",
+    "taskstoissues": "من tasks.md إلى issues على GitHub.",
 }
 
 
@@ -980,27 +980,22 @@ def init(
     integration_options: str = typer.Option(None, "--integration-options", help='Options for the integration (e.g. --integration-options="--commands-dir .myagent/cmds")'),
 ):
     """
-    Initialize a new Specify project.
+    تبدأ مشروع Specify من الصفر أو داخل مجلد موجود.
 
-    By default, project files are downloaded from the latest GitHub release.
-    Use --offline to scaffold from assets bundled inside the specify-cli
-    package instead (no internet access required, ideal for air-gapped or
-    enterprise environments).
+    افتراضياً: ملفات القالب من آخر إصدار على GitHub.
+    `--offline`: كل شيء من الحزمة المحلية (مناسب بدون إنترنت أو شبكات مقفلة).
 
-    NOTE: Starting with v0.6.0, bundled assets will be used by default and
-    the --offline flag will be removed. The GitHub download path will be
-    retired because bundled assets eliminate the need for network access,
-    avoid proxy/firewall issues, and guarantee that templates always match
-    the installed CLI version.
+    ملاحظة: من v0.6.0 الأصول المضمّنة تصير الافتراضي ويختفي `--offline` لاحقاً؛
+    الهدف: قوالب دائماً متطابقة مع إصدار الـ CLI.
 
-    This command will:
-    1. Check that required tools are installed (git is optional)
-    2. Let you choose your coding agent integration
-    3. Download template from GitHub (or use bundled assets with --offline)
-    4. Initialize a fresh git repository (if not --no-git and no existing repo)
-    5. Optionally set up coding agent integration commands
+    يعمل `init` عادةً على الخطوات التالية:
+    1. يتأكد من الأدوات المتاحة (git اختياري)
+    2. يخليك تختار تكامل الـ AI
+    3. ينزّل القوالب أو يستخدم المضمّن مع `--offline`
+    4. يهيّئ git إذا ما مرّرت `--no-git` وما فيه repo
+    5. يضبط أوامر الوكيل إن اخترت تكاملاً
 
-    Examples:
+    أمثلة:
         specify init my-project
         specify init my-project --integration claude
         specify init my-project --integration copilot --no-git
@@ -1041,7 +1036,7 @@ def init(
 
     # --integration and --ai are mutually exclusive
     if integration and ai_assistant:
-        console.print("[red]Error:[/red] --integration and --ai are mutually exclusive")
+        console.print("[red]خطأ:[/red] --integration و --ai غير متوافقين معاً")
         raise typer.Exit(1)
 
     # Resolve the integration — either from --integration or --ai
@@ -1049,7 +1044,7 @@ def init(
     if integration:
         resolved_integration = get_integration(integration)
         if not resolved_integration:
-            console.print(f"[red]Error:[/red] Unknown integration: '{integration}'")
+            console.print(f"[red]خطأ:[/red] تكامل غير معروف: '{integration}'")
             available = ", ".join(sorted(INTEGRATION_REGISTRY))
             console.print(f"[yellow]Available integrations:[/yellow] {available}")
             raise typer.Exit(1)
@@ -1506,7 +1501,7 @@ def init(
             pass
 
     console.print(tracker.render())
-    console.print("\n[bold green]Project ready.[/bold green]")
+    console.print("\n[bold green]المشروع جاهز.[/bold green]")
 
     # Agent folder security notice
     agent_config = AGENT_CONFIG.get(selected_ai)
@@ -1526,7 +1521,7 @@ def init(
     if ai_deprecation_warning:
         deprecation_notice = Panel(
             ai_deprecation_warning,
-            title="[bold red]Deprecation Warning[/bold red]",
+            title="[bold red]تحذير الإهمال[/bold red]",
             border_style="red",
             padding=(1, 2),
         )
@@ -1602,7 +1597,7 @@ def init(
     steps_lines.append(f"   {step_num}.4 [cyan]{_display_cmd('tasks')}[/] - Generate actionable tasks")
     steps_lines.append(f"   {step_num}.5 [cyan]{_display_cmd('implement')}[/] - Execute implementation")
 
-    steps_panel = Panel("\n".join(steps_lines), title="Next Steps", border_style="cyan", padding=(1,2))
+    steps_panel = Panel("\n".join(steps_lines), title="الخطوات التالية", border_style="cyan", padding=(1,2))
     console.print()
     console.print(steps_panel)
 
@@ -1625,9 +1620,9 @@ def init(
 
 @app.command()
 def check():
-    """Check that all required tools are installed."""
+    """التحقق من تثبيت الأدوات المطلوبة."""
     show_banner()
-    console.print("[bold]Checking for installed tools...[/bold]\n")
+    console.print("[bold]جاري التحقق من الأدوات المثبتة...[/bold]\n")
 
     tracker = StepTracker("Check Available Tools")
 
@@ -1659,17 +1654,17 @@ def check():
 
     console.print(tracker.render())
 
-    console.print("\n[bold green]Specify CLI is ready to use![/bold green]")
+    console.print("\n[bold green]واجهة Specify CLI جاهزة للاستخدام![/bold green]")
 
     if not git_ok:
-        console.print("[dim]Tip: Install git for repository management[/dim]")
+        console.print("[dim]نصيحة: ثبّت git لإدارة المستودع[/dim]")
 
     if not any(agent_results.values()):
-        console.print("[dim]Tip: Install a coding agent for the best experience[/dim]")
+        console.print("[dim]نصيحة: ثبّت وكيل برمجة لأفضل تجربة[/dim]")
 
 @app.command()
 def version():
-    """Display version and system information."""
+    """عرض معلومات الإصدار والنظام."""
     import platform
 
     show_banner()
