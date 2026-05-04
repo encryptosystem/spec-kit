@@ -1,62 +1,61 @@
-# Implementation Plan: [FEATURE]
+# خطة التنفيذ: [FEATURE]
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**الفرع**: `[###-feature-name]` | **التاريخ**: [DATE] | **المواصفة**: [link]
+**المدخل**: مواصفة الميزة من `/specs/[###-feature-name]/spec.md`
 
-**Note**: This template is filled in by the `__SPECKIT_COMMAND_PLAN__` command. See `.specify/templates/plan-template.md` for the execution workflow.
+**ملاحظة**: يُملأ هذا القالب بأمر __SPECKIT_COMMAND_PLAN__. للتسلسل التنفيذي راجع `.specify/templates/plan-template.md`.
 
-## Summary
+## ملخص
 
-[Extract from feature spec: primary requirement + technical approach from research]
+[مستخرج من مواصفة الميزة: المتطلب الأساسي + المنهج التقني من البحث]
 
-## Technical Context
+## السياق التقني
 
 <!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
+  مطلوب: عوّض محتوى هذا القسم بالتفاصيل التقنية للمشروع.
+  الهيكل هنا إرشادي فقط لتوجيه التكرار.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**اللغة/الإصدار**: [مثال: Python 3.11، Swift 5.9، Rust 1.75 أو NEEDS CLARIFICATION]  
+**التبعيات الأساسية**: [مثال: FastAPI، UIKit، LLVM أو NEEDS CLARIFICATION]  
+**التخزين**: [إن وُجد، مثال: PostgreSQL، CoreData، ملفات أو N/A]  
+**الاختبار**: [مثال: pytest، XCTest، cargo test أو NEEDS CLARIFICATION]  
+**المنصة المستهدفة**: [مثال: خادم Linux، iOS 15+، WASM أو NEEDS CLARIFICATION]  
+**نوع المشروع**: [مثال: library/cli/web-service/mobile-app/compiler/desktop-app أو NEEDS CLARIFICATION]  
+**أهداف الأداء**: [حسب المجال، مثال: 1000 req/s، 10k سطر/ث، 60 fps أو NEEDS CLARIFICATION]  
+**القيود**: [حسب المجال، مثال: p95 < 200ms، ذاكرة < 100MB، يعمل دون اتصال أو NEEDS CLARIFICATION]  
+**الحجم/النطاق**: [حسب المجال، مثال: 10k مستخدم، 1M سطر، 50 شاشة أو NEEDS CLARIFICATION]
 
-## Constitution Check
+## مطابقة الدستور
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+*بوابة: لازم تمر قبل بحث المرحلة 0. أعد الفحص بعد تصميم المرحلة 1.*
 
-[Gates determined based on constitution file]
+[بوابات مبنية على ملف الدستور]
 
-## Project Structure
+## هيكل المشروع
 
-### Documentation (this feature)
+### التوثيق (هذه الميزة)
 
 ```text
 specs/[###-feature]/
-├── plan.md              # This file (__SPECKIT_COMMAND_PLAN__ command output)
-├── research.md          # Phase 0 output (__SPECKIT_COMMAND_PLAN__ command)
-├── data-model.md        # Phase 1 output (__SPECKIT_COMMAND_PLAN__ command)
-├── quickstart.md        # Phase 1 output (__SPECKIT_COMMAND_PLAN__ command)
-├── contracts/           # Phase 1 output (__SPECKIT_COMMAND_PLAN__ command)
-└── tasks.md             # Phase 2 output (__SPECKIT_COMMAND_TASKS__ command - NOT created by __SPECKIT_COMMAND_PLAN__)
+├── plan.md              # هذا الملف (مخرجات __SPECKIT_COMMAND_PLAN__)
+├── research.md          # مرحلة 0 (__SPECKIT_COMMAND_PLAN__)
+├── data-model.md        # مرحلة 1 (__SPECKIT_COMMAND_PLAN__)
+├── quickstart.md        # مرحلة 1 (__SPECKIT_COMMAND_PLAN__)
+├── contracts/           # مرحلة 1 (__SPECKIT_COMMAND_PLAN__)
+└── tasks.md             # مرحلة 2 (__SPECKIT_COMMAND_TASKS__ — لا يُنشأ بـ __SPECKIT_COMMAND_PLAN__)
 ```
 
-### Source Code (repository root)
+### الشيفرة المصدرية (جذر المستودع)
+
 <!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
+  مطلوب: استبدل شجرة العناصر النائبة أدناه بهيكل فعلي لهذه الميزة.
+  احذف الخيارات غير المستخدمة ووسّع الهيكل المختار بمسارات حقيقية
+  (مثل apps/admin، packages/foo). الخطة النهائية ما يجب أن تبقي تسميات خيار (Option).
 -->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
+# [احذف إن لم يُستخدم] خيار 1: مشروع واحد (افتراضي)
 src/
 ├── models/
 ├── services/
@@ -68,7 +67,7 @@ tests/
 ├── integration/
 └── unit/
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
+# [احذف إن لم يُستخدم] خيار 2: تطبيق ويب (عند اكتشاف "frontend" + "backend")
 backend/
 ├── src/
 │   ├── models/
@@ -83,22 +82,21 @@ frontend/
 │   └── services/
 └── tests/
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
+# [احذف إن لم يُستخدم] خيار 3: موبايل + API (عند اكتشاف "iOS/Android")
 api/
-└── [same as backend above]
+└── [نفس backend أعلاه]
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+ios/ أو android/
+└── [هيكل المنصة: وحدات ميزة، تدفقات واجهة، اختبارات منصة]
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**قرار الهيكل**: [وثّق الهيكل المختار مع الإشارة للمسارات الفعلية أعلاه]
 
-## Complexity Tracking
+## تتبّع التعقيد
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
+> **املأ فقط إذا كانت مطابقة الدستور فيها مخالفات يجب تبريرها**
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| المخالفة | لماذا نحتاجها | البديل الأبسط وسُجّل الرفض لأن |
+|-----------|---------------|----------------------------------|
+| [مثال: مشروع رابع] | [الحاجة الحالية] | [لماذا 3 مشاريع غير كافية] |
+| [مثال: نمط Repository] | [مشكلة محددة] | [لماذا الوصول المباشر للقاعدة غير كافٍ] |
