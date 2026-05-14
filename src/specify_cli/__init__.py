@@ -1530,10 +1530,10 @@ def init(
 
     if git_default_notice:
         default_change_notice = Panel(
-            "The git extension is currently enabled by default during [bold]specify init[/bold].\n"
-            "Starting in [bold]v0.10.0[/bold], this will require explicit opt-in.\n"
-            "Use [bold]specify extension add git[/bold] after init when needed.",
-            title="[yellow]Notice: Git Default Changing[/yellow]",
+            "امتداد git مفعّل حالياً بشكل افتراضي أثناء [bold]specify init[/bold].\n"
+            "ابتداءً من [bold]v0.10.0[/bold]، سيتطلب ذلك اختيار صريح للتفعيل.\n"
+            "استخدم [bold]specify extension add git[/bold] بعد التهيئة عند الحاجة.",
+            title="[yellow]ملاحظة: تغيير افتراضي Git[/yellow]",
             border_style="yellow",
             padding=(1, 2),
         )
@@ -1542,10 +1542,10 @@ def init(
 
     steps_lines = []
     if not here:
-        steps_lines.append(f"1. Go to the project folder: [cyan]cd {project_name}[/cyan]")
+        steps_lines.append(f"1. انتقل إلى مجلد المشروع: [cyan]cd {project_name}[/cyan]")
         step_num = 2
     else:
-        steps_lines.append("1. You're already in the project directory!")
+        steps_lines.append("1. أنت بالفعل في مجلد المشروع!")
         step_num = 2
 
     # Determine skill display mode for the next-steps panel.
@@ -1565,18 +1565,18 @@ def init(
 
     if codex_skill_mode and not ai_skills:
         # Integration path installed skills; show the helpful notice
-        steps_lines.append(f"{step_num}. Start Codex in this project directory; spec-kit skills were installed to [cyan].agents/skills[/cyan]")
+        steps_lines.append(f"{step_num}. ابدأ Codex في مجلد هذا المشروع؛ تم تثبيت مهارات spec-kit في [cyan].agents/skills[/cyan]")
         step_num += 1
     if claude_skill_mode and not ai_skills:
-        steps_lines.append(f"{step_num}. Start Claude in this project directory; spec-kit skills were installed to [cyan].claude/skills[/cyan]")
+        steps_lines.append(f"{step_num}. ابدأ Claude في مجلد هذا المشروع؛ تم تثبيت مهارات spec-kit في [cyan].claude/skills[/cyan]")
         step_num += 1
     if cursor_agent_skill_mode and not ai_skills:
-        steps_lines.append(f"{step_num}. Start Cursor Agent in this project directory; spec-kit skills were installed to [cyan].cursor/skills[/cyan]")
+        steps_lines.append(f"{step_num}. ابدأ Cursor Agent في مجلد هذا المشروع؛ تم تثبيت مهارات spec-kit في [cyan].cursor/skills[/cyan]")
         step_num += 1
     if devin_skill_mode:
-        steps_lines.append(f"{step_num}. Start Devin in this project directory; spec-kit skills were installed to [cyan].devin/skills[/cyan]")
+        steps_lines.append(f"{step_num}. ابدأ Devin في مجلد هذا المشروع؛ تم تثبيت مهارات spec-kit في [cyan].devin/skills[/cyan]")
         step_num += 1
-    usage_label = "skills" if native_skill_mode else "slash commands"
+    usage_label = "المهارات" if native_skill_mode else "أوامر السلاش"
 
     def _display_cmd(name: str) -> str:
         if codex_skill_mode or agy_skill_mode or trae_skill_mode:
@@ -1589,31 +1589,31 @@ def init(
             return f"/speckit-{name}"
         return f"/speckit.{name}"
 
-    steps_lines.append(f"{step_num}. Start using {usage_label} with your coding agent:")
+    steps_lines.append(f"{step_num}. ابدأ باستخدام {usage_label} مع وكيل البرمجة:")
 
-    steps_lines.append(f"   {step_num}.1 [cyan]{_display_cmd('constitution')}[/] - Establish project principles")
-    steps_lines.append(f"   {step_num}.2 [cyan]{_display_cmd('specify')}[/] - Create baseline specification")
-    steps_lines.append(f"   {step_num}.3 [cyan]{_display_cmd('plan')}[/] - Create implementation plan")
-    steps_lines.append(f"   {step_num}.4 [cyan]{_display_cmd('tasks')}[/] - Generate actionable tasks")
-    steps_lines.append(f"   {step_num}.5 [cyan]{_display_cmd('implement')}[/] - Execute implementation")
+    steps_lines.append(f"   {step_num}.1 [cyan]{_display_cmd('constitution')}[/] - تأسيس مبادئ المشروع")
+    steps_lines.append(f"   {step_num}.2 [cyan]{_display_cmd('specify')}[/] - إنشاء المواصفة الأساسية")
+    steps_lines.append(f"   {step_num}.3 [cyan]{_display_cmd('plan')}[/] - إنشاء خطة التنفيذ")
+    steps_lines.append(f"   {step_num}.4 [cyan]{_display_cmd('tasks')}[/] - توليد مهام قابلة للتنفيذ")
+    steps_lines.append(f"   {step_num}.5 [cyan]{_display_cmd('implement')}[/] - تنفيذ المهام")
 
     steps_panel = Panel("\n".join(steps_lines), title="الخطوات التالية", border_style="cyan", padding=(1,2))
     console.print()
     console.print(steps_panel)
 
     enhancement_intro = (
-        "Optional skills that you can use for your specs [bright_black](improve quality & confidence)[/bright_black]"
+        "مهارات اختيارية يمكن استخدامها لمواصفاتك [bright_black](تحسّن الجودة والثقة)[/bright_black]"
         if native_skill_mode
-        else "Optional commands that you can use for your specs [bright_black](improve quality & confidence)[/bright_black]"
+        else "أوامر اختيارية يمكن استخدامها لمواصفاتك [bright_black](تحسّن الجودة والثقة)[/bright_black]"
     )
     enhancement_lines = [
         enhancement_intro,
         "",
-        f"○ [cyan]{_display_cmd('clarify')}[/] [bright_black](optional)[/bright_black] - Ask structured questions to de-risk ambiguous areas before planning (run before [cyan]{_display_cmd('plan')}[/] if used)",
-        f"○ [cyan]{_display_cmd('analyze')}[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]{_display_cmd('tasks')}[/], before [cyan]{_display_cmd('implement')}[/])",
-        f"○ [cyan]{_display_cmd('checklist')}[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]{_display_cmd('plan')}[/])"
+        f"○ [cyan]{_display_cmd('clarify')}[/] [bright_black](اختياري)[/bright_black] - طرح أسئلة منظّمة لتقليل المخاطر في المناطق الغامضة قبل التخطيط (نفّذه قبل [cyan]{_display_cmd('plan')}[/] إن استُخدم)",
+        f"○ [cyan]{_display_cmd('analyze')}[/] [bright_black](اختياري)[/bright_black] - تقرير اتساق ومحاذاة بين المخرجات (بعد [cyan]{_display_cmd('tasks')}[/]، قبل [cyan]{_display_cmd('implement')}[/])",
+        f"○ [cyan]{_display_cmd('checklist')}[/] [bright_black](اختياري)[/bright_black] - توليد قوائم تحقق للجودة للتحقق من اكتمال المتطلبات ووضوحها واتساقها (بعد [cyan]{_display_cmd('plan')}[/])"
     ]
-    enhancements_title = "Enhancement Skills" if native_skill_mode else "Enhancement Commands"
+    enhancements_title = "مهارات التحسين" if native_skill_mode else "أوامر التحسين"
     enhancements_panel = Panel("\n".join(enhancement_lines), title=enhancements_title, border_style="cyan", padding=(1,2))
     console.print()
     console.print(enhancements_panel)
@@ -1624,9 +1624,9 @@ def check():
     show_banner()
     console.print("[bold]جاري التحقق من الأدوات المثبتة...[/bold]\n")
 
-    tracker = StepTracker("Check Available Tools")
+    tracker = StepTracker("فحص الأدوات المتاحة")
 
-    tracker.add("git", "Git version control")
+    tracker.add("git", "إدارة الإصدارات Git")
     git_ok = check_tool("git", tracker=tracker)
 
     agent_results = {}
@@ -1642,7 +1642,7 @@ def check():
             agent_results[agent_key] = check_tool(agent_key, tracker=tracker)
         else:
             # IDE-based agent - skip CLI check and mark as optional
-            tracker.skip(agent_key, "IDE-based, no CLI check")
+            tracker.skip(agent_key, "وكيل قائم على IDE، بدون فحص CLI")
             agent_results[agent_key] = False  # Don't count IDE agents as "found"
 
     # Check VS Code variants (not in agent config)
@@ -1672,19 +1672,19 @@ def version():
     cli_version = get_speckit_version()
 
     info_table = Table(show_header=False, box=None, padding=(0, 2))
-    info_table.add_column("Key", style="cyan", justify="right")
-    info_table.add_column("Value", style="white")
+    info_table.add_column("المفتاح", style="cyan", justify="right")
+    info_table.add_column("القيمة", style="white")
 
-    info_table.add_row("CLI Version", cli_version)
+    info_table.add_row("إصدار CLI", cli_version)
     info_table.add_row("", "")
     info_table.add_row("Python", platform.python_version())
-    info_table.add_row("Platform", platform.system())
-    info_table.add_row("Architecture", platform.machine())
-    info_table.add_row("OS Version", platform.version())
+    info_table.add_row("النظام", platform.system())
+    info_table.add_row("المعمارية", platform.machine())
+    info_table.add_row("إصدار النظام", platform.version())
 
     panel = Panel(
         info_table,
-        title="[bold cyan]Specify CLI Information[/bold cyan]",
+        title="[bold cyan]معلومات Specify CLI[/bold cyan]",
         border_style="cyan",
         padding=(1, 2)
     )
@@ -1779,7 +1779,7 @@ def _fetch_latest_release_tag() -> tuple[str | None, str | None]:
 # ===== Self Commands =====
 self_app = typer.Typer(
     name="self",
-    help="Manage the specify CLI itself (read-only check and reserved upgrade command).",
+    help="إدارة أداة specify CLI نفسها (فحص للقراءة فقط وأمر ترقية محجوز).",
     add_completion=False,
 )
 app.add_typer(self_app, name="self")
@@ -1803,8 +1803,8 @@ def self_check() -> None:
         # enumerated strings produced by _fetch_latest_release_tag() — it
         # never contains a URL, headers, response body, or traceback.
         assert failure_reason is not None
-        console.print(f"Installed: {installed}")
-        console.print(f"[yellow]Could not check latest release:[/yellow] {failure_reason}")
+        console.print(f"المثبَّت: {installed}")
+        console.print(f"[yellow]تعذّر فحص آخر إصدار:[/yellow] {failure_reason}")
         return
 
     latest_normalized = _normalize_tag(tag)
@@ -1812,16 +1812,16 @@ def self_check() -> None:
     if installed == "unknown":
         # FR-020: surface the latest release and the recovery action even
         # when the local distribution metadata is unavailable.
-        console.print("Current version could not be determined.")
-        console.print(f"Latest release: {latest_normalized}")
-        console.print("\nTo reinstall:")
+        console.print("تعذّر تحديد الإصدار الحالي.")
+        console.print(f"آخر إصدار: {latest_normalized}")
+        console.print("\nلإعادة التثبيت:")
         console.print("  uv tool install specify-cli --force \\")
         console.print(f"    --from git+https://github.com/github/spec-kit.git@{tag}")
         return
 
     if _is_newer(latest_normalized, installed):
-        console.print(f"[green]Update available:[/green] {installed} → {latest_normalized}")
-        console.print("\nTo upgrade:")
+        console.print(f"[green]تحديث متوفر:[/green] {installed} → {latest_normalized}")
+        console.print("\nللترقية:")
         console.print("  uv tool install specify-cli --force \\")
         console.print(f"    --from git+https://github.com/github/spec-kit.git@{tag}")
         return
@@ -1830,7 +1830,7 @@ def self_check() -> None:
     # Also reached when the tag is unparseable (InvalidVersion) → _is_newer
     # returns False, and the up-to-date branch is the safer default per
     # FR-004 / test T016.
-    console.print(f"[green]Up to date:[/green] {installed}")
+    console.print(f"[green]محدّث:[/green] {installed}")
 
 
 @self_app.command("upgrade")
@@ -1845,37 +1845,37 @@ def self_upgrade() -> None:
     Use `specify self check` today to see whether a newer release is available
     and to get a copy-pasteable reinstall command.
     """
-    console.print("specify self upgrade is not implemented yet.")
-    console.print("Run 'specify self check' to see whether a newer release is available.")
-    console.print("Actual self-upgrade is planned as follow-up work.")
+    console.print("الأمر specify self upgrade غير منفّذ بعد.")
+    console.print("نفّذ 'specify self check' لمعرفة ما إذا كان هناك إصدار أحدث متاح.")
+    console.print("الترقية الذاتية الفعلية مخطّط لها كعمل لاحق.")
 
 
 # ===== Extension Commands =====
 
 extension_app = typer.Typer(
     name="extension",
-    help="Manage spec-kit extensions",
+    help="إدارة امتدادات spec-kit",
     add_completion=False,
 )
 app.add_typer(extension_app, name="extension")
 
 catalog_app = typer.Typer(
     name="catalog",
-    help="Manage extension catalogs",
+    help="إدارة كتالوجات الامتدادات",
     add_completion=False,
 )
 extension_app.add_typer(catalog_app, name="catalog")
 
 preset_app = typer.Typer(
     name="preset",
-    help="Manage spec-kit presets",
+    help="إدارة وصفات spec-kit",
     add_completion=False,
 )
 app.add_typer(preset_app, name="preset")
 
 preset_catalog_app = typer.Typer(
     name="catalog",
-    help="Manage preset catalogs",
+    help="إدارة كتالوجات الوصفات",
     add_completion=False,
 )
 preset_app.add_typer(preset_catalog_app, name="catalog")
@@ -1906,14 +1906,14 @@ def get_speckit_version() -> str:
 
 integration_app = typer.Typer(
     name="integration",
-    help="Manage coding agent integrations",
+    help="إدارة تكاملات وكلاء البرمجة",
     add_completion=False,
 )
 app.add_typer(integration_app, name="integration")
 
 integration_catalog_app = typer.Typer(
     name="catalog",
-    help="Manage integration catalog sources",
+    help="إدارة مصادر كتالوج التكاملات",
     add_completion=False,
 )
 integration_app.add_typer(integration_catalog_app, name="catalog")
@@ -1927,26 +1927,26 @@ def _read_integration_json(project_root: Path) -> dict[str, Any]:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
-        console.print(f"[red]Error:[/red] {path} contains invalid JSON.")
-        console.print(f"Please fix or delete {INTEGRATION_JSON} and retry.")
-        console.print(f"[dim]Details:[/dim] {exc}")
+        console.print(f"[red]خطأ:[/red] {path} يحتوي JSON غير صالح.")
+        console.print(f"يرجى إصلاح أو حذف {INTEGRATION_JSON} والمحاولة مجدداً.")
+        console.print(f"[dim]تفاصيل:[/dim] {exc}")
         raise typer.Exit(1)
     except OSError as exc:
-        console.print(f"[red]Error:[/red] Could not read {path}.")
-        console.print(f"Please fix file permissions or delete {INTEGRATION_JSON} and retry.")
-        console.print(f"[dim]Details:[/dim] {exc}")
+        console.print(f"[red]خطأ:[/red] تعذّر قراءة {path}.")
+        console.print(f"يرجى تصحيح صلاحيات الملف أو حذف {INTEGRATION_JSON} والمحاولة مجدداً.")
+        console.print(f"[dim]تفاصيل:[/dim] {exc}")
         raise typer.Exit(1)
     if not isinstance(data, dict):
-        console.print(f"[red]Error:[/red] {path} must contain a JSON object, got {type(data).__name__}.")
-        console.print(f"Please fix or delete {INTEGRATION_JSON} and retry.")
+        console.print(f"[red]خطأ:[/red] {path} يجب أن يحتوي كائن JSON، تم الحصول على {type(data).__name__}.")
+        console.print(f"يرجى إصلاح أو حذف {INTEGRATION_JSON} والمحاولة مجدداً.")
         raise typer.Exit(1)
     schema = data.get("integration_state_schema")
     if isinstance(schema, int) and not isinstance(schema, bool) and schema > INTEGRATION_STATE_SCHEMA:
         console.print(
-            f"[red]Error:[/red] {path} uses integration state schema {schema}, "
-            f"but this CLI only supports schema {INTEGRATION_STATE_SCHEMA}."
+            f"[red]خطأ:[/red] {path} يستخدم مخطط حالة التكامل {schema}، "
+            f"لكن هذا الـ CLI يدعم فقط المخطط {INTEGRATION_STATE_SCHEMA}."
         )
-        console.print("Please upgrade Spec Kit before modifying integrations.")
+        console.print("يرجى ترقية Spec Kit قبل تعديل التكاملات.")
         raise typer.Exit(1)
     return _normalize_integration_state(data)
 
@@ -1998,8 +1998,8 @@ def _normalize_script_type(script_type: str, source: str) -> str:
     if normalized in SCRIPT_TYPE_CHOICES:
         return normalized
     console.print(
-        f"[red]Error:[/red] Invalid script type {script_type!r} from {source}. "
-        f"Expected one of: {', '.join(sorted(SCRIPT_TYPE_CHOICES.keys()))}."
+        f"[red]خطأ:[/red] نوع سكربت غير صالح {script_type!r} من {source}. "
+        f"المتوقّع أحد: {', '.join(sorted(SCRIPT_TYPE_CHOICES.keys()))}."
     )
     raise typer.Exit(1)
 
@@ -2094,7 +2094,7 @@ def _set_default_integration_or_exit(*args: Any, **kwargs: Any) -> None:
     try:
         _set_default_integration(*args, **kwargs)
     except _SharedTemplateRefreshError as exc:
-        console.print(f"[red]Error:[/red] {exc}")
+        console.print(f"[red]خطأ:[/red] {exc}")
         raise typer.Exit(1)
 
 
@@ -2116,16 +2116,16 @@ def _require_specify_project() -> Path:
     project_root = Path.cwd()
     if (project_root / ".specify").is_dir():
         return project_root
-    console.print("[red]Error:[/red] Not a spec-kit project (no .specify/ directory)")
-    console.print("Run this command from a spec-kit project root")
+    console.print("[red]خطأ:[/red] ليس مشروع spec-kit (لا يوجد مجلد .specify/)")
+    console.print("نفّذ هذا الأمر من جذر مشروع spec-kit")
     raise typer.Exit(1)
 
 
 @integration_app.command("list")
 def integration_list(
-    catalog: bool = typer.Option(False, "--catalog", help="Browse full catalog (built-in + community)"),
+    catalog: bool = typer.Option(False, "--catalog", help="استعراض الكتالوج الكامل (المضمّن + المجتمع)"),
 ):
-    """List available integrations and installed status."""
+    """عرض التكاملات المتاحة وحالة تثبيتها."""
     from .integrations import INTEGRATION_REGISTRY
 
     project_root = _require_specify_project()
@@ -2140,38 +2140,38 @@ def integration_list(
         try:
             entries = ic.search()
         except IntegrationCatalogError as exc:
-            console.print(f"[red]Error:[/red] {exc}")
+            console.print(f"[red]خطأ:[/red] {exc}")
             raise typer.Exit(1)
 
         if not entries:
-            console.print("[yellow]No integrations found in catalog.[/yellow]")
+            console.print("[yellow]لا توجد تكاملات في الكتالوج.[/yellow]")
             return
 
-        table = Table(title="Integration Catalog")
-        table.add_column("ID", style="cyan")
-        table.add_column("Name")
-        table.add_column("Version")
-        table.add_column("Source")
-        table.add_column("Status")
-        table.add_column("Multi-install Safe")
+        table = Table(title="كتالوج التكاملات")
+        table.add_column("المعرّف", style="cyan")
+        table.add_column("الاسم")
+        table.add_column("الإصدار")
+        table.add_column("المصدر")
+        table.add_column("الحالة")
+        table.add_column("آمن للتثبيت المتعدد")
 
         for entry in sorted(entries, key=lambda e: e["id"]):
             eid = entry["id"]
             cat_name = entry.get("_catalog_name", "")
             install_allowed = entry.get("_install_allowed", True)
             if eid == default_key:
-                status = "[green]installed (default)[/green]"
+                status = "[green]مثبّت (افتراضي)[/green]"
             elif eid in installed_keys:
-                status = "[green]installed[/green]"
+                status = "[green]مثبّت[/green]"
             elif eid in INTEGRATION_REGISTRY:
-                status = "built-in"
+                status = "مضمّن"
             elif install_allowed is False:
-                status = "discovery-only"
+                status = "للاكتشاف فقط"
             else:
                 status = ""
             safe = ""
             if eid in INTEGRATION_REGISTRY:
-                safe = "yes" if getattr(INTEGRATION_REGISTRY[eid], "multi_install_safe", False) else "no"
+                safe = "نعم" if getattr(INTEGRATION_REGISTRY[eid], "multi_install_safe", False) else "لا"
             table.add_row(
                 eid,
                 entry.get("name", eid),
@@ -2184,12 +2184,12 @@ def integration_list(
         console.print(table)
         return
 
-    table = Table(title="Coding Agent Integrations")
-    table.add_column("Key", style="cyan")
-    table.add_column("Name")
-    table.add_column("Status")
-    table.add_column("CLI Required")
-    table.add_column("Multi-install Safe")
+    table = Table(title="تكاملات وكلاء البرمجة")
+    table.add_column("المفتاح", style="cyan")
+    table.add_column("الاسم")
+    table.add_column("الحالة")
+    table.add_column("CLI مطلوب")
+    table.add_column("آمن للتثبيت المتعدد")
 
     for key in sorted(INTEGRATION_REGISTRY.keys()):
         integration = INTEGRATION_REGISTRY[key]
@@ -2198,43 +2198,43 @@ def integration_list(
         requires_cli = cfg.get("requires_cli", False)
 
         if key == default_key:
-            status = "[green]installed (default)[/green]"
+            status = "[green]مثبّت (افتراضي)[/green]"
         elif key in installed_keys:
-            status = "[green]installed[/green]"
+            status = "[green]مثبّت[/green]"
         else:
             status = ""
 
-        cli_req = "yes" if requires_cli else "no (IDE)"
-        safe = "yes" if getattr(integration, "multi_install_safe", False) else "no"
+        cli_req = "نعم" if requires_cli else "لا (IDE)"
+        safe = "نعم" if getattr(integration, "multi_install_safe", False) else "لا"
         table.add_row(key, name, status, cli_req, safe)
 
     console.print(table)
 
     if installed_keys:
-        console.print(f"\n[dim]Default integration:[/dim] [cyan]{default_key or 'none'}[/cyan]")
-        console.print(f"[dim]Installed integrations:[/dim] [cyan]{', '.join(sorted(installed_keys))}[/cyan]")
+        console.print(f"\n[dim]التكامل الافتراضي:[/dim] [cyan]{default_key or 'لا يوجد'}[/cyan]")
+        console.print(f"[dim]التكاملات المثبّتة:[/dim] [cyan]{', '.join(sorted(installed_keys))}[/cyan]")
     else:
-        console.print("\n[yellow]No integration currently installed.[/yellow]")
-        console.print("Install one with: [cyan]specify integration install <key>[/cyan]")
+        console.print("\n[yellow]لا يوجد تكامل مثبّت حالياً.[/yellow]")
+        console.print("ثبّت واحداً بـ: [cyan]specify integration install <key>[/cyan]")
 
 
 @integration_app.command("install")
 def integration_install(
-    key: str = typer.Argument(help="Integration key to install (e.g. claude, copilot)"),
-    script: str | None = typer.Option(None, "--script", help="Script type: sh or ps (default: from init-options.json or platform default)"),
-    force: bool = typer.Option(False, "--force", help="Allow multi-install when integrations are not declared safe"),
-    integration_options: str | None = typer.Option(None, "--integration-options", help='Options for the integration (e.g. --integration-options="--commands-dir .myagent/cmds")'),
+    key: str = typer.Argument(help="مفتاح التكامل المراد تثبيته (مثال: claude, copilot)"),
+    script: str | None = typer.Option(None, "--script", help="نوع السكربت: sh أو ps (الافتراضي: من init-options.json أو الافتراضي للنظام)"),
+    force: bool = typer.Option(False, "--force", help="السماح بالتثبيت المتعدد عند عدم تأكيد أمان التكاملات"),
+    integration_options: str | None = typer.Option(None, "--integration-options", help='خيارات التكامل (مثال: --integration-options="--commands-dir .myagent/cmds")'),
 ):
-    """Install an integration into an existing project."""
+    """تثبيت تكامل داخل مشروع موجود."""
     from .integrations import INTEGRATION_REGISTRY, get_integration
     from .integrations.manifest import IntegrationManifest
 
     project_root = _require_specify_project()
     integration = get_integration(key)
     if integration is None:
-        console.print(f"[red]Error:[/red] Unknown integration '{key}'")
+        console.print(f"[red]خطأ:[/red] تكامل غير معروف '{key}'")
         available = ", ".join(sorted(INTEGRATION_REGISTRY.keys()))
-        console.print(f"Available integrations: {available}")
+        console.print(f"التكاملات المتاحة: {available}")
         raise typer.Exit(1)
 
     current = _read_integration_json(project_root)
@@ -2242,10 +2242,10 @@ def integration_install(
     installed_keys = _installed_integration_keys(current)
 
     if key in installed_keys:
-        console.print(f"[yellow]Integration '{key}' is already installed.[/yellow]")
+        console.print(f"[yellow]التكامل '{key}' مثبّت مسبقاً.[/yellow]")
         console.print(
-            f"Run [cyan]specify integration upgrade {key}[/cyan] to reinstall managed files, "
-            f"or [cyan]specify integration uninstall {key}[/cyan] first."
+            f"نفّذ [cyan]specify integration upgrade {key}[/cyan] لإعادة تثبيت الملفات المُدارة، "
+            f"أو [cyan]specify integration uninstall {key}[/cyan] أولاً."
         )
         raise typer.Exit(0)
 
@@ -2257,17 +2257,17 @@ def integration_install(
                 unsafe_keys.append(installed_key)
         if unsafe_keys or not getattr(integration, "multi_install_safe", False):
             console.print(
-                f"[red]Error:[/red] Installed integrations: {', '.join(installed_keys)}."
+                f"[red]خطأ:[/red] التكاملات المثبّتة: {', '.join(installed_keys)}."
             )
             if default_key:
-                console.print(f"Default integration: [cyan]{default_key}[/cyan].")
+                console.print(f"التكامل الافتراضي: [cyan]{default_key}[/cyan].")
             console.print(
-                "Installing multiple integrations is only automatic when all involved "
-                "integrations are declared multi-install safe."
+                "تثبيت تكاملات متعددة يتم تلقائياً فقط عندما تكون جميع التكاملات المعنية "
+                "مُعلنة آمنة للتثبيت المتعدد."
             )
             console.print(
-                f"Run [cyan]specify integration switch {key}[/cyan] to replace the default "
-                f"integration, or retry with [cyan]--force[/cyan] to opt in."
+                f"نفّذ [cyan]specify integration switch {key}[/cyan] لاستبدال التكامل الافتراضي، "
+                f"أو أعد المحاولة مع [cyan]--force[/cyan] للموافقة."
             )
             raise typer.Exit(1)
 
@@ -2335,20 +2335,20 @@ def integration_install(
             integration.teardown(project_root, manifest, force=True)
         except Exception as rollback_err:
             # Suppress so the original setup error remains the primary failure
-            console.print(f"[yellow]Warning:[/yellow] Failed to roll back integration changes: {rollback_err}")
+            console.print(f"[yellow]تحذير:[/yellow] فشل التراجع عن تغييرات التكامل: {rollback_err}")
         if installed_keys:
             _write_integration_json(
                 project_root, default_key, installed_keys, _integration_settings(current)
             )
         else:
             _remove_integration_json(project_root)
-        console.print(f"[red]Error:[/red] Failed to install integration: {e}")
+        console.print(f"[red]خطأ:[/red] فشل تثبيت التكامل: {e}")
         raise typer.Exit(1)
 
     name = (integration.config or {}).get("name", key)
-    console.print(f"\n[green]✓[/green] Integration '{name}' installed successfully")
+    console.print(f"\n[green]✓[/green] تم تثبيت التكامل '{name}' بنجاح")
     if default_key:
-        console.print(f"[dim]Default integration remains:[/dim] [cyan]{default_key}[/cyan]")
+        console.print(f"[dim]التكامل الافتراضي لا يزال:[/dim] [cyan]{default_key}[/cyan]")
 
 
 def _parse_integration_options(integration: Any, raw_options: str) -> dict[str, Any] | None:
@@ -2366,9 +2366,9 @@ def _parse_integration_options(integration: Any, raw_options: str) -> dict[str, 
     while i < len(tokens):
         token = tokens[i]
         if not token.startswith("-"):
-            console.print(f"[red]Error:[/red] Unexpected integration option value '{token}'.")
+            console.print(f"[red]خطأ:[/red] قيمة خيار تكامل غير متوقعة '{token}'.")
             if allowed:
-                console.print(f"Allowed options: {allowed}")
+                console.print(f"الخيارات المسموحة: {allowed}")
             raise typer.Exit(1)
         name = token.lstrip("-")
         value: str | None = None
@@ -2377,14 +2377,14 @@ def _parse_integration_options(integration: Any, raw_options: str) -> dict[str, 
             name, value = name.split("=", 1)
         opt = declared.get(name)
         if not opt:
-            console.print(f"[red]Error:[/red] Unknown integration option '{token}'.")
+            console.print(f"[red]خطأ:[/red] خيار تكامل غير معروف '{token}'.")
             if allowed:
-                console.print(f"Allowed options: {allowed}")
+                console.print(f"الخيارات المسموحة: {allowed}")
             raise typer.Exit(1)
         key = name.replace("-", "_")
         if opt.is_flag:
             if value is not None:
-                console.print(f"[red]Error:[/red] Option '{opt.name}' is a flag and does not accept a value.")
+                console.print(f"[red]خطأ:[/red] الخيار '{opt.name}' علم ولا يقبل قيمة.")
                 raise typer.Exit(1)
             parsed[key] = True
             i += 1
@@ -2395,7 +2395,7 @@ def _parse_integration_options(integration: Any, raw_options: str) -> dict[str, 
             parsed[key] = tokens[i + 1]
             i += 2
         else:
-            console.print(f"[red]Error:[/red] Option '{opt.name}' requires a value.")
+            console.print(f"[red]خطأ:[/red] الخيار '{opt.name}' يتطلب قيمة.")
             raise typer.Exit(1)
     return parsed or None
 
@@ -2422,26 +2422,26 @@ def _update_init_options_for_integration(
 
 @integration_app.command("use")
 def integration_use(
-    key: str = typer.Argument(help="Installed integration key to make the default"),
-    force: bool = typer.Option(False, "--force", help="Overwrite managed shared templates while changing the default"),
+    key: str = typer.Argument(help="مفتاح التكامل المثبّت لجعله الافتراضي"),
+    force: bool = typer.Option(False, "--force", help="استبدال القوالب المشتركة المُدارة أثناء تغيير الافتراضي"),
 ):
-    """Set the default integration without uninstalling other integrations."""
+    """تعيين التكامل الافتراضي دون إلغاء تثبيت التكاملات الأخرى."""
     from .integrations import get_integration
 
     project_root = _require_specify_project()
     current = _read_integration_json(project_root)
     installed_keys = _installed_integration_keys(current)
     if key not in installed_keys:
-        console.print(f"[red]Error:[/red] Integration '{key}' is not installed.")
+        console.print(f"[red]خطأ:[/red] التكامل '{key}' غير مثبّت.")
         if installed_keys:
-            console.print(f"[yellow]Installed integrations:[/yellow] {', '.join(installed_keys)}")
+            console.print(f"[yellow]التكاملات المثبّتة:[/yellow] {', '.join(installed_keys)}")
         else:
-            console.print("Install one with: [cyan]specify integration install <key>[/cyan]")
+            console.print("ثبّت واحداً بـ: [cyan]specify integration install <key>[/cyan]")
         raise typer.Exit(1)
 
     integration = get_integration(key)
     if integration is None:
-        console.print(f"[red]Error:[/red] Unknown integration '{key}'")
+        console.print(f"[red]خطأ:[/red] تكامل غير معروف '{key}'")
         raise typer.Exit(1)
 
     raw_options, parsed_options = _resolve_integration_options(integration, current, key, None)
@@ -2455,15 +2455,15 @@ def integration_use(
         parsed_options=parsed_options,
         refresh_templates_force=force,
     )
-    console.print(f"[green]✓[/green] Default integration set to [bold]{key}[/bold].")
+    console.print(f"[green]✓[/green] تم تعيين التكامل الافتراضي إلى [bold]{key}[/bold].")
 
 
 @integration_app.command("uninstall")
 def integration_uninstall(
-    key: str = typer.Argument(None, help="Integration key to uninstall (default: current integration)"),
-    force: bool = typer.Option(False, "--force", help="Remove files even if modified"),
+    key: str = typer.Argument(None, help="مفتاح التكامل المراد إلغاء تثبيته (افتراضياً: التكامل الحالي)"),
+    force: bool = typer.Option(False, "--force", help="إزالة الملفات حتى لو كانت معدّلة"),
 ):
-    """Uninstall an integration, safely preserving modified files."""
+    """إلغاء تثبيت تكامل مع الحفاظ على الملفات المعدّلة بأمان."""
     from .integrations import get_integration
     from .integrations.manifest import IntegrationManifest
 
@@ -2474,19 +2474,19 @@ def integration_uninstall(
 
     if key is None:
         if not default_key:
-            console.print("[yellow]No integration is currently installed.[/yellow]")
+            console.print("[yellow]لا يوجد تكامل مثبّت حالياً.[/yellow]")
             raise typer.Exit(0)
         key = default_key
 
     if key not in installed_keys:
-        console.print(f"[red]Error:[/red] Integration '{key}' is not installed.")
+        console.print(f"[red]خطأ:[/red] التكامل '{key}' غير مثبّت.")
         raise typer.Exit(1)
 
     integration = get_integration(key)
 
     manifest_path = project_root / ".specify" / "integrations" / f"{key}.manifest.json"
     if not manifest_path.exists():
-        console.print(f"[yellow]No manifest found for integration '{key}'. Nothing to uninstall.[/yellow]")
+        console.print(f"[yellow]لم يُعثر على بيان (manifest) للتكامل '{key}'. لا شيء لإلغاء تثبيته.[/yellow]")
         remaining = [installed for installed in installed_keys if installed != key]
         new_default = default_key if default_key != key else (remaining[0] if remaining else None)
         if remaining:
@@ -2516,14 +2516,14 @@ def integration_uninstall(
     try:
         manifest = IntegrationManifest.load(key, project_root)
     except _MANIFEST_READ_ERRORS as exc:
-        console.print(f"[red]Error:[/red] Integration manifest for '{key}' is unreadable.")
-        console.print(f"Manifest: {manifest_path}")
+        console.print(f"[red]خطأ:[/red] بيان التكامل (manifest) لـ '{key}' غير قابل للقراءة.")
+        console.print(f"البيان: {manifest_path}")
         console.print(
-            f"To recover, delete the unreadable manifest, run "
-            f"[cyan]specify integration uninstall {key}[/cyan] to clear stale metadata, "
-            f"then run [cyan]specify integration install {key}[/cyan] to regenerate."
+            f"للتعافي، احذف البيان غير القابل للقراءة، نفّذ "
+            f"[cyan]specify integration uninstall {key}[/cyan] لمسح البيانات الوصفية القديمة، "
+            f"ثم نفّذ [cyan]specify integration install {key}[/cyan] لإعادة التوليد."
         )
-        console.print(f"[dim]Details:[/dim] {exc}")
+        console.print(f"[dim]تفاصيل:[/dim] {exc}")
         raise typer.Exit(1)
 
     removed, skipped = manifest.uninstall(project_root, force=force)
@@ -2559,11 +2559,11 @@ def integration_uninstall(
         _clear_init_options_for_integration(project_root, key)
 
     name = (integration.config or {}).get("name", key) if integration else key
-    console.print(f"\n[green]✓[/green] Integration '{name}' uninstalled")
+    console.print(f"\n[green]✓[/green] تم إلغاء تثبيت التكامل '{name}'")
     if removed:
-        console.print(f"  Removed {len(removed)} file(s)")
+        console.print(f"  تم حذف {len(removed)} ملف/ملفات")
     if skipped:
-        console.print(f"\n[yellow]⚠[/yellow]  {len(skipped)} modified file(s) were preserved:")
+        console.print(f"\n[yellow]⚠[/yellow]  تم الاحتفاظ بـ {len(skipped)} ملف/ملفات معدّلة:")
         for path in skipped:
             rel = _display_project_path(project_root, path)
             console.print(f"    {rel}")
@@ -2571,21 +2571,21 @@ def integration_uninstall(
 
 @integration_app.command("switch")
 def integration_switch(
-    target: str = typer.Argument(help="Integration key to switch to"),
-    script: str | None = typer.Option(None, "--script", help="Script type: sh or ps (default: from init-options.json or platform default)"),
-    force: bool = typer.Option(False, "--force", help="Force removal of modified files during uninstall"),
-    integration_options: str | None = typer.Option(None, "--integration-options", help='Options for the target integration'),
+    target: str = typer.Argument(help="مفتاح التكامل المراد التبديل إليه"),
+    script: str | None = typer.Option(None, "--script", help="نوع السكربت: sh أو ps (الافتراضي: من init-options.json أو الافتراضي للنظام)"),
+    force: bool = typer.Option(False, "--force", help="فرض إزالة الملفات المعدّلة أثناء إلغاء التثبيت"),
+    integration_options: str | None = typer.Option(None, "--integration-options", help='خيارات للتكامل الهدف'),
 ):
-    """Switch from the current integration to a different one."""
+    """التبديل من التكامل الحالي إلى تكامل آخر."""
     from .integrations import INTEGRATION_REGISTRY, get_integration
     from .integrations.manifest import IntegrationManifest
 
     project_root = _require_specify_project()
     target_integration = get_integration(target)
     if target_integration is None:
-        console.print(f"[red]Error:[/red] Unknown integration '{target}'")
+        console.print(f"[red]خطأ:[/red] تكامل غير معروف '{target}'")
         available = ", ".join(sorted(INTEGRATION_REGISTRY.keys()))
-        console.print(f"Available integrations: {available}")
+        console.print(f"التكاملات المتاحة: {available}")
         raise typer.Exit(1)
 
     current = _read_integration_json(project_root)
@@ -2595,12 +2595,12 @@ def integration_switch(
     if installed_key == target:
         if integration_options is not None:
             console.print(
-                "[red]Error:[/red] --integration-options cannot be used when switching "
-                "to an already installed integration."
+                "[red]خطأ:[/red] لا يمكن استخدام --integration-options عند التبديل "
+                "إلى تكامل مثبّت مسبقاً."
             )
             console.print(
-                f"Run [cyan]specify integration upgrade {target} --integration-options ...[/cyan] "
-                "to update managed files/options."
+                f"نفّذ [cyan]specify integration upgrade {target} --integration-options ...[/cyan] "
+                "لتحديث الملفات/الخيارات المُدارة."
             )
             raise typer.Exit(1)
         if force:
@@ -2618,22 +2618,22 @@ def integration_switch(
                 refresh_templates_force=True,
             )
             console.print(
-                f"\n[green]✓[/green] Default integration remains [bold]{target}[/bold]; "
-                "managed shared templates refreshed."
+                f"\n[green]✓[/green] التكامل الافتراضي لا يزال [bold]{target}[/bold]؛ "
+                "تم تحديث القوالب المشتركة المُدارة."
             )
             raise typer.Exit(0)
-        console.print(f"[yellow]Integration '{target}' is already the default integration. Nothing to switch.[/yellow]")
+        console.print(f"[yellow]التكامل '{target}' هو التكامل الافتراضي بالفعل. لا شيء للتبديل.[/yellow]")
         raise typer.Exit(0)
 
     if target in installed_keys:
         if integration_options is not None:
             console.print(
-                "[red]Error:[/red] --integration-options cannot be used when switching "
-                "to an already installed integration."
+                "[red]خطأ:[/red] لا يمكن استخدام --integration-options عند التبديل "
+                "إلى تكامل مثبّت مسبقاً."
             )
             console.print(
-                f"Run [cyan]specify integration upgrade {target} --integration-options ...[/cyan] "
-                f"to update managed files/options, then [cyan]specify integration use {target}[/cyan]."
+                f"نفّذ [cyan]specify integration upgrade {target} --integration-options ...[/cyan] "
+                f"لتحديث الملفات/الخيارات المُدارة، ثم [cyan]specify integration use {target}[/cyan]."
             )
             raise typer.Exit(1)
         raw_options, parsed_options = _resolve_integration_options(
@@ -2649,7 +2649,7 @@ def integration_switch(
             parsed_options=parsed_options,
             refresh_templates_force=force,
         )
-        console.print(f"\n[green]✓[/green] Default integration set to [bold]{target}[/bold].")
+        console.print(f"\n[green]✓[/green] تم تعيين التكامل الافتراضي إلى [bold]{target}[/bold].")
         raise typer.Exit(0)
 
     selected_script = _resolve_script_type(project_root, script)
@@ -2660,40 +2660,40 @@ def integration_switch(
         manifest_path = project_root / ".specify" / "integrations" / f"{installed_key}.manifest.json"
 
         if current_integration and manifest_path.exists():
-            console.print(f"Uninstalling current integration: [cyan]{installed_key}[/cyan]")
+            console.print(f"إلغاء تثبيت التكامل الحالي: [cyan]{installed_key}[/cyan]")
             try:
                 old_manifest = IntegrationManifest.load(installed_key, project_root)
             except _MANIFEST_READ_ERRORS as exc:
-                console.print(f"[red]Error:[/red] Could not read integration manifest for '{installed_key}': {manifest_path}")
+                console.print(f"[red]خطأ:[/red] تعذّر قراءة بيان التكامل لـ '{installed_key}': {manifest_path}")
                 console.print(f"[dim]{exc}[/dim]")
                 console.print(
-                    f"To recover, delete the unreadable manifest at {manifest_path}, "
-                    f"run [cyan]specify integration uninstall {installed_key}[/cyan], then retry."
+                    f"للتعافي، احذف البيان غير القابل للقراءة في {manifest_path}، "
+                    f"نفّذ [cyan]specify integration uninstall {installed_key}[/cyan]، ثم أعد المحاولة."
                 )
                 raise typer.Exit(1)
             removed, skipped = old_manifest.uninstall(project_root, force=force)
             current_integration.remove_context_section(project_root)
             if removed:
-                console.print(f"  Removed {len(removed)} file(s)")
+                console.print(f"  تم حذف {len(removed)} ملف/ملفات")
             if skipped:
-                console.print(f"  [yellow]⚠[/yellow]  {len(skipped)} modified file(s) preserved")
+                console.print(f"  [yellow]⚠[/yellow]  تم الاحتفاظ بـ {len(skipped)} ملف/ملفات معدّلة")
         elif not current_integration and manifest_path.exists():
             # Integration removed from registry but manifest exists — use manifest-only uninstall
-            console.print(f"Uninstalling unknown integration '{installed_key}' via manifest")
+            console.print(f"إلغاء تثبيت تكامل غير معروف '{installed_key}' عبر البيان")
             try:
                 old_manifest = IntegrationManifest.load(installed_key, project_root)
                 removed, skipped = old_manifest.uninstall(project_root, force=force)
                 if removed:
-                    console.print(f"  Removed {len(removed)} file(s)")
+                    console.print(f"  تم حذف {len(removed)} ملف/ملفات")
                 if skipped:
-                    console.print(f"  [yellow]⚠[/yellow]  {len(skipped)} modified file(s) preserved")
+                    console.print(f"  [yellow]⚠[/yellow]  تم الاحتفاظ بـ {len(skipped)} ملف/ملفات معدّلة")
             except _MANIFEST_READ_ERRORS as exc:
-                console.print(f"[yellow]Warning:[/yellow] Could not read manifest for '{installed_key}': {exc}")
+                console.print(f"[yellow]تحذير:[/yellow] تعذّر قراءة البيان لـ '{installed_key}': {exc}")
         else:
-            console.print(f"[red]Error:[/red] Integration '{installed_key}' is installed but has no manifest.")
+            console.print(f"[red]خطأ:[/red] التكامل '{installed_key}' مثبّت لكن ليس له بيان.")
             console.print(
-                f"Run [cyan]specify integration uninstall {installed_key}[/cyan] to clear metadata, "
-                f"then retry [cyan]specify integration switch {target}[/cyan]."
+                f"نفّذ [cyan]specify integration uninstall {installed_key}[/cyan] لمسح البيانات الوصفية، "
+                f"ثم أعد المحاولة [cyan]specify integration switch {target}[/cyan]."
             )
             raise typer.Exit(1)
 
@@ -2706,8 +2706,8 @@ def integration_switch(
             ext_mgr.unregister_agent_artifacts(installed_key)
         except Exception as ext_err:
             console.print(
-                f"[yellow]Warning:[/yellow] Could not clean up extension artifacts "
-                f"(commands, skills, registry entries) for '{installed_key}': {ext_err}"
+                f"[yellow]تحذير:[/yellow] تعذّر تنظيف مخرجات الامتداد "
+                f"(الأوامر، المهارات، إدخالات السجل) لـ '{installed_key}': {ext_err}"
             )
 
         # Clear metadata so a failed Phase 2 doesn't leave stale references
@@ -2757,7 +2757,7 @@ def integration_switch(
         ensure_executable_scripts(project_root)
 
     # Phase 2: Install target integration
-    console.print(f"Installing integration: [cyan]{target}[/cyan]")
+    console.print(f"تثبيت التكامل: [cyan]{target}[/cyan]")
     manifest = IntegrationManifest(
         target_integration.key, project_root, version=get_speckit_version()
     )
@@ -2790,8 +2790,8 @@ def integration_switch(
             ext_mgr.register_enabled_extensions_for_agent(target)
         except Exception as ext_err:
             console.print(
-                f"[yellow]Warning:[/yellow] Could not register extension commands, skills, "
-                f"or related artifacts for '{target}': {ext_err}"
+                f"[yellow]تحذير:[/yellow] تعذّر تسجيل أوامر الامتداد، المهارات، "
+                f"أو المخرجات المتعلقة لـ '{target}': {ext_err}"
             )
 
     except Exception as e:
@@ -2800,7 +2800,7 @@ def integration_switch(
             target_integration.teardown(project_root, manifest, force=True)
         except Exception as rollback_err:
             # Suppress so the original setup error remains the primary failure
-            console.print(f"[yellow]Warning:[/yellow] Failed to roll back integration '{target}': {rollback_err}")
+            console.print(f"[yellow]تحذير:[/yellow] فشل التراجع عن التكامل '{target}': {rollback_err}")
         if installed_keys:
             fallback_key = installed_keys[0]
             fallback_integration = get_integration(fallback_key)
@@ -2820,8 +2820,8 @@ def integration_switch(
                     )
                 except _SharedTemplateRefreshError as restore_err:
                     console.print(
-                        f"[yellow]Warning:[/yellow] Failed to restore default "
-                        f"integration '{fallback_key}': {restore_err}"
+                        f"[yellow]تحذير:[/yellow] فشل استعادة التكامل الافتراضي "
+                        f"'{fallback_key}': {restore_err}"
                     )
             else:
                 _write_integration_json(
@@ -2829,24 +2829,24 @@ def integration_switch(
                 )
         else:
             _remove_integration_json(project_root)
-        console.print(f"[red]Error:[/red] Failed to install integration '{target}': {e}")
+        console.print(f"[red]خطأ:[/red] فشل تثبيت التكامل '{target}': {e}")
         raise typer.Exit(1)
 
     name = (target_integration.config or {}).get("name", target)
-    console.print(f"\n[green]✓[/green] Switched to integration '{name}'")
+    console.print(f"\n[green]✓[/green] تم التبديل إلى التكامل '{name}'")
 
 
 @integration_app.command("upgrade")
 def integration_upgrade(
-    key: str | None = typer.Argument(None, help="Integration key to upgrade (default: current integration)"),
-    force: bool = typer.Option(False, "--force", help="Force upgrade even if files are modified"),
-    script: str | None = typer.Option(None, "--script", help="Script type: sh or ps (default: from init-options.json or platform default)"),
-    integration_options: str | None = typer.Option(None, "--integration-options", help="Options for the integration"),
+    key: str | None = typer.Argument(None, help="مفتاح التكامل المراد ترقيته (الافتراضي: التكامل الحالي)"),
+    force: bool = typer.Option(False, "--force", help="فرض الترقية حتى لو كانت الملفات معدّلة"),
+    script: str | None = typer.Option(None, "--script", help="نوع السكربت: sh أو ps (الافتراضي: من init-options.json أو الافتراضي للنظام)"),
+    integration_options: str | None = typer.Option(None, "--integration-options", help="خيارات التكامل"),
 ):
-    """Upgrade an integration by reinstalling with diff-aware file handling.
+    """ترقية تكامل بإعادة التثبيت مع معالجة ملفات مدركة للفروقات.
 
-    Compares manifest hashes to detect locally modified files and
-    blocks the upgrade unless --force is used.
+    تقارن تجزئات البيان لاكتشاف الملفات المعدّلة محلياً وتحجب
+    الترقية إلا إذا استُخدم --force.
     """
     from .integrations import get_integration
     from .integrations.manifest import IntegrationManifest
@@ -2858,38 +2858,38 @@ def integration_upgrade(
 
     if key is None:
         if not installed_key:
-            console.print("[yellow]No integration is currently installed.[/yellow]")
+            console.print("[yellow]لا يوجد تكامل مثبّت حالياً.[/yellow]")
             raise typer.Exit(0)
         key = installed_key
 
     if key not in installed_keys:
-        console.print(f"[red]Error:[/red] Integration '{key}' is not installed.")
+        console.print(f"[red]خطأ:[/red] التكامل '{key}' غير مثبّت.")
         raise typer.Exit(1)
 
     integration = get_integration(key)
     if integration is None:
-        console.print(f"[red]Error:[/red] Unknown integration '{key}'")
+        console.print(f"[red]خطأ:[/red] تكامل غير معروف '{key}'")
         raise typer.Exit(1)
 
     manifest_path = project_root / ".specify" / "integrations" / f"{key}.manifest.json"
     if not manifest_path.exists():
-        console.print(f"[yellow]No manifest found for integration '{key}'. Nothing to upgrade.[/yellow]")
-        console.print(f"Run [cyan]specify integration install {key}[/cyan] to perform a fresh install.")
+        console.print(f"[yellow]لم يُعثر على بيان للتكامل '{key}'. لا شيء للترقية.[/yellow]")
+        console.print(f"نفّذ [cyan]specify integration install {key}[/cyan] لإجراء تثبيت جديد.")
         raise typer.Exit(0)
 
     try:
         old_manifest = IntegrationManifest.load(key, project_root)
     except _MANIFEST_READ_ERRORS as exc:
-        console.print(f"[red]Error:[/red] Integration manifest for '{key}' is unreadable: {exc}")
+        console.print(f"[red]خطأ:[/red] بيان التكامل لـ '{key}' غير قابل للقراءة: {exc}")
         raise typer.Exit(1)
 
     # Detect modified files via manifest hashes
     modified = old_manifest.check_modified()
     if modified and not force:
-        console.print(f"[yellow]⚠[/yellow]  {len(modified)} file(s) have been modified since installation:")
+        console.print(f"[yellow]⚠[/yellow]  {len(modified)} ملف/ملفات تم تعديلها منذ التثبيت:")
         for rel in modified:
             console.print(f"    {rel}")
-        console.print("\nUse [cyan]--force[/cyan] to overwrite modified files, or resolve manually.")
+        console.print("\nاستخدم [cyan]--force[/cyan] للاستبدال، أو حلّ الأمر يدوياً.")
         raise typer.Exit(1)
 
     selected_script = _resolve_integration_script_type(project_root, current, key, script)
@@ -2925,7 +2925,7 @@ def integration_upgrade(
         ensure_executable_scripts(project_root)
 
     # Phase 1: Install new files (overwrites existing; old-only files remain)
-    console.print(f"Upgrading integration: [cyan]{key}[/cyan]")
+    console.print(f"ترقية التكامل: [cyan]{key}[/cyan]")
     new_manifest = IntegrationManifest(key, project_root, version=get_speckit_version())
 
     try:
@@ -2964,8 +2964,8 @@ def integration_upgrade(
     except Exception as exc:
         # Don't teardown — setup overwrites in-place, so teardown would
         # delete files that were working before the upgrade.  Just report.
-        console.print(f"[red]Error:[/red] Failed to upgrade integration: {exc}")
-        console.print("[yellow]The previous integration files may still be in place.[/yellow]")
+        console.print(f"[red]خطأ:[/red] فشل ترقية التكامل: {exc}")
+        console.print("[yellow]ملفات التكامل السابق قد تظل في مكانها.[/yellow]")
         raise typer.Exit(1)
 
     # Phase 2: Remove stale files from old manifest that are not in the new one

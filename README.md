@@ -240,300 +240,300 @@ uvx --from git+https://github.com/github/spec-kit.git@vX.Y.Z specify init --here
 | PR Bridge | توليد تلقائي لأوصاف طلبات الدمج وقوائم التحقق والملخصات من مصنوعات المواصفة | `process` | Read-only | [spec-kit-pr-bridge-](https://github.com/Quratulain-bilal/spec-kit-pr-bridge-) |
 | Presetify | إنشاء وتحقق من الوصفات وكتالوجات الوصفات | `process` | Read+Write | [presetify](https://github.com/mnriem/spec-kit-extensions/tree/main/presetify) |
 | Product Forge | دورة حياة منتج كاملة من البحث إلى الإصدار — محفظة، وضع مبسط، monorepo، V-Model اختياري | `process` | Read+Write | [speckit-product-forge](https://github.com/VaiYav/speckit-product-forge) |
-| Project Health Check | Diagnose a Spec Kit project and report health issues across structure, agents, features, scripts, extensions, and git | `visibility` | Read-only | [spec-kit-doctor](https://github.com/KhawarHabibKhan/spec-kit-doctor) |
-| Project Status | Show current SDD workflow progress — active feature, artifact status, task completion, workflow phase, and extensions summary | `visibility` | Read-only | [spec-kit-status](https://github.com/KhawarHabibKhan/spec-kit-status) |
-| QA Testing Extension | Systematic QA testing with browser-driven or CLI-based validation of acceptance criteria from spec | `code` | Read-only | [spec-kit-qa](https://github.com/arunt14/spec-kit-qa) |
-| Ralph Loop | Autonomous implementation loop using AI agent CLI | `code` | Read+Write | [spec-kit-ralph](https://github.com/Rubiss/spec-kit-ralph) |
-| Reconcile Extension | Reconcile implementation drift by surgically updating feature artifacts. | `docs` | Read+Write | [spec-kit-reconcile](https://github.com/stn1slv/spec-kit-reconcile) |
-| Red Team | Adversarial review of specs before /speckit.plan — parallel lens agents surface risks that clarify/analyze structurally can't (prompt injection, integrity gaps, cross-spec drift, silent failures). Produces a structured findings report; no auto-edits to specs. | `docs` | Read+Write | [spec-kit-red-team](https://github.com/ashbrener/spec-kit-red-team) |
-| Repository Index | Generate index for existing repo for overview, architecture and module level. | `docs` | Read-only | [spec-kit-repoindex](https://github.com/liuyiyu/spec-kit-repoindex) |
-| Retro Extension | Sprint retrospective analysis with metrics, spec accuracy assessment, and improvement suggestions | `process` | Read+Write | [spec-kit-retro](https://github.com/arunt14/spec-kit-retro) |
-| Retrospective Extension | Post-implementation retrospective with spec adherence scoring, drift analysis, and human-gated spec updates | `docs` | Read+Write | [spec-kit-retrospective](https://github.com/emi-dm/spec-kit-retrospective) |
-| Review Extension | Post-implementation comprehensive code review with specialized agents for code quality, comments, tests, error handling, type design, and simplification | `code` | Read-only | [spec-kit-review](https://github.com/ismaelJimenez/spec-kit-review) |
-| Ripple | Detect side effects that tests can't catch after implementation — delta-anchored analysis across 9 domain-agnostic categories | `code` | Read+Write | [spec-kit-ripple](https://github.com/chordpli/spec-kit-ripple) |
-| SDD Utilities | Resume interrupted workflows, validate project health, and verify spec-to-task traceability | `process` | Read+Write | [speckit-utils](https://github.com/mvanhorn/speckit-utils) |
-| Security Review | Full-project secure-by-design security audits plus staged, branch/PR, plan, task, follow-up, and apply reviews | `code` | Read+Write | [spec-kit-security-review](https://github.com/DyanGalih/spec-kit-security-review) |
-| SFSpeckit | Enterprise Salesforce SDLC with 18 commands for the full SDD lifecycle. | `process` | Read+Write | [spec-kit-sf](https://github.com/ysumanth06/spec-kit-sf) |
-| Ship Release Extension | Automates release pipeline: pre-flight checks, branch sync, changelog generation, CI verification, and PR creation | `process` | Read+Write | [spec-kit-ship](https://github.com/arunt14/spec-kit-ship) |
-| Spec Reference Loader | Reads the ## References section from the feature spec and loads only the listed docs into context | `docs` | Read-only | [spec-kit-spec-reference-loader](https://github.com/KevinBrown5280/spec-kit-spec-reference-loader) |
-| Spec Critique Extension | Dual-lens critical review of spec and plan from product strategy and engineering risk perspectives | `docs` | Read-only | [spec-kit-critique](https://github.com/arunt14/spec-kit-critique) |
-| Spec Diagram | Auto-generate Mermaid diagrams of SDD workflow state, feature progress, and task dependencies | `visibility` | Read-only | [spec-kit-diagram-](https://github.com/Quratulain-bilal/spec-kit-diagram-) |
-| Spec Orchestrator | Cross-feature orchestration — track state, select tasks, and detect conflicts across parallel specs | `process` | Read-only | [spec-kit-orchestrator](https://github.com/Quratulain-bilal/spec-kit-orchestrator) |
-| Spec Refine | Update specs in-place, propagate changes to plan and tasks, and diff impact across artifacts | `process` | Read+Write | [spec-kit-refine](https://github.com/Quratulain-bilal/spec-kit-refine) |
-| Spec Scope | Effort estimation and scope tracking — estimate work, detect creep, and budget time per phase | `process` | Read-only | [spec-kit-scope-](https://github.com/Quratulain-bilal/spec-kit-scope-) |
-| Spec Sync | Detect and resolve drift between specs and implementation. AI-assisted resolution with human approval | `docs` | Read+Write | [spec-kit-sync](https://github.com/bgervin/spec-kit-sync) |
-| Spec Validate | Comprehension validation, review gating, and approval state for spec-kit artifacts — staged quizzes, peer review SLA, and a hard gate before /speckit.implement | `process` | Read+Write | [spec-kit-spec-validate](https://github.com/aeltayeb/spec-kit-spec-validate) |
-| Spec2Cloud | Spec-driven workflow tuned for shipping to Azure | `process` | Read+Write | [spec2cloud](https://github.com/Azure-Samples/Spec2Cloud) |
-| SpecTest | Auto-generate test scaffolds from spec criteria, map coverage, and find untested requirements | `code` | Read+Write | [spec-kit-spectest](https://github.com/Quratulain-bilal/spec-kit-spectest) |
-| Squad Bridge | Bootstrap and synchronize a Squad agent team from your Speckit spec and tasks | `process` | Read+Write | [spec-kit-squad](https://github.com/jwill824/spec-kit-squad) |
-| Staff Review Extension | Staff-engineer-level code review that validates implementation against spec, checks security, performance, and test coverage | `code` | Read-only | [spec-kit-staff-review](https://github.com/arunt14/spec-kit-staff-review) |
-| Status Report | Project status, feature progress, and next-action recommendations for spec-driven workflows | `visibility` | Read-only | [Open-Agent-Tools/spec-kit-status](https://github.com/Open-Agent-Tools/spec-kit-status) |
-| Superpowers Bridge | Orchestrates obra/superpowers skills within the spec-kit SDD workflow across the full lifecycle (clarification, TDD, review, verification, critique, debugging, branch completion) | `process` | Read+Write | [superpowers-bridge](https://github.com/RbBtSn0w/spec-kit-extensions/tree/main/superpowers-bridge) |
-| Superpowers Bridge (WangX0111) | Bridges spec-kit with obra/superpowers (brainstorming, TDD, subagent, code-review) into a unified, resumable workflow with graceful degradation and session progress tracking | `process` | Read+Write | [superspec](https://github.com/WangX0111/superspec) |
-| TinySpec | Lightweight single-file workflow for small tasks — skip the heavy multi-step SDD process | `process` | Read+Write | [spec-kit-tinyspec](https://github.com/Quratulain-bilal/spec-kit-tinyspec) |
-| Token Consumption Analyzer | Captures, analyzes, and compares token consumption across SDD workflows | `visibility` | Read-only | [spec-kit-token-analyzer](https://github.com/coderandhiker/spec-kit-token-analyzer) |
-| V-Model Extension Pack | Enforces V-Model paired generation of development specs and test specs with full traceability | `docs` | Read+Write | [spec-kit-v-model](https://github.com/leocamello/spec-kit-v-model) |
-| Verify Extension | Post-implementation quality gate that validates implemented code against specification artifacts | `code` | Read-only | [spec-kit-verify](https://github.com/ismaelJimenez/spec-kit-verify) |
-| Verify Tasks Extension | Detect phantom completions: tasks marked [X] in tasks.md with no real implementation | `code` | Read-only | [spec-kit-verify-tasks](https://github.com/datastone-inc/spec-kit-verify-tasks) |
-| Version Guard | Verify tech stack versions against live npm registries before planning and implementation | `process` | Read-only | [spec-kit-version-guard](https://github.com/KevinBrown5280/spec-kit-version-guard) |
-| What-if Analysis | Preview the downstream impact (complexity, effort, tasks, risks) of requirement changes before committing to them | `visibility` | Read-only | [spec-kit-whatif](https://github.com/DevAbdullah90/spec-kit-whatif) |
-| Wireframe Visual Feedback Loop | SVG wireframe generation, review, and sign-off for spec-driven development. Approved wireframes become spec constraints honored by /speckit.plan, /speckit.tasks, and /speckit.implement | `visibility` | Read+Write | [spec-kit-extension-wireframe](https://github.com/TortoiseWolfe/spec-kit-extension-wireframe) |
-| Work IQ | Integrate Microsoft 365 organizational knowledge into spec-driven development workflows | `integration` | Read-only | [spec-kit-workiq](https://github.com/sakitA/spec-kit-workiq) |
-| Worktree Isolation | Spawn isolated git worktrees for parallel feature development without checkout switching | `process` | Read+Write | [spec-kit-worktree](https://github.com/Quratulain-bilal/spec-kit-worktree) |
-| Worktrees | Default-on worktree isolation for parallel agents — sibling or nested layout | `process` | Read+Write | [spec-kit-worktree-parallel](https://github.com/dango85/spec-kit-worktree-parallel) |
+| Project Health Check | تشخيص مشروع Spec Kit والإبلاغ عن مشكلات الصحة عبر البنية والوكلاء والميزات والسكربتات والامتدادات و git | `visibility` | Read-only | [spec-kit-doctor](https://github.com/KhawarHabibKhan/spec-kit-doctor) |
+| Project Status | عرض تقدّم سير عمل SDD الحالي — الميزة النشطة، حالة المصنوعات، اكتمال المهام، مرحلة سير العمل، وملخص الامتدادات | `visibility` | Read-only | [spec-kit-status](https://github.com/KhawarHabibKhan/spec-kit-status) |
+| QA Testing Extension | اختبار ضمان جودة منهجي مع تحقق من معايير القبول من المواصفة عبر المتصفح أو CLI | `code` | Read-only | [spec-kit-qa](https://github.com/arunt14/spec-kit-qa) |
+| Ralph Loop | حلقة تنفيذ ذاتية باستخدام CLI لوكيل ذكاء اصطناعي | `code` | Read+Write | [spec-kit-ralph](https://github.com/Rubiss/spec-kit-ralph) |
+| Reconcile Extension | معالجة الانحراف في التنفيذ بتحديث مصنوعات الميزة بدقّة. | `docs` | Read+Write | [spec-kit-reconcile](https://github.com/stn1slv/spec-kit-reconcile) |
+| Red Team | مراجعة معاكسة للمواصفات قبل /speckit.plan — وكلاء بعدسات متوازية يكشفون مخاطر لا تستطيع clarify/analyze رصدها بنيويًا (حقن المطالبات، فجوات النزاهة، انحراف بين المواصفات، الأعطال الصامتة). يُنتج تقرير ملاحظات منظَّم؛ لا تعديلات تلقائية على المواصفات. | `docs` | Read+Write | [spec-kit-red-team](https://github.com/ashbrener/spec-kit-red-team) |
+| Repository Index | توليد فهرس لمستودع قائم على مستوى النظرة العامة والمعمارية والوحدات. | `docs` | Read-only | [spec-kit-repoindex](https://github.com/liuyiyu/spec-kit-repoindex) |
+| Retro Extension | تحليل استرجاعي للسبرنت بقياسات وتقييم دقة المواصفة واقتراحات تحسين | `process` | Read+Write | [spec-kit-retro](https://github.com/arunt14/spec-kit-retro) |
+| Retrospective Extension | استرجاع ما بعد التنفيذ مع تقييم الالتزام بالمواصفة وتحليل الانحراف وتحديثات للمواصفات يصادق عليها الإنسان | `docs` | Read+Write | [spec-kit-retrospective](https://github.com/emi-dm/spec-kit-retrospective) |
+| Review Extension | مراجعة شاملة للكود بعد التنفيذ بوكلاء متخصصين في جودة الكود والتعليقات والاختبارات ومعالجة الأخطاء وتصميم الأنواع والتبسيط | `code` | Read-only | [spec-kit-review](https://github.com/ismaelJimenez/spec-kit-review) |
+| Ripple | اكتشاف الآثار الجانبية التي لا تلتقطها الاختبارات بعد التنفيذ — تحليل مرتكز على الفروق عبر 9 تصنيفات مستقلة عن المجال | `code` | Read+Write | [spec-kit-ripple](https://github.com/chordpli/spec-kit-ripple) |
+| SDD Utilities | استئناف سير العمل المتوقف، التحقق من صحة المشروع، والتأكد من تتبّع المواصفة إلى المهام | `process` | Read+Write | [speckit-utils](https://github.com/mvanhorn/speckit-utils) |
+| Security Review | مراجعات أمنية شاملة للمشروع بمبدأ secure-by-design إضافة إلى مراجعات مرحلية على الفرع/طلب الدمج والخطة والمهام والمتابعة والتطبيق | `code` | Read+Write | [spec-kit-security-review](https://github.com/DyanGalih/spec-kit-security-review) |
+| SFSpeckit | دورة حياة Salesforce للمؤسسات مع 18 أمرًا لدورة SDD كاملة. | `process` | Read+Write | [spec-kit-sf](https://github.com/ysumanth06/spec-kit-sf) |
+| Ship Release Extension | أتمتة خط إصدار: فحوصات ما قبل الإقلاع، مزامنة الفروع، توليد changelog، التحقق من CI، وإنشاء PR | `process` | Read+Write | [spec-kit-ship](https://github.com/arunt14/spec-kit-ship) |
+| Spec Reference Loader | يقرأ قسم ## References من مواصفة الميزة ويحمّل فقط المستندات المدرجة إلى السياق | `docs` | Read-only | [spec-kit-spec-reference-loader](https://github.com/KevinBrown5280/spec-kit-spec-reference-loader) |
+| Spec Critique Extension | مراجعة نقدية بعدستين للمواصفة والخطة من منظور استراتيجية المنتج ومخاطر الهندسة | `docs` | Read-only | [spec-kit-critique](https://github.com/arunt14/spec-kit-critique) |
+| Spec Diagram | توليد تلقائي لمخططات Mermaid لحالة سير عمل SDD وتقدّم الميزة واعتماديات المهام | `visibility` | Read-only | [spec-kit-diagram-](https://github.com/Quratulain-bilal/spec-kit-diagram-) |
+| Spec Orchestrator | تنسيق عابر للميزات — تتبّع الحالة، اختيار المهام، واكتشاف التعارضات عبر المواصفات المتوازية | `process` | Read-only | [spec-kit-orchestrator](https://github.com/Quratulain-bilal/spec-kit-orchestrator) |
+| Spec Refine | تحديث المواصفات في مكانها ونشر التغييرات إلى الخطة والمهام ورصد الأثر عبر المصنوعات | `process` | Read+Write | [spec-kit-refine](https://github.com/Quratulain-bilal/spec-kit-refine) |
+| Spec Scope | تقدير الجهد وتتبّع النطاق — تقدير العمل، اكتشاف التضخّم، وتخصيص وقت لكل مرحلة | `process` | Read-only | [spec-kit-scope-](https://github.com/Quratulain-bilal/spec-kit-scope-) |
+| Spec Sync | اكتشاف وحلّ الانحراف بين المواصفات والتنفيذ. حلّ بمساعدة الذكاء الاصطناعي بموافقة بشرية | `docs` | Read+Write | [spec-kit-sync](https://github.com/bgervin/spec-kit-sync) |
+| Spec Validate | التحقق من الفهم وبوابات المراجعة وحالة الموافقة لمصنوعات spec-kit — اختبارات مرحلية و SLA لمراجعة الأقران وبوابة صارمة قبل /speckit.implement | `process` | Read+Write | [spec-kit-spec-validate](https://github.com/aeltayeb/spec-kit-spec-validate) |
+| Spec2Cloud | سير عمل مدفوع بالمواصفة مهيَّأ للنشر على Azure | `process` | Read+Write | [spec2cloud](https://github.com/Azure-Samples/Spec2Cloud) |
+| SpecTest | توليد تلقائي لهياكل اختبار من معايير المواصفة، ربط التغطية، وإيجاد المتطلبات غير المختبَرة | `code` | Read+Write | [spec-kit-spectest](https://github.com/Quratulain-bilal/spec-kit-spectest) |
+| Squad Bridge | تهيئة ومزامنة فريق وكلاء Squad من مواصفة Speckit ومهامها | `process` | Read+Write | [spec-kit-squad](https://github.com/jwill824/spec-kit-squad) |
+| Staff Review Extension | مراجعة كود بمستوى staff engineer تتحقق من مطابقة التنفيذ للمواصفة وتفحص الأمان والأداء وتغطية الاختبارات | `code` | Read-only | [spec-kit-staff-review](https://github.com/arunt14/spec-kit-staff-review) |
+| Status Report | حالة المشروع وتقدّم الميزة وتوصيات الإجراء التالي لسير العمل المدفوع بالمواصفة | `visibility` | Read-only | [Open-Agent-Tools/spec-kit-status](https://github.com/Open-Agent-Tools/spec-kit-status) |
+| Superpowers Bridge | ينسّق مهارات obra/superpowers ضمن سير عمل spec-kit عبر كامل دورة الحياة (التوضيح، TDD، المراجعة، التحقق، النقد، التنقيح، إكمال الفرع) | `process` | Read+Write | [superpowers-bridge](https://github.com/RbBtSn0w/spec-kit-extensions/tree/main/superpowers-bridge) |
+| Superpowers Bridge (WangX0111) | يربط spec-kit بـ obra/superpowers (العصف الذهني، TDD، الوكيل الفرعي، مراجعة الكود) في سير عمل موحّد قابل للاستئناف مع تدهور سلس وتتبّع تقدّم الجلسة | `process` | Read+Write | [superspec](https://github.com/WangX0111/superspec) |
+| TinySpec | سير عمل خفيف بملف واحد للمهام الصغيرة — تخطّي عملية SDD الثقيلة متعددة الخطوات | `process` | Read+Write | [spec-kit-tinyspec](https://github.com/Quratulain-bilal/spec-kit-tinyspec) |
+| Token Consumption Analyzer | يلتقط ويحلّل ويقارن استهلاك الرموز عبر مسارات سير عمل SDD | `visibility` | Read-only | [spec-kit-token-analyzer](https://github.com/coderandhiker/spec-kit-token-analyzer) |
+| V-Model Extension Pack | يفرض توليدًا مزدوجًا وفق V-Model لمواصفات التطوير ومواصفات الاختبار مع تتبّع كامل | `docs` | Read+Write | [spec-kit-v-model](https://github.com/leocamello/spec-kit-v-model) |
+| Verify Extension | بوابة جودة بعد التنفيذ تتحقق من مطابقة الكود المنفَّذ لمصنوعات المواصفة | `code` | Read-only | [spec-kit-verify](https://github.com/ismaelJimenez/spec-kit-verify) |
+| Verify Tasks Extension | اكتشاف الإنجازات الوهمية: المهام المعلَّمة [X] في tasks.md دون تنفيذ حقيقي | `code` | Read-only | [spec-kit-verify-tasks](https://github.com/datastone-inc/spec-kit-verify-tasks) |
+| Version Guard | التحقق من إصدارات المكدّس التقني مقابل سجلات npm الحيّة قبل التخطيط والتنفيذ | `process` | Read-only | [spec-kit-version-guard](https://github.com/KevinBrown5280/spec-kit-version-guard) |
+| What-if Analysis | معاينة الأثر اللاحق (التعقيد، الجهد، المهام، المخاطر) لتغييرات المتطلبات قبل الالتزام بها | `visibility` | Read-only | [spec-kit-whatif](https://github.com/DevAbdullah90/spec-kit-whatif) |
+| Wireframe Visual Feedback Loop | توليد ومراجعة واعتماد wireframes بصيغة SVG للتطوير المدفوع بالمواصفة. تصبح الـ wireframes المعتمدة قيودًا تلتزم بها /speckit.plan و /speckit.tasks و /speckit.implement | `visibility` | Read+Write | [spec-kit-extension-wireframe](https://github.com/TortoiseWolfe/spec-kit-extension-wireframe) |
+| Work IQ | دمج معرفة مؤسسة Microsoft 365 في سير العمل المدفوع بالمواصفة | `integration` | Read-only | [spec-kit-workiq](https://github.com/sakitA/spec-kit-workiq) |
+| Worktree Isolation | إنشاء worktrees معزولة في git لتطوير ميزات متوازية دون التبديل بـ checkout | `process` | Read+Write | [spec-kit-worktree](https://github.com/Quratulain-bilal/spec-kit-worktree) |
+| Worktrees | عزل worktree افتراضي للوكلاء المتوازين — بترتيب شقيق أو متشعّب | `process` | Read+Write | [spec-kit-worktree-parallel](https://github.com/dango85/spec-kit-worktree-parallel) |
 
-To submit your own extension, see the [Extension Publishing Guide](extensions/EXTENSION-PUBLISHING-GUIDE.md).
+لتقديم امتدادك الخاص، راجع [دليل نشر الامتدادات](extensions/EXTENSION-PUBLISHING-GUIDE.md).
 
-## 🎨 Community Presets
+## 🎨 وصفات المجتمع
 
-Community-contributed presets customize how Spec Kit behaves — overriding templates, commands, and terminology without changing any tooling. See the full list on the [Community Presets](https://github.github.io/spec-kit/community/presets.html) page.
+تخصّص وصفات المجتمع طريقة عمل Spec Kit — إذ تتجاوز القوالب والأوامر والمصطلحات دون أي تعديل في الأدوات. راجع القائمة الكاملة على صفحة [وصفات المجتمع](https://github.github.io/spec-kit/community/presets.html).
 
 > [!NOTE]
-> Community presets are third-party contributions and are not maintained by the Spec Kit team. Review them carefully before use, and see the docs page above for the full disclaimer.
+> وصفات المجتمع مساهمات طرف ثالث ولا يصونها فريق Spec Kit. راجعها بعناية قبل الاستخدام، واطّلع على إخلاء المسؤولية الكامل في صفحة الوثائق أعلاه.
 
-To submit your own preset, see the [Presets Publishing Guide](presets/PUBLISHING.md).
+لتقديم وصفتك الخاصة، راجع [دليل نشر الوصفات](presets/PUBLISHING.md).
 
-## 🚶 Community Walkthroughs
+## 🚶 جولات المجتمع
 
-See Spec-Driven Development in action across different scenarios with community-contributed walkthroughs; find the full list on the [Community Walkthroughs](https://github.github.io/spec-kit/community/walkthroughs.html) page.
+شاهد التطوير المعتمد على المواصفات في سيناريوهات مختلفة عبر جولات مساهَم بها من المجتمع؛ القائمة الكاملة موجودة على صفحة [جولات المجتمع](https://github.github.io/spec-kit/community/walkthroughs.html).
 
-## 🛠️ Community Friends
+## 🛠️ أصدقاء المجتمع
 
-Community projects that extend, visualize, or build on Spec Kit. See the full list on the [Community Friends](https://github.github.io/spec-kit/community/friends.html) page.
+مشاريع مجتمعية تمدّ أو تصوّر أو تبني فوق Spec Kit. راجع القائمة الكاملة على صفحة [أصدقاء المجتمع](https://github.github.io/spec-kit/community/friends.html).
 
-## 🤖 Supported AI Coding Agent Integrations
+## 🤖 وكلاء البرمجة بالذكاء الاصطناعي المدعومون
 
-Spec Kit works with 30+ AI coding agents — both CLI tools and IDE-based assistants. See the full list with notes and usage details in the [Supported AI Coding Agent Integrations](https://github.github.io/spec-kit/reference/integrations.html) guide.
+يعمل Spec Kit مع أكثر من 30 وكيل برمجة بالذكاء الاصطناعي — سواء أكانت أدوات CLI أم مساعدين داخل بيئات التطوير. راجع القائمة الكاملة مع الملاحظات وتفاصيل الاستخدام في دليل [وكلاء البرمجة بالذكاء الاصطناعي المدعومين](https://github.github.io/spec-kit/reference/integrations.html).
 
-Run `specify integration list` to see all available integrations in your installed version.
+شغّل `specify integration list` لعرض كل التكاملات المتاحة في الإصدار المثبت لديك.
 
-## Available Slash Commands
+## الأوامر المتاحة (Slash Commands)
 
-After running `specify init`, your AI coding agent will have access to these slash commands for structured development. For integrations that support skills mode, passing `--integration <agent> --integration-options="--skills"` installs agent skills instead of slash-command prompt files.
+بعد تشغيل `specify init`، سيتمكن وكيل البرمجة لديك من الوصول إلى هذه الأوامر للتطوير المنظَّم. للتكاملات التي تدعم وضع المهارات، يؤدي تمرير `--integration <agent> --integration-options="--skills"` إلى تثبيت مهارات الوكيل بدلاً من ملفات المطالبات الخاصة بأوامر slash.
 
-#### Core Commands
+#### الأوامر الأساسية
 
-Essential commands for the Spec-Driven Development workflow:
+الأوامر الجوهرية لسير عمل التطوير المعتمد على المواصفات:
 
-| Command                  | Agent Skill            | Description                                                                |
+| الأمر                  | مهارة الوكيل            | الوصف                                                                |
 | ------------------------ | ---------------------- | -------------------------------------------------------------------------- |
-| `/speckit.constitution`  | `speckit-constitution` | Create or update project governing principles and development guidelines   |
-| `/speckit.specify`       | `speckit-specify`      | Define what you want to build (requirements and user stories)              |
-| `/speckit.plan`          | `speckit-plan`         | Create technical implementation plans with your chosen tech stack          |
-| `/speckit.tasks`         | `speckit-tasks`        | Generate actionable task lists for implementation                          |
-| `/speckit.taskstoissues` | `speckit-taskstoissues`| Convert generated task lists into GitHub issues for tracking and execution |
-| `/speckit.implement`     | `speckit-implement`    | Execute all tasks to build the feature according to the plan               |
+| `/speckit.constitution`  | `speckit-constitution` | إنشاء أو تحديث المبادئ الحاكمة للمشروع وإرشادات التطوير   |
+| `/speckit.specify`       | `speckit-specify`      | تعريف ما تريد بناءه (المتطلبات وقصص المستخدم)              |
+| `/speckit.plan`          | `speckit-plan`         | إنشاء خطط تنفيذ تقنية بالمكدّس الذي تختاره          |
+| `/speckit.tasks`         | `speckit-tasks`        | توليد قوائم مهام قابلة للتنفيذ                          |
+| `/speckit.taskstoissues` | `speckit-taskstoissues`| تحويل قوائم المهام المولَّدة إلى GitHub issues للتتبّع والتنفيذ |
+| `/speckit.implement`     | `speckit-implement`    | تنفيذ كل المهام لبناء الميزة وفق الخطة               |
 
-#### Optional Commands
+#### الأوامر الاختيارية
 
-Additional commands for enhanced quality and validation:
+أوامر إضافية لتحسين الجودة والتحقق:
 
-| Command              | Agent Skill            | Description                                                                                                                          |
+| الأمر              | مهارة الوكيل            | الوصف                                                                                                                          |
 | -------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `/speckit.clarify`   | `speckit-clarify`      | Clarify underspecified areas (recommended before `/speckit.plan`; formerly `/quizme`)                                                |
-| `/speckit.analyze`   | `speckit-analyze`      | Cross-artifact consistency & coverage analysis (run after `/speckit.tasks`, before `/speckit.implement`)                             |
-| `/speckit.checklist` | `speckit-checklist`    | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
+| `/speckit.clarify`   | `speckit-clarify`      | توضيح المناطق غير المحدَّدة بشكل كافٍ (موصى به قبل `/speckit.plan`؛ كان سابقًا `/quizme`)                                                |
+| `/speckit.analyze`   | `speckit-analyze`      | تحليل الاتساق والتغطية عبر المصنوعات (يُشغَّل بعد `/speckit.tasks` وقبل `/speckit.implement`)                             |
+| `/speckit.checklist` | `speckit-checklist`    | توليد قوائم تحقق جودة مخصصة تتحقق من اكتمال المتطلبات ووضوحها واتساقها (مثل «اختبارات وحدة للغة الإنجليزية») |
 
-## 🔧 Specify CLI Reference
+## 🔧 مرجع Specify CLI
 
-For full command details, options, and examples, see the [CLI Reference](https://github.github.io/spec-kit/reference/overview.html).
+للاطلاع على تفاصيل الأوامر والخيارات والأمثلة كاملةً، راجع [مرجع CLI](https://github.github.io/spec-kit/reference/overview.html).
 
-## 🧩 Making Spec Kit Your Own: Extensions & Presets
+## 🧩 خصّص Spec Kit حسب احتياجك: الامتدادات والوصفات
 
-Spec Kit can be tailored to your needs through two complementary systems — **extensions** and **presets** — plus project-local overrides for one-off adjustments:
+يمكنك تكييف Spec Kit مع احتياجاتك عبر نظامين متكاملين — **الامتدادات** و**الوصفات** — إضافة إلى التجاوزات المحلية للمشروع للتعديلات الفردية:
 
-| Priority | Component Type                                    | Location                         |
+| الأولوية | نوع المكوّن                                    | الموقع                         |
 | -------: | ------------------------------------------------- | -------------------------------- |
-|      ⬆ 1 | Project-Local Overrides                           | `.specify/templates/overrides/`  |
-|        2 | Presets — Customize core & extensions             | `.specify/presets/templates/`    |
-|        3 | Extensions — Add new capabilities                 | `.specify/extensions/templates/` |
-|      ⬇ 4 | Spec Kit Core — Built-in SDD commands & templates | `.specify/templates/`            |
+|      ⬆ 1 | تجاوزات محلية للمشروع                           | `.specify/templates/overrides/`  |
+|        2 | الوصفات — تخصيص النواة والامتدادات             | `.specify/presets/templates/`    |
+|        3 | الامتدادات — إضافة قدرات جديدة                 | `.specify/extensions/templates/` |
+|      ⬇ 4 | نواة Spec Kit — أوامر وقوالب SDD المدمجة | `.specify/templates/`            |
 
-- **Templates** are resolved at **runtime** — Spec Kit walks the stack top-down and uses the first match.
-- Project-local overrides (`.specify/templates/overrides/`) let you make one-off adjustments for a single project without creating a full preset.
-- **Extension/preset commands** are applied at **install time** — when you run `specify extension add` or `specify preset add`, command files are written into agent directories (e.g., `.claude/commands/`).
-- If multiple presets or extensions provide the same command, the highest-priority version wins. On removal, the next-highest-priority version is restored automatically.
-- If no overrides or customizations exist, Spec Kit uses its core defaults.
+- **القوالب** تُحلّ في **وقت التشغيل** — يمشي Spec Kit من أعلى المكدّس إلى أسفله ويستخدم أول مطابقة.
+- التجاوزات المحلية للمشروع (`.specify/templates/overrides/`) تتيح لك إجراء تعديلات فردية لمشروع واحد دون إنشاء وصفة كاملة.
+- **أوامر الامتدادات/الوصفات** تُطبَّق **وقت التثبيت** — عندما تشغّل `specify extension add` أو `specify preset add`، تُكتب ملفات الأوامر إلى مجلدات الوكلاء (مثل `.claude/commands/`).
+- إذا قدّمت عدة وصفات أو امتدادات الأمر نفسه، يفوز الإصدار صاحب الأولوية الأعلى. وعند الإزالة، يُستعاد الإصدار التالي في الأولوية تلقائيًا.
+- إن لم تكن هناك تجاوزات أو تخصيصات، يستخدم Spec Kit إعداداته الافتراضية الأساسية.
 
-### Extensions — Add New Capabilities
+### الامتدادات — إضافة قدرات جديدة
 
-Use **extensions** when you need functionality that goes beyond Spec Kit's core. Extensions introduce new commands and templates — for example, adding domain-specific workflows that are not covered by the built-in SDD commands, integrating with external tools, or adding entirely new development phases. They expand *what Spec Kit can do*.
+استخدم **الامتدادات** عندما تحتاج وظيفة تتجاوز نواة Spec Kit. تُقدّم الامتدادات أوامر وقوالب جديدة — مثلاً إضافة سير عمل خاص بمجال معين لا تغطّيه أوامر SDD المدمجة، أو التكامل مع أدوات خارجية، أو إضافة مراحل تطوير جديدة كليًا. هي توسّع *ما يستطيع Spec Kit فعله*.
 
 ```bash
-# Search available extensions
+# البحث عن الامتدادات المتاحة
 specify extension search
 
-# Install an extension
+# تثبيت امتداد
 specify extension add <extension-name>
 ```
 
-For example, extensions could add Jira integration, post-implementation code review, V-Model test traceability, or project health diagnostics.
+مثلًا قد تضيف الامتدادات تكامل Jira، أو مراجعة الكود بعد التنفيذ، أو تتبّع اختبارات V-Model، أو تشخيص صحة المشروع.
 
-See the [Extensions reference](https://github.github.io/spec-kit/reference/extensions.html) for the full command guide. Browse the [community extensions](#-community-extensions) above for what's available.
+راجع [مرجع الامتدادات](https://github.github.io/spec-kit/reference/extensions.html) للدليل الكامل للأوامر. تصفّح [امتدادات المجتمع](#-community-extensions) أعلاه لمعرفة المتاح.
 
-### Presets — Customize Existing Workflows
+### الوصفات — تخصيص سير العمل القائم
 
-Use **presets** when you want to change *how* Spec Kit works without adding new capabilities. Presets override the templates and commands that ship with the core *and* with installed extensions — for example, enforcing a compliance-oriented spec format, using domain-specific terminology, or applying organizational standards to plans and tasks. They customize the artifacts and instructions that Spec Kit and its extensions produce.
+استخدم **الوصفات** حين تريد تغيير *كيفية* عمل Spec Kit دون إضافة قدرات جديدة. تتجاوز الوصفات القوالب والأوامر المرفقة بالنواة *وبالامتدادات المثبتة* — مثلًا فرض صيغة مواصفة متوافقة مع الامتثال، أو استخدام مصطلحات متخصصة بمجال معيّن، أو تطبيق معايير المؤسسة على الخطط والمهام. هي تخصّص المصنوعات والتعليمات التي يولّدها Spec Kit وامتداداته.
 
 ```bash
-# Search available presets
+# البحث عن الوصفات المتاحة
 specify preset search
 
-# Install a preset
+# تثبيت وصفة
 specify preset add <preset-name>
 ```
 
-For example, presets could restructure spec templates to require regulatory traceability, adapt the workflow to fit the methodology you use (e.g., Agile, Kanban, Waterfall, jobs-to-be-done, or domain-driven design), add mandatory security review gates to plans, enforce test-first task ordering, or localize the entire workflow to a different language. The [pirate-speak demo](https://github.com/mnriem/spec-kit-pirate-speak-preset-demo) shows just how deep the customization can go. Multiple presets can be stacked with priority ordering.
+مثلًا قد تعيد الوصفات تشكيل قوالب المواصفة لاشتراط تتبّع تنظيمي، أو تكيّف سير العمل ليناسب المنهجية التي تستخدمها (Agile أو Kanban أو Waterfall أو jobs-to-be-done أو التصميم المدفوع بالمجال)، أو تضيف بوابات إلزامية للمراجعة الأمنية على الخطط، أو تفرض ترتيب المهام بإسبقية الاختبارات، أو تترجم سير العمل بالكامل إلى لغة أخرى. يُظهر [العرض التوضيحي pirate-speak](https://github.com/mnriem/spec-kit-pirate-speak-preset-demo) كم يمكن أن يصل التخصيص. يمكن تكديس عدة وصفات وترتيبها بالأولوية.
 
-See the [Presets reference](https://github.github.io/spec-kit/reference/presets.html) for the full command guide, including resolution order and priority stacking.
+راجع [مرجع الوصفات](https://github.github.io/spec-kit/reference/presets.html) للدليل الكامل للأوامر، بما في ذلك ترتيب الحلّ وتكديس الأولوية.
 
-### When to Use Which
+### متى تستخدم كلًّا منها
 
-| Goal | Use |
+| الهدف | الاستخدام |
 | --- | --- |
-| Add a brand-new command or workflow | Extension |
-| Customize the format of specs, plans, or tasks | Preset |
-| Integrate an external tool or service | Extension |
-| Enforce organizational or regulatory standards | Preset |
-| Ship reusable domain-specific templates | Either — presets for template overrides, extensions for templates bundled with new commands |
+| إضافة أمر أو سير عمل جديد كليًا | امتداد |
+| تخصيص صيغة المواصفات أو الخطط أو المهام | وصفة |
+| التكامل مع أداة أو خدمة خارجية | امتداد |
+| فرض معايير مؤسسية أو تنظيمية | وصفة |
+| توفير قوالب قابلة لإعادة الاستخدام خاصة بمجال | كلاهما — وصفات لتجاوز القوالب، وامتدادات للقوالب المحزَّمة مع أوامر جديدة |
 
-## 📚 Core Philosophy
+## 📚 الفلسفة الأساسية
 
-Spec-Driven Development is a structured process that emphasizes:
+التطوير المعتمد على المواصفات عملية منظَّمة تركّز على:
 
-- **Intent-driven development** where specifications define the "*what*" before the "*how*"
-- **Rich specification creation** using guardrails and organizational principles
-- **Multi-step refinement** rather than one-shot code generation from prompts
-- **Heavy reliance** on advanced AI model capabilities for specification interpretation
+- **التطوير المدفوع بالنية** حيث تعرّف المواصفات «*ماذا*» قبل «*كيف*»
+- **إنشاء مواصفات غنية** باستخدام ضوابط ومبادئ تنظيمية
+- **الصقل متعدد الخطوات** بدلاً من توليد كود من المطالبات بمحاولة واحدة
+- **اعتماد كبير** على قدرات نماذج الذكاء الاصطناعي المتقدمة لتفسير المواصفات
 
-## 🌟 Development Phases
+## 🌟 مراحل التطوير
 
-| Phase                                    | Focus                    | Key Activities                                                                                                                                                     |
+| المرحلة                                    | التركيز                    | الأنشطة الرئيسية                                                                                                                                                     |
 | ---------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **0-to-1 Development** ("Greenfield")    | Generate from scratch    | <ul><li>Start with high-level requirements</li><li>Generate specifications</li><li>Plan implementation steps</li><li>Build production-ready applications</li></ul> |
-| **Creative Exploration**                 | Parallel implementations | <ul><li>Explore diverse solutions</li><li>Support multiple technology stacks & architectures</li><li>Experiment with UX patterns</li></ul>                         |
-| **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add features iteratively</li><li>Modernize legacy systems</li><li>Adapt processes</li></ul>                                                                |
+| **التطوير من 0 إلى 1** («Greenfield»)    | التوليد من الصفر    | <ul><li>الانطلاق من متطلبات عالية المستوى</li><li>توليد المواصفات</li><li>التخطيط لخطوات التنفيذ</li><li>بناء تطبيقات جاهزة للإنتاج</li></ul> |
+| **الاستكشاف الإبداعي**                 | تنفيذات متوازية | <ul><li>استكشاف حلول متنوعة</li><li>دعم مكدّسات تقنية ومعماريات متعددة</li><li>تجريب أنماط تجربة المستخدم</li></ul>                         |
+| **التحسين التكراري** («Brownfield») | تحديث الأنظمة القائمة | <ul><li>إضافة الميزات تكراريًا</li><li>تحديث الأنظمة القديمة</li><li>تكييف العمليات</li></ul>                                                                |
 
-## 🎯 Experimental Goals
+## 🎯 الأهداف التجريبية
 
-Our research and experimentation focus on:
+يركّز بحثنا وتجريبنا على:
 
-### Technology independence
+### استقلالية التقنية
 
-- Create applications using diverse technology stacks
-- Validate the hypothesis that Spec-Driven Development is a process not tied to specific technologies, programming languages, or frameworks
+- إنشاء تطبيقات باستخدام مكدّسات تقنية متنوعة
+- التحقق من فرضية أن التطوير المعتمد على المواصفات عملية لا ترتبط بتقنيات أو لغات برمجة أو أُطر بعينها
 
-### Enterprise constraints
+### قيود المؤسسات
 
-- Demonstrate mission-critical application development
-- Incorporate organizational constraints (cloud providers, tech stacks, engineering practices)
-- Support enterprise design systems and compliance requirements
+- إثبات إمكانية تطوير تطبيقات بالغة الأهمية
+- دمج قيود المؤسسة (مزودي السحابة، المكدّسات التقنية، الممارسات الهندسية)
+- دعم أنظمة التصميم الخاصة بالمؤسسات ومتطلبات الامتثال
 
-### User-centric development
+### التطوير المتمحور حول المستخدم
 
-- Build applications for different user cohorts and preferences
-- Support various development approaches (from vibe-coding to AI-native development)
+- بناء تطبيقات لشرائح وتفضيلات مستخدمين مختلفة
+- دعم مقاربات تطوير متنوعة (من vibe-coding إلى التطوير الأصيل بالذكاء الاصطناعي)
 
-### Creative & iterative processes
+### العمليات الإبداعية والتكرارية
 
-- Validate the concept of parallel implementation exploration
-- Provide robust iterative feature development workflows
-- Extend processes to handle upgrades and modernization tasks
+- التحقق من مفهوم استكشاف التنفيذ المتوازي
+- تقديم مسارات قوية للتطوير التكراري للميزات
+- توسيع العمليات لتشمل الترقيات ومهام التحديث
 
-## 🔧 Prerequisites
+## 🔧 المتطلبات الأساسية
 
 - **Linux/macOS/Windows**
-- [Supported](#-supported-ai-coding-agent-integrations) AI coding agent.
-- [uv](https://docs.astral.sh/uv/) for package management (recommended) or [pipx](https://pypa.github.io/pipx/) for persistent installation
+- وكيل برمجة بالذكاء الاصطناعي [مدعوم](#-supported-ai-coding-agent-integrations).
+- [uv](https://docs.astral.sh/uv/) لإدارة الحزم (موصى به) أو [pipx](https://pypa.github.io/pipx/) للتثبيت الدائم
 - [Python 3.11+](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
 
-If you encounter issues with an agent, please open an issue so we can refine the integration.
+إذا واجهت مشكلات مع وكيل، الرجاء فتح issue لكي نتمكن من تحسين التكامل.
 
-## 📖 Learn More
+## 📖 تعلّم المزيد
 
-- **[Complete Spec-Driven Development Methodology](./spec-driven.md)** - Deep dive into the full process
-- **[Detailed Walkthrough](#-detailed-process)** - Step-by-step implementation guide
+- **[منهجية التطوير المعتمد على المواصفات الكاملة](./spec-driven.md)** - تعمّق في العملية الكاملة
+- **[الجولة التفصيلية](#-detailed-process)** - دليل تنفيذ خطوة بخطوة
 
 ---
 
-## 📋 Detailed Process
+## 📋 الخطوات التفصيلية
 
 <details>
-<summary>Click to expand the detailed step-by-step walkthrough</summary>
+<summary>اضغط لتوسيع الجولة التفصيلية خطوة بخطوة</summary>
 
-You can use the Specify CLI to bootstrap your project, which will bring in the required artifacts in your environment. Run:
+يمكنك استخدام Specify CLI لتهيئة مشروعك، حيث سيُحضر المصنوعات المطلوبة إلى بيئتك. شغّل:
 
 ```bash
 specify init <project_name>
 ```
 
-Or initialize in the current directory:
+أو هيّئ في المجلد الحالي:
 
 ```bash
 specify init .
-# or use the --here flag
+# أو استخدم خيار --here
 specify init --here
-# Skip confirmation when the directory already has files
+# تخطّي التأكيد إذا كان المجلد يحوي ملفات
 specify init . --force
-# or
+# أو
 specify init --here --force
 ```
 
 ![Specify CLI bootstrapping a new project in the terminal](./media/specify_cli.gif)
 
-You will be prompted to select the coding agent integration you are using. You can also proactively specify it directly in the terminal:
+ستُطالَب باختيار تكامل وكيل البرمجة الذي تستخدمه. ويمكنك أيضًا تحديده مباشرة من سطر الأوامر:
 
 ```bash
 specify init <project_name> --integration copilot
 specify init <project_name> --integration gemini
 specify init <project_name> --integration codex
 
-# Or in current directory:
+# أو في المجلد الحالي:
 specify init . --integration copilot
 specify init . --integration codex --integration-options="--skills"
 
-# or use --here flag
+# أو استخدم خيار --here
 specify init --here --integration copilot
 specify init --here --integration codex --integration-options="--skills"
 
-# Force merge into a non-empty current directory
+# فرض الدمج داخل مجلد حالي غير فارغ
 specify init . --force --integration copilot
 
-# or
+# أو
 specify init --here --force --integration copilot
 ```
 
-The CLI will check if you have Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, opencode, Codex CLI, Qoder CLI, Tabnine CLI, Kiro CLI, Pi, Forge, Goose, or Mistral Vibe installed. If you do not, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
+سيتحقق CLI من تثبيت Claude Code أو Gemini CLI أو Cursor CLI أو Qwen CLI أو opencode أو Codex CLI أو Qoder CLI أو Tabnine CLI أو Kiro CLI أو Pi أو Forge أو Goose أو Mistral Vibe لديك. إن لم تكن مثبتة، أو إن كنت تفضّل الحصول على القوالب دون التحقق من الأدوات المناسبة، استخدم `--ignore-agent-tools` مع أمرك:
 
 ```bash
 specify init <project_name> --integration copilot --ignore-agent-tools
 ```
 
-### **STEP 1:** Establish project principles
+### **الخطوة 1:** أرسِ مبادئ المشروع
 
-Go to the project folder and run your coding agent. In our example, we're using `claude`.
+اذهب إلى مجلد المشروع وشغّل وكيل البرمجة. في مثالنا، نستخدم `claude`.
 
 ![Bootstrapping Claude Code environment](./media/bootstrap-claude-code.gif)
 
-You will know that things are configured correctly if you see the `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.tasks`, and `/speckit.implement` commands available.
+ستعرف أن الإعداد صحيح إذا رأيت أوامر `/speckit.constitution` و `/speckit.specify` و `/speckit.plan` و `/speckit.tasks` و `/speckit.implement` متاحة.
 
-The first step should be establishing your project's governing principles using the `/speckit.constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
+الخطوة الأولى ينبغي أن تكون إرساء المبادئ الحاكمة لمشروعك باستخدام أمر `/speckit.constitution`. يساعد ذلك في ضمان اتخاذ قرارات متّسقة في كل مراحل التطوير اللاحقة:
 
 ```text
 /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide technical decisions and implementation choices.
 ```
 
-This step creates or updates the `.specify/memory/constitution.md` file with your project's foundational guidelines that the coding agent will reference during specification, planning, and implementation phases.
+تنشئ هذه الخطوة أو تحدّث ملف `.specify/memory/constitution.md` بإرشادات مشروعك التأسيسية التي سيرجع إليها وكيل البرمجة أثناء مراحل المواصفة والتخطيط والتنفيذ.
 
-### **STEP 2:** Create project specifications
+### **الخطوة 2:** أنشئ مواصفات المشروع
 
-With your project principles established, you can now create the functional specifications. Use the `/speckit.specify` command and then provide the concrete requirements for the project you want to develop.
+بعد إرساء مبادئ مشروعك، يمكنك الآن إنشاء المواصفات الوظيفية. استخدم أمر `/speckit.specify` ثم قدّم متطلبات ملموسة للمشروع الذي تريد تطويره.
 
 > [!IMPORTANT]
-> Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the tech stack at this point**.
+> كن صريحًا قدر الإمكان حول *ما* تحاول بناءه و*لماذا*. **لا تركّز على المكدّس التقني في هذه المرحلة**.
 
-An example prompt:
+مثال على مطالبة:
 
 ```text
 Develop Taskify, a team productivity platform. It should allow users to create projects, add team members,
@@ -554,13 +554,13 @@ see yours. You can edit any comments that you make, but you can't edit comments 
 delete any comments that you made, but you can't delete comments anybody else made.
 ```
 
-After this prompt is entered, you should see Claude Code kick off the planning and spec drafting process. Claude Code will also trigger some of the built-in scripts to set up the repository.
+بعد إدخال هذه المطالبة، سترى Claude Code يبدأ عملية التخطيط وصياغة المواصفة. سيشغّل Claude Code أيضًا بعض السكربتات المدمجة لإعداد المستودع.
 
-Once this step is completed, you should have a new branch created (e.g., `001-create-taskify`), as well as a new specification in the `specs/001-create-taskify` directory.
+عند اكتمال هذه الخطوة، يجب أن يكون لديك فرع جديد (مثل `001-create-taskify`) ومواصفة جديدة في مجلد `specs/001-create-taskify`.
 
-The produced specification should contain a set of user stories and functional requirements, as defined in the template.
+ينبغي أن تتضمن المواصفة المنتَجة مجموعة من قصص المستخدم والمتطلبات الوظيفية، كما هو محدد في القالب.
 
-At this stage, your project folder contents should resemble the following:
+في هذه المرحلة، يجب أن تشبه محتويات مجلد مشروعك ما يلي:
 
 ```text
 └── .specify
@@ -581,20 +581,20 @@ At this stage, your project folder contents should resemble the following:
         └── tasks-template.md
 ```
 
-### **STEP 3:** Functional specification clarification (required before planning)
+### **الخطوة 3:** توضيح المواصفة الوظيفية (مطلوب قبل التخطيط)
 
-With the baseline specification created, you can go ahead and clarify any of the requirements that were not captured properly within the first shot attempt.
+بعد إنشاء المواصفة الأساسية، يمكنك المضي قُدمًا وتوضيح أي متطلبات لم تُلتقَط بشكل صحيح من المحاولة الأولى.
 
-You should run the structured clarification workflow **before** creating a technical plan to reduce rework downstream.
+ينبغي عليك تشغيل سير عمل التوضيح المنظَّم **قبل** إنشاء خطة تقنية لتقليل العمل المكرَّر لاحقًا.
 
-Preferred order:
+الترتيب المفضّل:
 
-1. Use `/speckit.clarify` (structured) – sequential, coverage-based questioning that records answers in a Clarifications section.
-2. Optionally follow up with ad-hoc free-form refinement if something still feels vague.
+1. استخدم `/speckit.clarify` (المنظَّم) – أسئلة متسلسلة قائمة على التغطية تسجّل الإجابات في قسم Clarifications.
+2. اختياريًا، تابع بصقل حرّ ارتجالي إن بقي شيء غامض.
 
-If you intentionally want to skip clarification (e.g., spike or exploratory prototype), explicitly state that so the agent doesn't block on missing clarifications.
+إذا كنت تريد تخطّي التوضيح عمدًا (مثل spike أو نموذج استكشافي)، أعلن ذلك صراحةً حتى لا يتوقف الوكيل بسبب توضيحات ناقصة.
 
-Example free-form refinement prompt (after `/speckit.clarify` if still needed):
+مثال على مطالبة صقل حرّ (بعد `/speckit.clarify` إن دعت الحاجة):
 
 ```text
 For each sample project or project that you create there should be a variable number of tasks between 5 and 15
@@ -602,17 +602,17 @@ tasks for each one randomly distributed into different states of completion. Mak
 one task in each stage of completion.
 ```
 
-You should also ask Claude Code to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The following prompt can be used:
+ينبغي أيضًا أن تطلب من Claude Code التحقق من **قائمة المراجعة والقبول**، بحيث يضع علامة على البنود التي تجاوزت المتطلبات ويترك ما لم يجتزها دون علامة. يمكن استخدام المطالبة التالية:
 
 ```text
 Read the review and acceptance checklist, and check off each item in the checklist if the feature spec meets the criteria. Leave it empty if it does not.
 ```
 
-It's important to use the interaction with Claude Code as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
+من المهم استخدام التفاعل مع Claude Code فرصةً للتوضيح وطرح الأسئلة حول المواصفة - **لا تعتبر محاولته الأولى نهائية**.
 
-### **STEP 4:** Generate a plan
+### **الخطوة 4:** ولّد خطة
 
-You can now be specific about the tech stack and other technical requirements. You can use the `/speckit.plan` command that is built into the project template with a prompt like this:
+يمكنك الآن أن تكون محددًا بشأن المكدّس التقني وغيره من المتطلبات التقنية. يمكنك استخدام أمر `/speckit.plan` المدمج في قالب المشروع بمطالبة كهذه:
 
 ```text
 We are going to generate this using .NET Aspire, using Postgres as the database. The frontend should use
@@ -620,7 +620,7 @@ Blazor server with drag-and-drop task boards, real-time updates. There should be
 tasks API, and a notifications API.
 ```
 
-The output of this step will include a number of implementation detail documents, with your directory tree resembling this:
+سيتضمن مخرج هذه الخطوة عددًا من مستندات تفاصيل التنفيذ، مع شجرة مجلد مشابهة لهذه:
 
 ```text
 .
@@ -650,9 +650,9 @@ The output of this step will include a number of implementation detail documents
     └── tasks-template.md
 ```
 
-Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask Claude Code to refine it if any of the components stand out, or even have it check the locally-installed version of the platform/framework you want to use (e.g., .NET).
+راجع مستند `research.md` للتأكد من استخدام المكدّس التقني الصحيح، بناءً على تعليماتك. يمكنك أن تطلب من Claude Code صقله إن لفت نظرك أي من المكوّنات، أو حتى أن يتحقق من الإصدار المثبت محليًا للمنصة/الإطار الذي تريد استخدامه (مثل .NET).
 
-Additionally, you might want to ask Claude Code to research details about the chosen tech stack if it's something that is rapidly changing (e.g., .NET Aspire, JS frameworks), with a prompt like this:
+علاوةً على ذلك، قد ترغب في أن تطلب من Claude Code البحث في تفاصيل المكدّس التقني المختار إن كان شيئًا سريع التغيير (مثل .NET Aspire أو أُطر JS)، بمطالبة كهذه:
 
 ```text
 I want you to go through the implementation plan and implementation details, looking for areas that could
@@ -662,7 +662,7 @@ versions that we are going to be using in this Taskify application and spawn par
 any details using research from the web.
 ```
 
-During this process, you might find that Claude Code gets stuck researching the wrong thing - you can help nudge it in the right direction with a prompt like this:
+خلال هذه العملية، قد تجد أن Claude Code يعلق في بحث الشيء الخطأ - يمكنك مساعدته بدفعه في الاتجاه الصحيح بمطالبة كهذه:
 
 ```text
 I think we need to break this down into a series of steps. First, identify a list of tasks
@@ -675,11 +675,11 @@ That's way too untargeted research. The research needs to help you solve a speci
 ```
 
 > [!NOTE]
-> Claude Code might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
+> قد يكون Claude Code متحمسًا أكثر من اللازم ويضيف مكوّنات لم تطلبها. اطلب منه توضيح المنطق ومصدر التغيير.
 
-### **STEP 5:** Have Claude Code validate the plan
+### **الخطوة 5:** اجعل Claude Code يتحقق من الخطة
 
-With the plan in place, you should have Claude Code run through it to make sure that there are no missing pieces. You can use a prompt like this:
+بعد جاهزية الخطة، ينبغي أن تطلب من Claude Code المرور عليها للتأكد من عدم وجود قطع ناقصة. يمكنك استخدام مطالبة كهذه:
 
 ```text
 Now I want you to go and audit the implementation plan and the implementation detail files.
@@ -689,62 +689,62 @@ when I look at the core implementation, it would be useful to reference the appr
 details where it can find the information as it walks through each step in the core implementation or in the refinement.
 ```
 
-This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to go through the checklist once more before you can get to the implementation.
+يساعد هذا في صقل خطة التنفيذ وتجنّب نقاط عمى محتملة فاتت Claude Code في دورة تخطيطه. بمجرد اكتمال الصقل الأولي، اطلب من Claude Code المرور على القائمة مرة أخرى قبل الانتقال إلى التنفيذ.
 
-You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
+يمكنك أيضًا أن تطلب من Claude Code (إن كان لديك [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) مثبتًا) إنشاء طلب دمج من فرعك الحالي إلى `main` بوصف مفصل، للتأكد من تتبّع الجهد بشكل صحيح.
 
 > [!NOTE]
-> Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [constitution](base/memory/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
+> قبل أن تطلب من الوكيل التنفيذ، من المفيد كذلك توجيه Claude Code للتدقيق في التفاصيل لرؤية ما إذا كانت هناك أجزاء مفرطة في الهندسة (تذكّر - قد يكون متحمسًا أكثر من اللازم). إن وُجدت مكوّنات أو قرارات مفرطة الهندسة، يمكنك أن تطلب من Claude Code حلّها. تأكّد من أن Claude Code يتبع [الدستور](base/memory/constitution.md) باعتباره الأساس الذي يجب أن يلتزم به عند وضع الخطة.
 
-### **STEP 6:** Generate task breakdown with /speckit.tasks
+### **الخطوة 6:** ولّد تقسيم المهام عبر /speckit.tasks
 
-With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/speckit.tasks` command to automatically generate a detailed task breakdown from your implementation plan:
+بعد التحقق من خطة التنفيذ، يمكنك الآن تقسيم الخطة إلى مهام محددة وقابلة للتنفيذ يمكن تنفيذها بالترتيب الصحيح. استخدم أمر `/speckit.tasks` لتوليد تقسيم مهام مفصّل تلقائيًا من خطة التنفيذ:
 
 ```text
 /speckit.tasks
 ```
 
-This step creates a `tasks.md` file in your feature specification directory that contains:
+تنشئ هذه الخطوة ملف `tasks.md` في مجلد مواصفة الميزة يحتوي على:
 
-- **Task breakdown organized by user story** - Each user story becomes a separate implementation phase with its own set of tasks
-- **Dependency management** - Tasks are ordered to respect dependencies between components (e.g., models before services, services before endpoints)
-- **Parallel execution markers** - Tasks that can run in parallel are marked with `[P]` to optimize development workflow
-- **File path specifications** - Each task includes the exact file paths where implementation should occur
-- **Test-driven development structure** - If tests are requested, test tasks are included and ordered to be written before implementation
-- **Checkpoint validation** - Each user story phase includes checkpoints to validate independent functionality
+- **تقسيم المهام منظمًا حسب قصة المستخدم** - كل قصة مستخدم تصبح مرحلة تنفيذ مستقلة بمجموعتها الخاصة من المهام
+- **إدارة الاعتماديات** - تُرتَّب المهام لتحترم الاعتماديات بين المكوّنات (مثلًا النماذج قبل الخدمات، والخدمات قبل النقاط الطرفية)
+- **علامات التنفيذ المتوازي** - المهام التي يمكن تنفيذها بالتوازي تُعلَّم بـ `[P]` لتحسين سير العمل
+- **مواصفات مسارات الملفات** - كل مهمة تتضمن المسارات الدقيقة للملفات التي يجب أن يحدث فيها التنفيذ
+- **بنية التطوير المدفوع بالاختبارات** - إن طُلبت الاختبارات، تُدرَج مهام الاختبارات وتُرتَّب لتُكتَب قبل التنفيذ
+- **تحقّق عند نقاط الفحص** - كل مرحلة قصة مستخدم تتضمن نقاط فحص للتحقق من وظائف مستقلة
 
-The generated tasks.md provides a clear roadmap for the `/speckit.implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user stories.
+يوفّر tasks.md المولَّد خارطة طريق واضحة لأمر `/speckit.implement`، مما يضمن تنفيذًا منهجيًا يحافظ على جودة الكود ويتيح تسليمًا تدريجيًا لقصص المستخدم.
 
-### **STEP 7:** Implementation
+### **الخطوة 7:** التنفيذ
 
-Once ready, use the `/speckit.implement` command to execute your implementation plan:
+عند الجاهزية، استخدم أمر `/speckit.implement` لتنفيذ خطة التنفيذ الخاصة بك:
 
 ```text
 /speckit.implement
 ```
 
-The `/speckit.implement` command will:
+سيقوم أمر `/speckit.implement` بـ:
 
-- Validate that all prerequisites are in place (constitution, spec, plan, and tasks)
-- Parse the task breakdown from `tasks.md`
-- Execute tasks in the correct order, respecting dependencies and parallel execution markers
-- Follow the TDD approach defined in your task plan
-- Provide progress updates and handle errors appropriately
+- التحقق من اكتمال جميع المتطلبات الأساسية (الدستور، المواصفة، الخطة، والمهام)
+- تحليل تقسيم المهام من `tasks.md`
+- تنفيذ المهام بالترتيب الصحيح، مع احترام الاعتماديات وعلامات التنفيذ المتوازي
+- اتباع منهج TDD المعرَّف في خطة المهام
+- تقديم تحديثات تقدّم ومعالجة الأخطاء بالشكل المناسب
 
 > [!IMPORTANT]
-> The coding agent will execute local CLI commands (such as `dotnet`, `npm`, etc.) - make sure you have the required tools installed on your machine.
+> سيُنفّذ وكيل البرمجة أوامر CLI محلية (مثل `dotnet`، `npm`، إلخ) - تأكّد من تثبيت الأدوات المطلوبة على جهازك.
 
-Once the implementation is complete, test the application and resolve any runtime errors that may not be visible in CLI logs (e.g., browser console errors). You can copy and paste such errors back to your coding agent for resolution.
+عند اكتمال التنفيذ، اختبر التطبيق وعالج أي أخطاء وقت التشغيل قد لا تكون مرئية في سجلات CLI (مثل أخطاء وحدة تحكم المتصفح). يمكنك نسخ هذه الأخطاء ولصقها لوكيل البرمجة لحلّها.
 
 </details>
 
 ---
 
-## 🔍 Troubleshooting
+## 🔍 حل المشكلات
 
-### Git Credential Manager on Linux
+### Git Credential Manager على Linux
 
-If you're having issues with Git authentication on Linux, you can install Git Credential Manager:
+إذا واجهت مشكلات في مصادقة Git على Linux، يمكنك تثبيت Git Credential Manager:
 
 ```bash
 #!/usr/bin/env bash
@@ -759,14 +759,14 @@ echo "Cleaning up..."
 rm gcm-linux_amd64.2.6.1.deb
 ```
 
-## 💬 Support
+## 💬 الدعم
 
-For support, please open a [GitHub issue](https://github.com/github/spec-kit/issues/new). We welcome bug reports, feature requests, and questions about using Spec-Driven Development.
+للحصول على الدعم، الرجاء فتح [GitHub issue](https://github.com/github/spec-kit/issues/new). نرحب ببلاغات الأخطاء وطلبات الميزات والأسئلة حول استخدام التطوير المعتمد على المواصفات.
 
-## 🙏 Acknowledgements
+## 🙏 شكر وتقدير
 
-This project is heavily influenced by and based on the work and research of [John Lam](https://github.com/jflam).
+هذا المشروع متأثر بشدة ومبني على عمل وأبحاث [John Lam](https://github.com/jflam).
 
-## 📄 License
+## 📄 الترخيص
 
-This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.
+هذا المشروع مرخّص بموجب شروط رخصة MIT مفتوحة المصدر. الرجاء الرجوع إلى ملف [LICENSE](./LICENSE) للشروط الكاملة.
