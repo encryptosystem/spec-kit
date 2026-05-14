@@ -1,412 +1,412 @@
-# Specification-Driven Development (SDD)
+# التطوير المعتمد على المواصفات (SDD)
 
-## The Power Inversion
+## انعكاس موازين القوى
 
-For decades, code has been king. Specifications served code—they were the scaffolding we built and then discarded once the "real work" of coding began. We wrote PRDs to guide development, created design docs to inform implementation, drew diagrams to visualize architecture. But these were always subordinate to the code itself. Code was truth. Everything else was, at best, good intentions. Code was the source of truth, and as it moved forward, specs rarely kept pace. As the asset (code) and the implementation are one, it's not easy to have a parallel implementation without trying to build from the code.
+لعقود من الزمن، كانت الشيفرة هي الملك. كانت المواصفات تخدم الشيفرة، إذ كانت بمثابة السقالات التي نبنيها ثم نتخلى عنها بمجرد أن يبدأ «العمل الحقيقي» المتمثل في كتابة الكود. كنا نكتب وثائق متطلبات المنتج (PRD) لتوجيه التطوير، ونعدّ وثائق التصميم لإرشاد التنفيذ، ونرسم المخططات لتصوّر البنية المعمارية. لكن كل هذه الأمور كانت دائماً تابعة للشيفرة نفسها. كانت الشيفرة هي الحقيقة، وكل ما عداها لم يكن في أحسن الأحوال سوى نوايا حسنة. كانت الشيفرة هي مصدر الحقيقة، ومع تقدمها كانت المواصفات نادراً ما تواكبها. ولأن الأصل (الشيفرة) والتنفيذ شيء واحد، فليس من السهل امتلاك تنفيذ موازٍ دون محاولة البناء انطلاقاً من الشيفرة.
 
-Spec-Driven Development (SDD) inverts this power structure. Specifications don't serve code—code serves specifications. The Product Requirements Document (PRD) isn't a guide for implementation; it's the source that generates implementation. Technical plans aren't documents that inform coding; they're precise definitions that produce code. This isn't an incremental improvement to how we build software. It's a fundamental rethinking of what drives development.
+يقلب التطوير المعتمد على المواصفات (SDD) هذه البنية الهرمية للقوى رأساً على عقب. فالمواصفات لا تخدم الشيفرة، بل الشيفرة هي التي تخدم المواصفات. ليست وثيقة متطلبات المنتج (PRD) دليلاً للتنفيذ؛ بل هي المصدر الذي يولّد التنفيذ. والخطط التقنية ليست وثائق تُرشد عملية البرمجة؛ بل هي تعريفات دقيقة تنتج الشيفرة. هذا ليس تحسيناً تدريجياً لطريقة بناء البرمجيات، بل هو إعادة تفكير جذرية في ما يقود التطوير.
 
-The gap between specification and implementation has plagued software development since its inception. We've tried to bridge it with better documentation, more detailed requirements, stricter processes. These approaches fail because they accept the gap as inevitable. They try to narrow it but never eliminate it. SDD eliminates the gap by making specifications and their concrete implementation plans born from the specification executable. When specifications and implementation plans generate code, there is no gap—only transformation.
+لازمت الفجوة بين المواصفة والتنفيذ تطويرَ البرمجيات منذ نشأته. حاولنا جسر هذه الفجوة بتوثيق أفضل، ومتطلبات أكثر تفصيلاً، وعمليات أكثر صرامة. لكن هذه المقاربات تفشل لأنها تقبل الفجوة بوصفها أمراً حتمياً. فهي تحاول تضييقها لكنها لا تزيلها أبداً. ويزيل SDD هذه الفجوة من خلال جعل المواصفات وخطط التنفيذ الملموسة المنبثقة عنها قابلةً للتنفيذ. وحين تولّد المواصفات وخطط التنفيذ الشيفرةَ، لا تبقى ثمة فجوة، بل تحوّل فقط.
 
-This transformation is now possible because AI can understand and implement complex specifications, and create detailed implementation plans. But raw AI generation without structure produces chaos. SDD provides that structure through specifications and subsequent implementation plans that are precise, complete, and unambiguous enough to generate working systems. The specification becomes the primary artifact. Code becomes its expression (as an implementation from the implementation plan) in a particular language and framework.
+أصبح هذا التحول ممكناً الآن لأن الذكاء الاصطناعي قادر على فهم مواصفات معقدة وتنفيذها، وإنشاء خطط تنفيذ مفصّلة. لكن التوليد الخام بالذكاء الاصطناعي دون بنية ينتج فوضى. ويوفر SDD هذه البنية عبر مواصفات وخطط تنفيذ لاحقة دقيقة وكاملة وغير ملتبسة بما يكفي لتوليد أنظمة عاملة. تصبح المواصفة هي المخرج الأساسي. وتصبح الشيفرة تعبيراً عنها (بوصفها تنفيذاً مستنداً إلى خطة التنفيذ) بلغة وإطار عمل بعينهما.
 
-In this new world, maintaining software means evolving specifications. The intent of the development team is expressed in natural language ("**intent-driven development**"), design assets, core principles and other guidelines. The **lingua franca** of development moves to a higher level, and code is the last-mile approach.
+في هذا العالم الجديد، تعني صيانة البرمجيات تطويرَ المواصفات. ويُعبَّر عن نية فريق التطوير باللغة الطبيعية («**التطوير المعتمد على النية**»)، وأصول التصميم، والمبادئ الجوهرية وغيرها من الإرشادات. تنتقل **اللغة المشتركة** للتطوير إلى مستوى أعلى، وتصبح الشيفرة هي مقاربة «الميل الأخير».
 
-Debugging means fixing specifications and their implementation plans that generate incorrect code. Refactoring means restructuring for clarity. The entire development workflow reorganizes around specifications as the central source of truth, with implementation plans and code as the continuously regenerated output. Updating apps with new features or creating a new parallel implementation because we are creative beings, means revisiting the specification and creating new implementation plans. This process is therefore a 0 -> 1, (1', ..), 2, 3, N.
+يعني التصحيح إصلاحَ المواصفات وخطط التنفيذ الخاصة بها التي تولّد شيفرة غير صحيحة. وتعني إعادة الهيكلة (Refactoring) إعادةَ التنظيم من أجل الوضوح. يُعاد تنظيم سير عمل التطوير بأكمله حول المواصفات بوصفها مصدر الحقيقة المركزي، مع خطط التنفيذ والشيفرة بوصفها المُخرج المُعاد توليده باستمرار. وتحديث التطبيقات بميزات جديدة أو إنشاء تنفيذ موازٍ جديد لأننا كائنات مبدعة، يعني إعادة النظر في المواصفة وإنشاء خطط تنفيذ جديدة. ولذلك فإن هذه العملية هي 0 -> 1, (1', ..), 2, 3, N.
 
-The development team focuses in on their creativity, experimentation, their critical thinking.
+يركّز فريق التطوير على إبداعه وتجاربه وتفكيره النقدي.
 
-## The SDD Workflow in Practice
+## سير عمل SDD في الممارسة العملية
 
-The workflow begins with an idea—often vague and incomplete. Through iterative dialogue with AI, this idea becomes a comprehensive PRD. The AI asks clarifying questions, identifies edge cases, and helps define precise acceptance criteria. What might take days of meetings and documentation in traditional development happens in hours of focused specification work. This transforms the traditional SDLC—requirements and design become continuous activities rather than discrete phases. This is supportive of a **team process**, where team-reviewed specifications are expressed and versioned, created in branches, and merged.
+يبدأ سير العمل بفكرة، غالباً ما تكون ضبابية وغير مكتملة. ومن خلال حوار تكراري مع الذكاء الاصطناعي، تتحول هذه الفكرة إلى وثيقة متطلبات منتج (PRD) شاملة. يطرح الذكاء الاصطناعي أسئلة استيضاحية، ويحدد الحالات الحدية، ويساعد في تعريف معايير قبول دقيقة. ما قد يستغرق أياماً من الاجتماعات والتوثيق في التطوير التقليدي يحدث في ساعات من العمل المركّز على المواصفات. وهذا يحوّل دورة حياة تطوير البرمجيات (SDLC) التقليدية، إذ تصبح المتطلبات والتصميم أنشطة مستمرة بدلاً من مراحل منفصلة. وهذا داعم لـ **عملية الفريق**، حيث يتم التعبير عن المواصفات التي راجعها الفريق وإصدارها، وإنشاؤها في فروع (branches)، ودمجها.
 
-When a product manager updates acceptance criteria, implementation plans automatically flag affected technical decisions. When an architect discovers a better pattern, the PRD updates to reflect new possibilities.
+عندما يحدّث مدير المنتج معايير القبول، تُشير خطط التنفيذ تلقائياً إلى القرارات التقنية المتأثرة. وعندما يكتشف المعماري نمطاً أفضل، تُحدَّث وثيقة الـ PRD لتعكس الإمكانيات الجديدة.
 
-Throughout this specification process, research agents gather critical context. They investigate library compatibility, performance benchmarks, and security implications. Organizational constraints are discovered and applied automatically—your company's database standards, authentication requirements, and deployment policies seamlessly integrate into every specification.
+طوال عملية وضع المواصفات هذه، تجمع وكلاء البحث السياق الحاسم. فهم يتقصّون توافق المكتبات، ومقاييس الأداء، والآثار الأمنية. ويتم اكتشاف القيود التنظيمية وتطبيقها تلقائياً، إذ تتكامل معايير قواعد البيانات في شركتك، ومتطلبات المصادقة، وسياسات النشر بسلاسة في كل مواصفة.
 
-From the PRD, AI generates implementation plans that map requirements to technical decisions. Every technology choice has documented rationale. Every architectural decision traces back to specific requirements. Throughout this process, consistency validation continuously improves quality. AI analyzes specifications for ambiguity, contradictions, and gaps—not as a one-time gate, but as an ongoing refinement.
+انطلاقاً من الـ PRD، يولّد الذكاء الاصطناعي خطط تنفيذ تُحوِّل المتطلبات إلى قرارات تقنية. لكل خيار تقني مبرر موثّق. وكل قرار معماري يعود إلى متطلبات محددة. وطوال هذه العملية، يحسّن التحقق من الاتساق الجودةَ باستمرار. يحلل الذكاء الاصطناعي المواصفات بحثاً عن الغموض والتناقضات والثغرات، ليس بوصفه بوابة لمرة واحدة، بل بوصفه تحسيناً مستمراً.
 
-Code generation begins as soon as specifications and their implementation plans are stable enough, but they do not have to be "complete." Early generations might be exploratory—testing whether the specification makes sense in practice. Domain concepts become data models. User stories become API endpoints. Acceptance scenarios become tests. This merges development and testing through specification—test scenarios aren't written after code, they're part of the specification that generates both implementation and tests.
+يبدأ توليد الشيفرة بمجرد أن تكون المواصفات وخطط التنفيذ الخاصة بها مستقرة بما يكفي، لكنها لا يلزم أن تكون «مكتملة». قد تكون الأجيال الأولى استكشافية، أي اختبار ما إذا كانت المواصفة منطقية في الممارسة. تصبح مفاهيم المجال نماذج بيانات. وتصبح قصص المستخدمين نقاط نهاية API. وتصبح سيناريوهات القبول اختبارات. وهذا يدمج التطوير والاختبار من خلال المواصفة، فلا تُكتب سيناريوهات الاختبار بعد الشيفرة، بل تكون جزءاً من المواصفة التي تولّد كلاً من التنفيذ والاختبارات.
 
-The feedback loop extends beyond initial development. Production metrics and incidents don't just trigger hotfixes—they update specifications for the next regeneration. Performance bottlenecks become new non-functional requirements. Security vulnerabilities become constraints that affect all future generations. This iterative dance between specification, implementation, and operational reality is where true understanding emerges and where the traditional SDLC transforms into a continuous evolution.
+تمتد حلقة التغذية الراجعة إلى ما بعد التطوير الأولي. مقاييس الإنتاج والحوادث لا تطلق إصلاحات سريعة فحسب، بل تحدّث المواصفات للتوليد التالي. تصبح اختناقات الأداء متطلبات غير وظيفية جديدة. وتصبح الثغرات الأمنية قيوداً تؤثر على جميع الأجيال المستقبلية. هذه الرقصة التكرارية بين المواصفة والتنفيذ والواقع التشغيلي هي حيث ينبثق الفهم الحقيقي، وحيث تتحول دورة حياة تطوير البرمجيات التقليدية إلى تطور مستمر.
 
-## Why SDD Matters Now
+## لماذا يهم SDD الآن
 
-Three trends make SDD not just possible but necessary:
+ثلاثة اتجاهات تجعل SDD ليس ممكناً فحسب بل ضرورياً:
 
-First, AI capabilities have reached a threshold where natural language specifications can reliably generate working code. This isn't about replacing developers—it's about amplifying their effectiveness by automating the mechanical translation from specification to implementation. It can amplify exploration and creativity, support "start-over" easily, and support addition, subtraction, and critical thinking.
+أولاً، بلغت قدرات الذكاء الاصطناعي عتبة تستطيع عندها المواصفات بلغة طبيعية أن تولّد شيفرة عاملة بشكل موثوق. هذا لا يتعلق باستبدال المطورين، بل بتعزيز فعاليتهم من خلال أتمتة الترجمة الميكانيكية من المواصفة إلى التنفيذ. ويمكن أن يعزّز الاستكشاف والإبداع، ويدعم «البدء من جديد» بسهولة، ويدعم الإضافة والحذف والتفكير النقدي.
 
-Second, software complexity continues to grow exponentially. Modern systems integrate dozens of services, frameworks, and dependencies. Keeping all these pieces aligned with original intent through manual processes becomes increasingly difficult. SDD provides systematic alignment through specification-driven generation. Frameworks may evolve to provide AI-first support, not human-first support, or architect around reusable components.
+ثانياً، يستمر تعقيد البرمجيات في النمو الأسي. تدمج الأنظمة الحديثة عشرات الخدمات وأطر العمل والاعتماديات. يصبح الحفاظ على توافق كل هذه القطع مع النية الأصلية من خلال العمليات اليدوية أمراً صعباً بشكل متزايد. ويوفر SDD محاذاة منهجية من خلال التوليد المعتمد على المواصفات. وقد تتطور الأطر لتوفر دعماً يقوده الذكاء الاصطناعي أولاً بدلاً من البشر أولاً، أو لتُبنى حول مكونات قابلة لإعادة الاستخدام.
 
-Third, the pace of change accelerates. Requirements change far more rapidly today than ever before. Pivoting is no longer exceptional—it's expected. Modern product development demands rapid iteration based on user feedback, market conditions, and competitive pressures. Traditional development treats these changes as disruptions. Each pivot requires manually propagating changes through documentation, design, and code. The result is either slow, careful updates that limit velocity, or fast, reckless changes that accumulate technical debt.
+ثالثاً، تتسارع وتيرة التغيير. تتغير المتطلبات اليوم بسرعة أكبر بكثير من أي وقت مضى. لم يعد التغيير الجذري (Pivoting) استثنائياً، بل أصبح متوقعاً. يتطلب تطوير المنتج الحديث تكراراً سريعاً يستند إلى تغذية المستخدمين الراجعة، وظروف السوق، والضغوط التنافسية. يتعامل التطوير التقليدي مع هذه التغييرات على أنها اضطرابات. ويتطلب كل تحول جذري نشر التغييرات يدوياً عبر التوثيق والتصميم والشيفرة. والنتيجة إما تحديثات بطيئة وحذرة تحد من السرعة، أو تغييرات سريعة ومتهورة تراكم ديوناً تقنية.
 
-SDD can support what-if/simulation experiments: "If we need to re-implement or change the application to promote a business need to sell more T-shirts, how would we implement and experiment for that?"
+يمكن لـ SDD دعم تجارب «ماذا لو» / المحاكاة: «إذا احتجنا إلى إعادة تنفيذ التطبيق أو تغييره لتعزيز حاجة تجارية تتمثل في بيع المزيد من القمصان، فكيف سننفذ ونجرّب ذلك؟»
 
-SDD transforms requirement changes from obstacles into normal workflow. When specifications drive implementation, pivots become systematic regenerations rather than manual rewrites. Change a core requirement in the PRD, and affected implementation plans update automatically. Modify a user story, and corresponding API endpoints regenerate. This isn't just about initial development—it's about maintaining engineering velocity through inevitable changes.
+يحوّل SDD تغييرات المتطلبات من عقبات إلى سير عمل طبيعي. عندما تقود المواصفات التنفيذ، تصبح التحولات الجذرية إعادة توليد منهجية بدلاً من إعادة كتابة يدوية. غيّر متطلباً جوهرياً في الـ PRD، وتُحدَّث خطط التنفيذ المتأثرة تلقائياً. عدّل قصة مستخدم، وتُعاد توليد نقاط نهاية الـ API المقابلة. هذا لا يتعلق بالتطوير الأولي فحسب، بل بالحفاظ على سرعة الهندسة عبر التغييرات الحتمية.
 
-## Core Principles
+## المبادئ الجوهرية
 
-**Specifications as the Lingua Franca**: The specification becomes the primary artifact. Code becomes its expression in a particular language and framework. Maintaining software means evolving specifications.
+**المواصفات بوصفها اللغة المشتركة**: تصبح المواصفة هي المخرج الأساسي. وتصبح الشيفرة تعبيراً عنها بلغة وإطار عمل بعينهما. وصيانة البرمجيات تعني تطوير المواصفات.
 
-**Executable Specifications**: Specifications must be precise, complete, and unambiguous enough to generate working systems. This eliminates the gap between intent and implementation.
+**مواصفات قابلة للتنفيذ**: يجب أن تكون المواصفات دقيقة وكاملة وغير ملتبسة بما يكفي لتوليد أنظمة عاملة. وهذا يلغي الفجوة بين النية والتنفيذ.
 
-**Continuous Refinement**: Consistency validation happens continuously, not as a one-time gate. AI analyzes specifications for ambiguity, contradictions, and gaps as an ongoing process.
+**التحسين المستمر**: يتم التحقق من الاتساق باستمرار، وليس كبوابة لمرة واحدة. يحلل الذكاء الاصطناعي المواصفات بحثاً عن الغموض والتناقضات والثغرات بوصف ذلك عملية مستمرة.
 
-**Research-Driven Context**: Research agents gather critical context throughout the specification process, investigating technical options, performance implications, and organizational constraints.
+**سياق مدفوع بالبحث**: تجمع وكلاء البحث السياق الحاسم طوال عملية المواصفات، وتتقصى الخيارات التقنية وآثار الأداء والقيود التنظيمية.
 
-**Bidirectional Feedback**: Production reality informs specification evolution. Metrics, incidents, and operational learnings become inputs for specification refinement.
+**تغذية راجعة ثنائية الاتجاه**: يُرشد الواقع الإنتاجي تطورَ المواصفات. تصبح المقاييس والحوادث والتعلّمات التشغيلية مدخلات لتحسين المواصفات.
 
-**Branching for Exploration**: Generate multiple implementation approaches from the same specification to explore different optimization targets—performance, maintainability, user experience, cost.
+**التفريع للاستكشاف**: توليد مقاربات تنفيذ متعددة من المواصفة نفسها لاستكشاف أهداف تحسين مختلفة، كالأداء، وقابلية الصيانة، وتجربة المستخدم، والتكلفة.
 
-## Implementation Approaches
+## مقاربات التنفيذ
 
-Today, practicing SDD requires assembling existing tools and maintaining discipline throughout the process. The methodology can be practiced with:
+اليوم، تتطلب ممارسة SDD تجميع الأدوات الموجودة والحفاظ على الانضباط طوال العملية. ويمكن ممارسة المنهجية باستخدام:
 
-- AI assistants for iterative specification development
-- Research agents for gathering technical context
-- Code generation tools for translating specifications to implementation
-- Version control systems adapted for specification-first workflows
-- Consistency checking through AI analysis of specification documents
+- مساعدي الذكاء الاصطناعي للتطوير التكراري للمواصفات
+- وكلاء البحث لجمع السياق التقني
+- أدوات توليد الشيفرة لترجمة المواصفات إلى تنفيذ
+- أنظمة التحكم بالإصدارات المُكيَّفة لسير العمل القائم على المواصفات أولاً
+- التحقق من الاتساق عبر تحليل الذكاء الاصطناعي لوثائق المواصفات
 
-The key is treating specifications as the source of truth, with code as the generated output that serves the specification rather than the other way around.
+المفتاح هو معاملة المواصفات بوصفها مصدر الحقيقة، مع الشيفرة بوصفها المخرج المولَّد الذي يخدم المواصفة بدلاً من العكس.
 
-## Streamlining SDD with Commands
+## تبسيط SDD باستخدام الأوامر
 
-The SDD methodology is significantly enhanced through three powerful commands that automate the specification → planning → tasking workflow:
+تتعزز منهجية SDD بشكل كبير من خلال ثلاثة أوامر قوية تؤتمت سير عمل المواصفة ← التخطيط ← المهام:
 
-### The `/speckit.specify` Command
+### الأمر `/speckit.specify`
 
-This command transforms a simple feature description (the user-prompt) into a complete, structured specification with automatic repository management:
+يحوّل هذا الأمر وصف ميزة بسيط (موجَّه المستخدم) إلى مواصفة كاملة ومُهيكلة مع إدارة تلقائية للمستودع:
 
-1. **Automatic Feature Numbering**: Scans existing specs to determine the next feature number (e.g., 001, 002, 003, …, 1000 — expands beyond 3 digits automatically)
-2. **Branch Creation**: Generates a semantic branch name from your description and creates it automatically
-3. **Template-Based Generation**: Copies and customizes the feature specification template with your requirements
-4. **Directory Structure**: Creates the proper `specs/[branch-name]/` structure for all related documents
+1. **ترقيم تلقائي للميزات**: يفحص المواصفات الموجودة لتحديد رقم الميزة التالي (مثل 001، 002، 003، ...، 1000 — يتوسع تلقائياً إلى ما يتجاوز 3 خانات)
+2. **إنشاء الفرع**: يولّد اسم فرع دلالي من وصفك وينشئه تلقائياً
+3. **التوليد المعتمد على القوالب**: ينسخ ويخصص قالب مواصفة الميزة وفق متطلباتك
+4. **هيكل الدليل**: ينشئ بنية `specs/[branch-name]/` المناسبة لجميع الوثائق ذات الصلة
 
-### The `/speckit.plan` Command
+### الأمر `/speckit.plan`
 
-Once a feature specification exists, this command creates a comprehensive implementation plan:
+بمجرد وجود مواصفة ميزة، ينشئ هذا الأمر خطة تنفيذ شاملة:
 
-1. **Specification Analysis**: Reads and understands the feature requirements, user stories, and acceptance criteria
-2. **Constitutional Compliance**: Ensures alignment with project constitution and architectural principles
-3. **Technical Translation**: Converts business requirements into technical architecture and implementation details
-4. **Detailed Documentation**: Generates supporting documents for data models, API contracts, and test scenarios
-5. **Quickstart Validation**: Produces a quickstart guide capturing key validation scenarios
+1. **تحليل المواصفة**: يقرأ ويفهم متطلبات الميزة وقصص المستخدمين ومعايير القبول
+2. **الالتزام الدستوري**: يضمن التوافق مع دستور المشروع والمبادئ المعمارية
+3. **الترجمة التقنية**: يحوّل المتطلبات التجارية إلى بنية تقنية وتفاصيل تنفيذ
+4. **التوثيق التفصيلي**: يولّد وثائق داعمة لنماذج البيانات وعقود الـ API وسيناريوهات الاختبار
+5. **التحقق عبر دليل البدء السريع**: ينتج دليل بدء سريع يلتقط سيناريوهات التحقق الرئيسية
 
-### The `/speckit.tasks` Command
+### الأمر `/speckit.tasks`
 
-After a plan is created, this command analyzes the plan and related design documents to generate an executable task list:
+بعد إنشاء خطة، يحلل هذا الأمر الخطة ووثائق التصميم ذات الصلة لتوليد قائمة مهام قابلة للتنفيذ:
 
-1. **Inputs**: Reads `plan.md` (required) and, if present, `data-model.md`, `contracts/`, and `research.md`
-2. **Task Derivation**: Converts contracts, entities, and scenarios into specific tasks
-3. **Parallelization**: Marks independent tasks `[P]` and outlines safe parallel groups
-4. **Output**: Writes `tasks.md` in the feature directory, ready for execution by a Task agent
+1. **المدخلات**: يقرأ `plan.md` (إلزامي)، وفي حال وجودها `data-model.md` و`contracts/` و`research.md`
+2. **اشتقاق المهام**: يحوّل العقود والكيانات والسيناريوهات إلى مهام محددة
+3. **المعالجة المتوازية**: يضع علامة `[P]` على المهام المستقلة ويحدد مجموعات متوازية آمنة
+4. **المخرج**: يكتب `tasks.md` في دليل الميزة، جاهزاً للتنفيذ من قِبل وكيل المهام (Task agent)
 
-### Example: Building a Chat Feature
+### مثال: بناء ميزة محادثة
 
-Here's how these commands transform the traditional development workflow:
+إليك كيف تحوّل هذه الأوامر سير عمل التطوير التقليدي:
 
-**Traditional Approach:**
+**المقاربة التقليدية:**
 
 ```text
-1. Write a PRD in a document (2-3 hours)
-2. Create design documents (2-3 hours)
-3. Set up project structure manually (30 minutes)
-4. Write technical specifications (3-4 hours)
-5. Create test plans (2 hours)
-Total: ~12 hours of documentation work
+1. كتابة وثيقة PRD (2-3 ساعات)
+2. إنشاء وثائق التصميم (2-3 ساعات)
+3. إعداد بنية المشروع يدوياً (30 دقيقة)
+4. كتابة المواصفات التقنية (3-4 ساعات)
+5. إنشاء خطط الاختبار (ساعتان)
+الإجمالي: ~12 ساعة من عمل التوثيق
 ```
 
-**SDD with Commands Approach:**
+**مقاربة SDD باستخدام الأوامر:**
 
 ```bash
-# Step 1: Create the feature specification (5 minutes)
+# الخطوة 1: إنشاء مواصفة الميزة (5 دقائق)
 /speckit.specify Real-time chat system with message history and user presence
 
-# This automatically:
-# - Creates branch "003-chat-system"
-# - Generates specs/003-chat-system/spec.md
-# - Populates it with structured requirements
+# يقوم هذا تلقائياً بـ:
+# - إنشاء فرع "003-chat-system"
+# - توليد specs/003-chat-system/spec.md
+# - تعبئته بمتطلبات مُهيكلة
 
-# Step 2: Generate implementation plan (5 minutes)
+# الخطوة 2: توليد خطة التنفيذ (5 دقائق)
 /speckit.plan WebSocket for real-time messaging, PostgreSQL for history, Redis for presence
 
-# Step 3: Generate executable tasks (5 minutes)
+# الخطوة 3: توليد مهام قابلة للتنفيذ (5 دقائق)
 /speckit.tasks
 
-# This automatically creates:
+# يقوم هذا تلقائياً بإنشاء:
 # - specs/003-chat-system/plan.md
-# - specs/003-chat-system/research.md (WebSocket library comparisons)
-# - specs/003-chat-system/data-model.md (Message and User schemas)
-# - specs/003-chat-system/contracts/ (WebSocket events, REST endpoints)
-# - specs/003-chat-system/quickstart.md (Key validation scenarios)
-# - specs/003-chat-system/tasks.md (Task list derived from the plan)
+# - specs/003-chat-system/research.md (مقارنات مكتبات WebSocket)
+# - specs/003-chat-system/data-model.md (مخططات Message و User)
+# - specs/003-chat-system/contracts/ (أحداث WebSocket ونقاط نهاية REST)
+# - specs/003-chat-system/quickstart.md (سيناريوهات التحقق الرئيسية)
+# - specs/003-chat-system/tasks.md (قائمة المهام المشتقة من الخطة)
 ```
 
-In 15 minutes, you have:
+في 15 دقيقة، لديك:
 
-- A complete feature specification with user stories and acceptance criteria
-- A detailed implementation plan with technology choices and rationale
-- API contracts and data models ready for code generation
-- Comprehensive test scenarios for both automated and manual testing
-- All documents properly versioned in a feature branch
+- مواصفة ميزة كاملة مع قصص مستخدمين ومعايير قبول
+- خطة تنفيذ مفصّلة مع خيارات تقنية ومبررات
+- عقود API ونماذج بيانات جاهزة لتوليد الشيفرة
+- سيناريوهات اختبار شاملة لكل من الاختبار الآلي واليدوي
+- جميع الوثائق مُصدَّرة بشكل سليم في فرع الميزة
 
-### The Power of Structured Automation
+### قوة الأتمتة المُهيكلة
 
-These commands don't just save time—they enforce consistency and completeness:
+هذه الأوامر لا توفر الوقت فحسب، بل تفرض الاتساق والاكتمال:
 
-1. **No Forgotten Details**: Templates ensure every aspect is considered, from non-functional requirements to error handling
-2. **Traceable Decisions**: Every technical choice links back to specific requirements
-3. **Living Documentation**: Specifications stay in sync with code because they generate it
-4. **Rapid Iteration**: Change requirements and regenerate plans in minutes, not days
+1. **لا تفاصيل منسية**: تضمن القوالب أخذ كل جانب بعين الاعتبار، من المتطلبات غير الوظيفية إلى معالجة الأخطاء
+2. **قرارات قابلة للتتبع**: يرتبط كل خيار تقني بمتطلبات محددة
+3. **توثيق حي**: تبقى المواصفات متزامنة مع الشيفرة لأنها هي التي تولّدها
+4. **تكرار سريع**: غيّر المتطلبات وأعد توليد الخطط في دقائق لا أيام
 
-The commands embody SDD principles by treating specifications as executable artifacts rather than static documents. They transform the specification process from a necessary evil into the driving force of development.
+تجسّد الأوامر مبادئ SDD من خلال معاملة المواصفات بوصفها مخرجات قابلة للتنفيذ بدلاً من وثائق ساكنة. فهي تحوّل عملية المواصفات من شرٍ لا بد منه إلى القوة الدافعة للتطوير.
 
-### Template-Driven Quality: How Structure Constrains LLMs for Better Outcomes
+### الجودة المعتمدة على القوالب: كيف تُقيّد البنيةُ نماذجَ LLM للحصول على نتائج أفضل
 
-The true power of these commands lies not just in automation, but in how the templates guide LLM behavior toward higher-quality specifications. The templates act as sophisticated prompts that constrain the LLM's output in productive ways:
+تكمن القوة الحقيقية لهذه الأوامر ليس في الأتمتة وحدها، بل في الكيفية التي توجّه بها القوالبُ سلوكَ نموذج LLM نحو مواصفات أعلى جودة. تعمل القوالب بوصفها موجّهات (prompts) متطورة تُقيّد مخرج النموذج بطرق منتجة:
 
-#### 1. **Preventing Premature Implementation Details**
+#### 1. **منع تفاصيل التنفيذ المبكرة**
 
-The feature specification template explicitly instructs:
+يوجّه قالب مواصفة الميزة بشكل صريح:
 
 ```text
-- ✅ Focus on WHAT users need and WHY
-- ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
+- ✅ ركّز على ماذا يحتاج المستخدمون ولماذا
+- ❌ تجنّب كيفية التنفيذ (لا حزمة تقنية، لا APIs، لا بنية شيفرة)
 ```
 
-This constraint forces the LLM to maintain proper abstraction levels. When an LLM might naturally jump to "implement using React with Redux," the template keeps it focused on "users need real-time updates of their data." This separation ensures specifications remain stable even as implementation technologies change.
+يجبر هذا القيدُ النموذجَ على الحفاظ على مستويات تجريد مناسبة. عندما قد يقفز النموذج بشكل طبيعي إلى «نفّذ باستخدام React مع Redux»، يبقيه القالب مركّزاً على «يحتاج المستخدمون إلى تحديثات لحظية لبياناتهم». يضمن هذا الفصل بقاء المواصفات مستقرة حتى مع تغيّر تقنيات التنفيذ.
 
-#### 2. **Forcing Explicit Uncertainty Markers**
+#### 2. **فرض علامات عدم اليقين الصريحة**
 
-Both templates mandate the use of `[NEEDS CLARIFICATION]` markers:
+يفرض كلا القالبين استخدام علامات `[NEEDS CLARIFICATION]`:
 
 ```text
-When creating this spec from a user prompt:
-1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question]
-2. **Don't guess**: If the prompt doesn't specify something, mark it
+عند إنشاء هذه المواصفة من موجّه المستخدم:
+1. **ضع علامة على كل المواضع الملتبسة**: استخدم [NEEDS CLARIFICATION: سؤال محدد]
+2. **لا تخمّن**: إذا لم يحدد الموجّه شيئاً، ضع علامة عليه
 ```
 
-This prevents the common LLM behavior of making plausible but potentially incorrect assumptions. Instead of guessing that a "login system" uses email/password authentication, the LLM must mark it as `[NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]`.
+يمنع هذا السلوكَ الشائع لنماذج LLM المتمثل في وضع افتراضات معقولة لكنها قد تكون غير صحيحة. فبدلاً من تخمين أن «نظام تسجيل الدخول» يستخدم مصادقة بالبريد/كلمة المرور، يجب على النموذج أن يضع علامة `[NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]`.
 
-#### 3. **Structured Thinking Through Checklists**
+#### 3. **التفكير المُهيكل عبر قوائم التحقق**
 
-The templates include comprehensive checklists that act as "unit tests" for the specification:
+تتضمن القوالب قوائم تحقق شاملة تعمل بوصفها «اختبارات وحدة» للمواصفة:
 
 ```markdown
-### Requirement Completeness
+### اكتمال المتطلبات
 
-- [ ] No [NEEDS CLARIFICATION] markers remain
-- [ ] Requirements are testable and unambiguous
-- [ ] Success criteria are measurable
+- [ ] لم تتبقَ علامات [NEEDS CLARIFICATION]
+- [ ] المتطلبات قابلة للاختبار وغير ملتبسة
+- [ ] معايير النجاح قابلة للقياس
 ```
 
-These checklists force the LLM to self-review its output systematically, catching gaps that might otherwise slip through. It's like giving the LLM a quality assurance framework.
+تُجبر قوائم التحقق هذه النموذج على مراجعة مخرجاته ذاتياً بشكل منهجي، فتلتقط الثغرات التي قد تمرّ دون ذلك. الأمر أشبه بتزويد النموذج بإطار لضمان الجودة.
 
-#### 4. **Constitutional Compliance Through Gates**
+#### 4. **الالتزام الدستوري عبر البوابات**
 
-The implementation plan template enforces architectural principles through phase gates:
+يفرض قالب خطة التنفيذ المبادئ المعمارية عبر بوابات مرحلية:
 
 ```markdown
-### Phase -1: Pre-Implementation Gates
+### المرحلة -1: بوابات ما قبل التنفيذ
 
-#### Simplicity Gate (Article VII)
+#### بوابة البساطة (المادة السابعة)
 
-- [ ] Using ≤3 projects?
-- [ ] No future-proofing?
+- [ ] استخدام ≤3 مشاريع؟
+- [ ] لا تجهيز للمستقبل؟
 
-#### Anti-Abstraction Gate (Article VIII)
+#### بوابة مكافحة التجريد (المادة الثامنة)
 
-- [ ] Using framework directly?
-- [ ] Single model representation?
+- [ ] استخدام الإطار مباشرة؟
+- [ ] تمثيل نموذج واحد؟
 ```
 
-These gates prevent over-engineering by making the LLM explicitly justify any complexity. If a gate fails, the LLM must document why in the "Complexity Tracking" section, creating accountability for architectural decisions.
+تمنع هذه البوابات الهندسة المفرطة من خلال إجبار النموذج على تبرير أي تعقيد بشكل صريح. فإذا فشلت بوابة، يجب على النموذج توثيق السبب في قسم «تتبع التعقيد»، مما يخلق مساءلة عن القرارات المعمارية.
 
-#### 5. **Hierarchical Detail Management**
+#### 5. **إدارة التفاصيل بشكل هرمي**
 
-The templates enforce proper information architecture:
+تفرض القوالب بنية معلومات مناسبة:
 
 ```text
-**IMPORTANT**: This implementation plan should remain high-level and readable.
-Any code samples, detailed algorithms, or extensive technical specifications
-must be placed in the appropriate `implementation-details/` file
+**مهم**: يجب أن تبقى خطة التنفيذ هذه على مستوى عالٍ وسهلة القراءة.
+أي عينات شيفرة أو خوارزميات تفصيلية أو مواصفات تقنية موسّعة
+يجب وضعها في الملف المناسب ضمن `implementation-details/`
 ```
 
-This prevents the common problem of specifications becoming unreadable code dumps. The LLM learns to maintain appropriate detail levels, extracting complexity to separate files while keeping the main document navigable.
+يمنع هذا المشكلةَ الشائعة المتمثلة في تحوّل المواصفات إلى مكبّات شيفرة غير قابلة للقراءة. ويتعلم النموذج الحفاظ على مستويات تفصيل مناسبة، باستخراج التعقيد إلى ملفات منفصلة مع إبقاء الوثيقة الرئيسية قابلة للتصفّح.
 
-#### 6. **Test-First Thinking**
+#### 6. **التفكير القائم على الاختبار أولاً**
 
-The implementation template enforces test-first development:
+يفرض قالب التنفيذ التطويرَ القائم على الاختبار أولاً:
 
 ```text
-### File Creation Order
-1. Create `contracts/` with API specifications
-2. Create test files in order: contract → integration → e2e → unit
-3. Create source files to make tests pass
+### ترتيب إنشاء الملفات
+1. أنشئ `contracts/` بمواصفات الـ API
+2. أنشئ ملفات الاختبار بالترتيب: عقد ← تكامل ← e2e ← وحدة
+3. أنشئ ملفات المصدر لجعل الاختبارات تنجح
 ```
 
-This ordering constraint ensures the LLM thinks about testability and contracts before implementation, leading to more robust and verifiable specifications.
+يضمن قيد الترتيب هذا أن يفكر النموذج في قابلية الاختبار والعقود قبل التنفيذ، مما يؤدي إلى مواصفات أكثر متانة وقابلية للتحقق.
 
-#### 7. **Preventing Speculative Features**
+#### 7. **منع الميزات التخمينية**
 
-Templates explicitly discourage speculation:
+تثبّط القوالب التخمين بشكل صريح:
 
 ```text
-- [ ] No speculative or "might need" features
-- [ ] All phases have clear prerequisites and deliverables
+- [ ] لا ميزات تخمينية أو «قد نحتاجها»
+- [ ] جميع المراحل لها متطلبات سابقة ومخرجات واضحة
 ```
 
-This stops the LLM from adding "nice to have" features that complicate implementation. Every feature must trace back to a concrete user story with clear acceptance criteria.
+يوقف هذا النموذج عن إضافة ميزات «جميلة لو وُجدت» تُعقّد التنفيذ. ويجب أن تعود كل ميزة إلى قصة مستخدم ملموسة بمعايير قبول واضحة.
 
-### The Compound Effect
+### الأثر التراكمي
 
-These constraints work together to produce specifications that are:
+تعمل هذه القيود معاً لإنتاج مواصفات تتسم بأنها:
 
-- **Complete**: Checklists ensure nothing is forgotten
-- **Unambiguous**: Forced clarification markers highlight uncertainties
-- **Testable**: Test-first thinking baked into the process
-- **Maintainable**: Proper abstraction levels and information hierarchy
-- **Implementable**: Clear phases with concrete deliverables
+- **كاملة**: قوائم التحقق تضمن ألا يُنسى شيء
+- **غير ملتبسة**: علامات الاستيضاح المفروضة تُبرز جوانب عدم اليقين
+- **قابلة للاختبار**: التفكير القائم على الاختبار أولاً مغروس في العملية
+- **قابلة للصيانة**: مستويات تجريد مناسبة وتسلسل هرمي للمعلومات
+- **قابلة للتنفيذ**: مراحل واضحة بمخرجات ملموسة
 
-The templates transform the LLM from a creative writer into a disciplined specification engineer, channeling its capabilities toward producing consistently high-quality, executable specifications that truly drive development.
+تحوّل القوالب نموذج LLM من كاتب مبدع إلى مهندس مواصفات منضبط، فتوجّه قدراته نحو إنتاج مواصفات قابلة للتنفيذ وعالية الجودة باستمرار، تقود التطوير حقاً.
 
-## The Constitutional Foundation: Enforcing Architectural Discipline
+## الأساس الدستوري: فرض الانضباط المعماري
 
-At the heart of SDD lies a constitution—a set of immutable principles that govern how specifications become code. The constitution (`memory/constitution.md`) acts as the architectural DNA of the system, ensuring that every generated implementation maintains consistency, simplicity, and quality.
+في قلب SDD يكمن دستور، أي مجموعة من المبادئ غير القابلة للتغيير تحكم كيف تتحول المواصفات إلى شيفرة. يعمل الدستور (`memory/constitution.md`) بوصفه الحمض النووي المعماري للنظام، مما يضمن أن كل تنفيذ مُولَّد يحافظ على الاتساق والبساطة والجودة.
 
-### The Nine Articles of Development
+### المواد التسع للتطوير
 
-The constitution defines nine articles that shape every aspect of the development process:
+يحدد الدستور تسع مواد تشكّل كل جانب من جوانب عملية التطوير:
 
-#### Article I: Library-First Principle
+#### المادة الأولى: مبدأ المكتبة أولاً
 
-Every feature must begin as a standalone library—no exceptions. This forces modular design from the start:
+يجب أن تبدأ كل ميزة بوصفها مكتبة قائمة بذاتها، دون استثناءات. وهذا يفرض التصميم المعياري (modular) من البداية:
 
 ```text
-Every feature in Specify MUST begin its existence as a standalone library.
-No feature shall be implemented directly within application code without
-first being abstracted into a reusable library component.
+يجب أن تبدأ كل ميزة في Specify وجودها بوصفها مكتبة قائمة بذاتها.
+لا يُنفَّذ أي ميزة مباشرة ضمن شيفرة التطبيق دون
+تجريدها أولاً في مكوّن مكتبة قابل لإعادة الاستخدام.
 ```
 
-This principle ensures that specifications generate modular, reusable code rather than monolithic applications. When the LLM generates an implementation plan, it must structure features as libraries with clear boundaries and minimal dependencies.
+يضمن هذا المبدأ أن تولّد المواصفات شيفرة معيارية قابلة لإعادة الاستخدام بدلاً من تطبيقات أحادية الكتلة. وعندما يولّد النموذج خطة تنفيذ، يجب عليه هيكلة الميزات بوصفها مكتبات ذات حدود واضحة واعتماديات دنيا.
 
-#### Article II: CLI Interface Mandate
+#### المادة الثانية: إلزامية واجهة سطر الأوامر
 
-Every library must expose its functionality through a command-line interface:
+يجب أن تكشف كل مكتبة عن وظائفها عبر واجهة سطر أوامر:
 
 ```text
-All CLI interfaces MUST:
-- Accept text as input (via stdin, arguments, or files)
-- Produce text as output (via stdout)
-- Support JSON format for structured data exchange
+يجب أن تتسم جميع واجهات CLI بـ:
+- قبول النص كمدخل (عبر stdin أو الوسائط أو الملفات)
+- إنتاج النص كمخرج (عبر stdout)
+- دعم صيغة JSON لتبادل البيانات المُهيكلة
 ```
 
-This enforces observability and testability. The LLM cannot hide functionality inside opaque classes—everything must be accessible and verifiable through text-based interfaces.
+يفرض هذا قابلية الملاحظة وقابلية الاختبار. لا يمكن للنموذج إخفاء وظيفية داخل أصناف معتمة، إذ يجب أن يكون كل شيء متاحاً وقابلاً للتحقق عبر واجهات نصية.
 
-#### Article III: Test-First Imperative
+#### المادة الثالثة: حتمية الاختبار أولاً
 
-The most transformative article—no code before tests:
+أكثر المواد تحويلية: لا شيفرة قبل الاختبارات:
 
 ```text
-This is NON-NEGOTIABLE: All implementation MUST follow strict Test-Driven Development.
-No implementation code shall be written before:
-1. Unit tests are written
-2. Tests are validated and approved by the user
-3. Tests are confirmed to FAIL (Red phase)
+هذا غير قابل للتفاوض: يجب أن يتبع كل تنفيذ تطويراً صارماً قائماً على الاختبارات.
+لا تُكتب أي شيفرة تنفيذ قبل:
+1. كتابة اختبارات الوحدة
+2. التحقق من الاختبارات والموافقة عليها من قِبل المستخدم
+3. التأكد من فشل الاختبارات (المرحلة الحمراء)
 ```
 
-This completely inverts traditional AI code generation. Instead of generating code and hoping it works, the LLM must first generate comprehensive tests that define behavior, get them approved, and only then generate implementation.
+يقلب هذا تماماً توليد الشيفرة التقليدي بالذكاء الاصطناعي. فبدلاً من توليد الشيفرة وأمل أن تعمل، يجب على النموذج أولاً توليد اختبارات شاملة تُعرّف السلوك، والحصول على الموافقة عليها، ثم بعد ذلك فقط توليد التنفيذ.
 
-#### Articles VII & VIII: Simplicity and Anti-Abstraction
+#### المادتان السابعة والثامنة: البساطة ومكافحة التجريد
 
-These paired articles combat over-engineering:
+تكافح هاتان المادتان المقترنتان الهندسةَ المفرطة:
 
 ```text
-Section 7.3: Minimal Project Structure
-- Maximum 3 projects for initial implementation
-- Additional projects require documented justification
+القسم 7.3: بنية مشروع دنيا
+- حد أقصى 3 مشاريع للتنفيذ الأولي
+- تتطلب المشاريع الإضافية تبريراً موثقاً
 
-Section 8.1: Framework Trust
-- Use framework features directly rather than wrapping them
+القسم 8.1: الثقة بالإطار
+- استخدم ميزات الإطار مباشرة بدلاً من تغليفها
 ```
 
-When an LLM might naturally create elaborate abstractions, these articles force it to justify every layer of complexity. The implementation plan template's "Phase -1 Gates" directly enforce these principles.
+عندما قد ينشئ النموذج تجريدات معقدة بشكل طبيعي، تجبره هاتان المادتان على تبرير كل طبقة من طبقات التعقيد. وتفرض «بوابات المرحلة -1» في قالب خطة التنفيذ هذه المبادئ مباشرة.
 
-#### Article IX: Integration-First Testing
+#### المادة التاسعة: الاختبار القائم على التكامل أولاً
 
-Prioritizes real-world testing over isolated unit tests:
+تعطي الأولوية للاختبار في العالم الحقيقي على اختبارات الوحدة المعزولة:
 
 ```text
-Tests MUST use realistic environments:
-- Prefer real databases over mocks
-- Use actual service instances over stubs
-- Contract tests mandatory before implementation
+يجب أن تستخدم الاختبارات بيئات واقعية:
+- تفضيل قواعد البيانات الحقيقية على الـ mocks
+- استخدام نسخ خدمات فعلية بدلاً من الـ stubs
+- اختبارات العقود إلزامية قبل التنفيذ
 ```
 
-This ensures generated code works in practice, not just in theory.
+يضمن هذا أن تعمل الشيفرة المولَّدة في الممارسة، وليس في النظرية فحسب.
 
-### Constitutional Enforcement Through Templates
+### الإنفاذ الدستوري عبر القوالب
 
-The implementation plan template operationalizes these articles through concrete checkpoints:
+يُفعِّل قالب خطة التنفيذ هذه المواد من خلال نقاط تحقق ملموسة:
 
 ```markdown
-### Phase -1: Pre-Implementation Gates
+### المرحلة -1: بوابات ما قبل التنفيذ
 
-#### Simplicity Gate (Article VII)
+#### بوابة البساطة (المادة السابعة)
 
-- [ ] Using ≤3 projects?
-- [ ] No future-proofing?
+- [ ] استخدام ≤3 مشاريع؟
+- [ ] لا تجهيز للمستقبل؟
 
-#### Anti-Abstraction Gate (Article VIII)
+#### بوابة مكافحة التجريد (المادة الثامنة)
 
-- [ ] Using framework directly?
-- [ ] Single model representation?
+- [ ] استخدام الإطار مباشرة؟
+- [ ] تمثيل نموذج واحد؟
 
-#### Integration-First Gate (Article IX)
+#### بوابة التكامل أولاً (المادة التاسعة)
 
-- [ ] Contracts defined?
-- [ ] Contract tests written?
+- [ ] هل العقود محددة؟
+- [ ] هل كُتبت اختبارات العقود؟
 ```
 
-These gates act as compile-time checks for architectural principles. The LLM cannot proceed without either passing the gates or documenting justified exceptions in the "Complexity Tracking" section.
+تعمل هذه البوابات بوصفها فحوصات وقت ترجمة للمبادئ المعمارية. ولا يمكن للنموذج المتابعة دون اجتياز البوابات أو توثيق استثناءات مبررة في قسم «تتبع التعقيد».
 
-### The Power of Immutable Principles
+### قوة المبادئ غير القابلة للتغيير
 
-The constitution's power lies in its immutability. While implementation details can evolve, the core principles remain constant. This provides:
+تكمن قوة الدستور في عدم قابليته للتغيير. فبينما يمكن أن تتطور تفاصيل التنفيذ، تبقى المبادئ الجوهرية ثابتة. ويوفر هذا:
 
-1. **Consistency Across Time**: Code generated today follows the same principles as code generated next year
-2. **Consistency Across LLMs**: Different AI models produce architecturally compatible code
-3. **Architectural Integrity**: Every feature reinforces rather than undermines the system design
-4. **Quality Guarantees**: Test-first, library-first, and simplicity principles ensure maintainable code
+1. **الاتساق عبر الزمن**: الشيفرة المولّدة اليوم تتبع المبادئ نفسها التي تتبعها الشيفرة المولّدة العام القادم
+2. **الاتساق عبر نماذج LLM المختلفة**: تنتج نماذج الذكاء الاصطناعي المختلفة شيفرة متوافقة معمارياً
+3. **سلامة معمارية**: كل ميزة تعزّز تصميم النظام بدلاً من تقويضه
+4. **ضمانات الجودة**: مبادئ الاختبار أولاً، والمكتبة أولاً، والبساطة تضمن شيفرة قابلة للصيانة
 
-### Constitutional Evolution
+### التطور الدستوري
 
-While principles are immutable, their application can evolve:
+في حين أن المبادئ غير قابلة للتغيير، يمكن أن يتطور تطبيقها:
 
 ```text
-Section 4.2: Amendment Process
-Modifications to this constitution require:
-- Explicit documentation of the rationale for change
-- Review and approval by project maintainers
-- Backwards compatibility assessment
+القسم 4.2: عملية التعديل
+تتطلب التعديلات على هذا الدستور:
+- توثيقاً صريحاً لمبرر التغيير
+- مراجعة وموافقة من قائمي المشروع
+- تقييم التوافق العكسي
 ```
 
-This allows the methodology to learn and improve while maintaining stability. The constitution shows its own evolution with dated amendments, demonstrating how principles can be refined based on real-world experience.
+يسمح هذا للمنهجية بالتعلم والتحسن مع الحفاظ على الاستقرار. ويُظهر الدستور تطوّره الخاص بتعديلات مؤرّخة، مما يدل على كيف يمكن صقل المبادئ بناءً على التجربة في العالم الحقيقي.
 
-### Beyond Rules: A Development Philosophy
+### ما يتجاوز القواعد: فلسفة تطوير
 
-The constitution isn't just a rulebook—it's a philosophy that shapes how LLMs think about code generation:
+ليس الدستور مجرد كتاب قواعد، بل هو فلسفة تُشكّل كيف تفكر نماذج LLM في توليد الشيفرة:
 
-- **Observability Over Opacity**: Everything must be inspectable through CLI interfaces
-- **Simplicity Over Cleverness**: Start simple, add complexity only when proven necessary
-- **Integration Over Isolation**: Test in real environments, not artificial ones
-- **Modularity Over Monoliths**: Every feature is a library with clear boundaries
+- **قابلية الملاحظة فوق الإبهام**: يجب أن يكون كل شيء قابلاً للفحص عبر واجهات CLI
+- **البساطة فوق الذكاء**: ابدأ ببساطة، وأضف التعقيد فقط عند الحاجة المثبتة
+- **التكامل فوق العزل**: اختبر في بيئات حقيقية، لا في بيئات اصطناعية
+- **المعيارية فوق الكتلة الواحدة**: كل ميزة هي مكتبة ذات حدود واضحة
 
-By embedding these principles into the specification and planning process, SDD ensures that generated code isn't just functional—it's maintainable, testable, and architecturally sound. The constitution transforms AI from a code generator into an architectural partner that respects and reinforces system design principles.
+من خلال غرس هذه المبادئ في عملية المواصفات والتخطيط، يضمن SDD أن الشيفرة المُولَّدة ليست وظيفية فحسب، بل قابلة للصيانة وقابلة للاختبار وسليمة معمارياً. يحوّل الدستور الذكاء الاصطناعي من مُولِّد شيفرة إلى شريك معماري يحترم مبادئ تصميم النظام ويعزّزها.
 
-## The Transformation
+## التحوّل
 
-This isn't about replacing developers or automating creativity. It's about amplifying human capability by automating mechanical translation. It's about creating a tight feedback loop where specifications, research, and code evolve together, each iteration bringing deeper understanding and better alignment between intent and implementation.
+هذا لا يتعلق باستبدال المطورين أو أتمتة الإبداع، بل يتعلق بتعزيز القدرة البشرية من خلال أتمتة الترجمة الميكانيكية. ويتعلق بإنشاء حلقة تغذية راجعة محكمة حيث تتطور المواصفات والبحث والشيفرة معاً، وكل تكرار يجلب فهماً أعمق ومحاذاة أفضل بين النية والتنفيذ.
 
-Software development needs better tools for maintaining alignment between intent and implementation. SDD provides the methodology for achieving this alignment through executable specifications that generate code rather than merely guiding it.
+يحتاج تطوير البرمجيات إلى أدوات أفضل للحفاظ على المحاذاة بين النية والتنفيذ. ويوفر SDD المنهجية لتحقيق هذه المحاذاة عبر مواصفات قابلة للتنفيذ تولّد الشيفرة بدلاً من مجرد توجيهها.
