@@ -1450,24 +1450,24 @@ def init(
                             preset_catalog = PresetCatalog(project_path)
                             pack_info = preset_catalog.get_pack_info(preset)
                             if not pack_info:
-                                console.print(f"[yellow]Warning:[/yellow] Preset '{preset}' not found in catalog. Skipping.")
+                                console.print(f"[yellow]تحذير:[/yellow] الوصفة '{preset}' غير موجودة في الكتالوج. سيتم التخطي.")
                             elif pack_info.get("bundled") and not pack_info.get("download_url"):
                                 from .extensions import REINSTALL_COMMAND
                                 console.print(
-                                    f"[yellow]Warning:[/yellow] Preset '{preset}' is bundled with spec-kit "
-                                    f"but could not be found in the installed package."
+                                    f"[yellow]تحذير:[/yellow] الوصفة '{preset}' مضمّنة مع spec-kit "
+                                    f"لكن لم يتم العثور عليها في الحزمة المثبّتة."
                                 )
                                 console.print(
-                                    "This usually means the spec-kit installation is incomplete or corrupted."
+                                    "هذا عادةً يعني أن تثبيت spec-kit غير مكتمل أو تالف."
                                 )
-                                console.print(f"Try reinstalling: {REINSTALL_COMMAND}")
+                                console.print(f"حاول إعادة التثبيت: {REINSTALL_COMMAND}")
                             else:
                                 zip_path = None
                                 try:
                                     zip_path = preset_catalog.download_pack(preset)
                                     preset_manager.install_from_zip(zip_path, speckit_ver)
                                 except PresetError as preset_err:
-                                    console.print(f"[yellow]Warning:[/yellow] Failed to install preset '{preset}': {preset_err}")
+                                    console.print(f"[yellow]تحذير:[/yellow] فشل تثبيت الوصفة '{preset}': {preset_err}")
                                 finally:
                                     if zip_path is not None:
                                         # Clean up downloaded ZIP to avoid cache accumulation
@@ -1477,14 +1477,14 @@ def init(
                                             # Best-effort cleanup; failure to delete is non-fatal
                                             pass
                 except Exception as preset_err:
-                    console.print(f"[yellow]Warning:[/yellow] Failed to install preset: {preset_err}")
+                    console.print(f"[yellow]تحذير:[/yellow] فشل تثبيت الوصفة: {preset_err}")
 
-            tracker.complete("final", "project ready")
+            tracker.complete("final", "المشروع جاهز")
         except (typer.Exit, SystemExit):
             raise
         except Exception as e:
             tracker.error("final", str(e))
-            console.print(Panel(f"Initialization failed: {e}", title="Failure", border_style="red"))
+            console.print(Panel(f"فشلت التهيئة: {e}", title="فشل", border_style="red"))
             if debug:
                 _env_pairs = [
                     ("Python", sys.version.split()[0]),
@@ -1493,7 +1493,7 @@ def init(
                 ]
                 _label_width = max(len(k) for k, _ in _env_pairs)
                 env_lines = [f"{k.ljust(_label_width)} → [bright_black]{v}[/bright_black]" for k, v in _env_pairs]
-                console.print(Panel("\n".join(env_lines), title="Debug Environment", border_style="magenta"))
+                console.print(Panel("\n".join(env_lines), title="بيئة التصحيح", border_style="magenta"))
             if not here and project_path.exists() and not dir_existed_before:
                 shutil.rmtree(project_path)
             raise typer.Exit(1)
@@ -1509,9 +1509,9 @@ def init(
         agent_folder = ai_commands_dir if selected_ai == "generic" else agent_config["folder"]
         if agent_folder:
             security_notice = Panel(
-                f"Some agents may store credentials, auth tokens, or other identifying and private artifacts in the agent folder within your project.\n"
-                f"Consider adding [cyan]{agent_folder}[/cyan] (or parts of it) to [cyan].gitignore[/cyan] to prevent accidental credential leakage.",
-                title="[yellow]Agent Folder Security[/yellow]",
+                f"بعض الوكلاء قد يخزّنون اعتمادات أو رموز توثيق أو معلومات خاصة أخرى داخل مجلد الوكيل في مشروعك.\n"
+                f"فكّر بإضافة [cyan]{agent_folder}[/cyan] (أو أجزاء منه) إلى [cyan].gitignore[/cyan] لمنع تسرّب الاعتمادات عرضياً.",
+                title="[yellow]أمان مجلد الوكيل[/yellow]",
                 border_style="yellow",
                 padding=(1, 2)
             )
