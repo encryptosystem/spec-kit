@@ -163,83 +163,83 @@ uvx --from git+https://github.com/github/spec-kit.git@vX.Y.Z specify init --here
 /speckit.implement
 ```
 
-For detailed step-by-step instructions, see our [comprehensive guide](./spec-driven.md).
+للحصول على تعليمات تفصيلية خطوة بخطوة، راجع [الدليل الشامل](./spec-driven.md).
 
-## 📽️ Video Overview
+## 📽️ نظرة عامة بالفيديو
 
-Want to see Spec Kit in action? Watch our [video overview](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)!
+تريد رؤية Spec Kit أثناء العمل؟ شاهد [نظرتنا العامة بالفيديو](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)!
 
 [![Spec Kit video header](/media/spec-kit-video-header.jpg)](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)
 
-## 🧩 Community Extensions
+## 🧩 امتدادات المجتمع
 
 > [!NOTE]
-> Community extensions are independently created and maintained by their respective authors. GitHub and the Spec Kit maintainers may review pull requests that add entries to the community catalog for formatting, catalog structure, or policy compliance, but they do **not review, audit, endorse, or support the extension code itself**. The Community Extensions website is also a third-party resource. Review extension source code before installation and use at your own discretion.
+> امتدادات المجتمع يصنعها ويصونها مؤلفوها بشكل مستقل. قد يراجع فريق GitHub ومشرفو Spec Kit طلبات الدمج التي تضيف مدخلات إلى كتالوج المجتمع من حيث التنسيق أو بنية الكتالوج أو الالتزام بالسياسة، لكنهم **لا يراجعون ولا يدققون ولا يصادقون ولا يدعمون كود الامتداد نفسه**. كذلك فإن موقع امتدادات المجتمع هو مورد طرف ثالث. راجع الشيفرة المصدرية للامتدادات قبل التثبيت واستخدمها بناءً على تقديرك الشخصي.
 
-🔍 **Browse and search community extensions on the [Community Extensions website](https://speckit-community.github.io/extensions/).**
+🔍 **تصفّح وابحث في امتدادات المجتمع عبر [موقع امتدادات المجتمع](https://speckit-community.github.io/extensions/).**
 
-The following community-contributed extensions are available in [`catalog.community.json`](extensions/catalog.community.json):
+الامتدادات المساهَم بها من قِبل المجتمع متاحة في [`catalog.community.json`](extensions/catalog.community.json):
 
-**Categories:**
+**التصنيفات:**
 
-- `docs` — reads, validates, or generates spec artifacts
-- `code` — reviews, validates, or modifies source code
-- `process` — orchestrates workflow across phases
-- `integration` — syncs with external platforms
-- `visibility` — reports on project health or progress
+- `docs` — قراءة أو تحقق أو توليد لمصنوعات المواصفة
+- `code` — مراجعة أو تحقق أو تعديل للشيفرة المصدرية
+- `process` — تنسيق سير العمل عبر المراحل
+- `integration` — مزامنة مع منصات خارجية
+- `visibility` — تقارير عن صحة المشروع أو تقدّمه
 
-**Effect:**
+**الأثر:**
 
-- `Read-only` — produces reports without modifying files
-- `Read+Write` — modifies files, creates artifacts, or updates specs
+- `Read-only` — يُنتج تقارير دون تعديل الملفات
+- `Read+Write` — يعدّل الملفات أو يُنشئ مصنوعات أو يحدّث المواصفات
 
-| Extension | Purpose | Category | Effect | URL |
+| الامتداد | الغرض | التصنيف | الأثر | الرابط |
 |-----------|---------|----------|--------|-----|
-| Agent Assign | Assign specialized Claude Code agents to spec-kit tasks for targeted execution | `process` | Read+Write | [spec-kit-agent-assign](https://github.com/xymelon/spec-kit-agent-assign) |
-| AI-Driven Engineering (AIDE) | A structured 7-step workflow for building new projects from scratch with AI assistants — from vision through implementation | `process` | Read+Write | [aide](https://github.com/mnriem/spec-kit-extensions/tree/main/aide) |
-| Architect Impact Previewer | Predicts architectural impact, complexity, and risks of proposed changes before implementation. | `visibility` | Read-only | [spec-kit-architect-preview](https://github.com/UmmeHabiba1312/spec-kit-architect-preview) |
-| Archive Extension | Archive merged features into main project memory. | `docs` | Read+Write | [spec-kit-archive](https://github.com/stn1slv/spec-kit-archive) |
-| Azure DevOps Integration | Sync user stories and tasks to Azure DevOps work items using OAuth authentication | `integration` | Read+Write | [spec-kit-azure-devops](https://github.com/pragya247/spec-kit-azure-devops) |
-| Blueprint | Stay code-literate in AI-driven development: review a complete code blueprint for every task from spec artifacts before /speckit.implement runs | `docs` | Read+Write | [spec-kit-blueprint](https://github.com/chordpli/spec-kit-blueprint) |
-| Branch Convention | Configurable branch and folder naming conventions for /specify with presets and custom patterns | `process` | Read+Write | [spec-kit-branch-convention](https://github.com/Quratulain-bilal/spec-kit-branch-convention) |
-| Brownfield Bootstrap | Bootstrap spec-kit for existing codebases — auto-discover architecture and adopt SDD incrementally | `process` | Read+Write | [spec-kit-brownfield](https://github.com/Quratulain-bilal/spec-kit-brownfield) |
-| Bugfix Workflow | Structured bugfix workflow — capture bugs, trace to spec artifacts, and patch specs surgically | `process` | Read+Write | [spec-kit-bugfix](https://github.com/Quratulain-bilal/spec-kit-bugfix) |
-| Canon | Adds canon-driven (baseline-driven) workflows: spec-first, code-first, spec-drift. Requires Canon Core preset installation. | `process` | Read+Write | [spec-kit-canon](https://github.com/maximiliamus/spec-kit-canon/tree/master/extension) |
-| Catalog CI | Automated validation for spec-kit community catalog entries — structure, URLs, diffs, and linting | `process` | Read-only | [spec-kit-catalog-ci](https://github.com/Quratulain-bilal/spec-kit-catalog-ci) |
-| CI Guard | Spec compliance gates for CI/CD — verify specs exist, check drift, and block merges on gaps | `process` | Read-only | [spec-kit-ci-guard](https://github.com/Quratulain-bilal/spec-kit-ci-guard) |
-| Checkpoint Extension | Commit the changes made during the middle of the implementation, so you don't end up with just one very large commit at the end | `code` | Read+Write | [spec-kit-checkpoint](https://github.com/aaronrsun/spec-kit-checkpoint) |
-| Cleanup Extension | Post-implementation quality gate that reviews changes, fixes small issues (scout rule), creates tasks for medium issues, and generates analysis for large issues | `code` | Read+Write | [spec-kit-cleanup](https://github.com/dsrednicki/spec-kit-cleanup) |
-| Conduct Extension | Orchestrates spec-kit phases via sub-agent delegation to reduce context pollution. | `process` | Read+Write | [spec-kit-conduct-ext](https://github.com/twbrandon7/spec-kit-conduct-ext) |
-| Confluence Extension | Create a doc in Confluence summarizing the specifications and planning files | `integration` | Read+Write | [spec-kit-confluence](https://github.com/aaronrsun/spec-kit-confluence) |
-| DocGuard — CDD Enforcement | Canonical-Driven Development enforcement. Validates, scores, and traces project documentation with automated checks, AI-driven workflows, and spec-kit hooks. Zero NPM runtime dependencies. | `docs` | Read+Write | [spec-kit-docguard](https://github.com/raccioly/docguard) |
-| Extensify | Create and validate extensions and extension catalogs | `process` | Read+Write | [extensify](https://github.com/mnriem/spec-kit-extensions/tree/main/extensify) |
-| Fix Findings | Automated analyze-fix-reanalyze loop that resolves spec findings until clean | `code` | Read+Write | [spec-kit-fix-findings](https://github.com/Quratulain-bilal/spec-kit-fix-findings) |
-| FixIt Extension | Spec-aware bug fixing — maps bugs to spec artifacts, proposes a plan, applies minimal changes | `code` | Read+Write | [spec-kit-fixit](https://github.com/speckit-community/spec-kit-fixit) |
-| Fleet Orchestrator | Orchestrate a full feature lifecycle with human-in-the-loop gates across all SpecKit phases | `process` | Read+Write | [spec-kit-fleet](https://github.com/sharathsatish/spec-kit-fleet) |
-| GitHub Issues Integration 1 | Generate spec artifacts from GitHub Issues - import issues, sync updates, and maintain bidirectional traceability | `integration` | Read+Write | [spec-kit-github-issues](https://github.com/Fatima367/spec-kit-github-issues) |
-| GitHub Issues Integration 2 | Creates and syncs local specs from an existing GitHub issue | `integration` | Read+Write | [spec-kit-issue](https://github.com/aaronrsun/spec-kit-issue) |
-| Iterate | Iterate on spec documents with a two-phase define-and-apply workflow — refine specs mid-implementation and go straight back to building | `docs` | Read+Write | [spec-kit-iterate](https://github.com/imviancagrace/spec-kit-iterate) |
-| Jira Integration | Create Jira Epics, Stories, and Issues from spec-kit specifications and task breakdowns with configurable hierarchy and custom field support | `integration` | Read+Write | [spec-kit-jira](https://github.com/mbachorik/spec-kit-jira) |
-| Learning Extension | Generate educational guides from implementations and enhance clarifications with mentoring context | `docs` | Read+Write | [spec-kit-learn](https://github.com/imviancagrace/spec-kit-learn) |
-| MAQA — Multi-Agent & Quality Assurance | Coordinator → feature → QA agent workflow with parallel worktree-based implementation. Language-agnostic. Auto-detects installed board plugins. Optional CI gate. | `process` | Read+Write | [spec-kit-maqa-ext](https://github.com/GenieRobot/spec-kit-maqa-ext) |
-| MAQA Azure DevOps Integration | Azure DevOps Boards integration for MAQA — syncs User Stories and Task children as features progress | `integration` | Read+Write | [spec-kit-maqa-azure-devops](https://github.com/GenieRobot/spec-kit-maqa-azure-devops) |
-| MAQA CI/CD Gate | Auto-detects GitHub Actions, CircleCI, GitLab CI, and Bitbucket Pipelines. Blocks QA handoff until pipeline is green. | `process` | Read+Write | [spec-kit-maqa-ci](https://github.com/GenieRobot/spec-kit-maqa-ci) |
-| MAQA GitHub Projects Integration | GitHub Projects v2 integration for MAQA — syncs draft issues and Status columns as features progress | `integration` | Read+Write | [spec-kit-maqa-github-projects](https://github.com/GenieRobot/spec-kit-maqa-github-projects) |
-| MAQA Jira Integration | Jira integration for MAQA — syncs Stories and Subtasks as features progress through the board | `integration` | Read+Write | [spec-kit-maqa-jira](https://github.com/GenieRobot/spec-kit-maqa-jira) |
-| MAQA Linear Integration | Linear integration for MAQA — syncs issues and sub-issues across workflow states as features progress | `integration` | Read+Write | [spec-kit-maqa-linear](https://github.com/GenieRobot/spec-kit-maqa-linear) |
-| MAQA Trello Integration | Trello board integration for MAQA — populates board from specs, moves cards, real-time checklist ticking | `integration` | Read+Write | [spec-kit-maqa-trello](https://github.com/GenieRobot/spec-kit-maqa-trello) |
-| MarkItDown Document Converter | Convert documents (PDF, Word, PowerPoint, Excel, and more) to Markdown for use as spec reference material | `docs` | Read+Write | [spec-kit-markitdown](https://github.com/BenBtg/spec-kit-markitdown) |
-| Memory Loader | Loads .specify/memory/ files before lifecycle commands so LLM agents have project governance context | `docs` | Read-only | [spec-kit-memory-loader](https://github.com/KevinBrown5280/spec-kit-memory-loader) |
-| Memory MD | Repository-native durable memory for Spec Kit projects | `docs` | Read+Write | [spec-kit-memory-hub](https://github.com/DyanGalih/spec-kit-memory-hub) |
-| MemoryLint | Agent memory governance tool: Automatically audits and fixes boundary conflicts between AGENTS.md and the constitution. | `process` | Read+Write | [memorylint](https://github.com/RbBtSn0w/spec-kit-extensions/tree/main/memorylint) |
-| Microsoft 365 Integration | Fetch Teams messages, meeting transcripts, and SharePoint/OneDrive files as local Markdown for spec generation | `integration` | Read+Write | [spec-kit-m365](https://github.com/BenBtg/spec-kit-m365) |
-| Onboard | Contextual onboarding and progressive growth for developers new to spec-kit projects. Explains specs, maps dependencies, validates understanding, and guides the next step | `process` | Read+Write | [spec-kit-onboard](https://github.com/dmux/spec-kit-onboard) |
-| Optimize | Audit and optimize AI governance for context efficiency — token budgets, rule health, interpretability, compression, coherence, and echo detection | `process` | Read+Write | [spec-kit-optimize](https://github.com/sakitA/spec-kit-optimize) |
-| OWASP LLM Threat Model | OWASP Top 10 for LLM Applications 2025 threat analysis on agent artifacts | `code` | Read-only | [spec-kit-threatmodel](https://github.com/NaviaSamal/spec-kit-threatmodel) |
-| Plan Review Gate | Require spec.md and plan.md to be merged via MR/PR before allowing task generation | `process` | Read-only | [spec-kit-plan-review-gate](https://github.com/luno/spec-kit-plan-review-gate) |
-| PR Bridge | Auto-generate pull request descriptions, checklists, and summaries from spec artifacts | `process` | Read-only | [spec-kit-pr-bridge-](https://github.com/Quratulain-bilal/spec-kit-pr-bridge-) |
-| Presetify | Create and validate presets and preset catalogs | `process` | Read+Write | [presetify](https://github.com/mnriem/spec-kit-extensions/tree/main/presetify) |
-| Product Forge | Full product lifecycle from research to release — portfolio, lite mode, monorepo, optional V-Model | `process` | Read+Write | [speckit-product-forge](https://github.com/VaiYav/speckit-product-forge) |
+| Agent Assign | تعيين وكلاء Claude Code متخصصين لمهام spec-kit من أجل تنفيذ موجّه | `process` | Read+Write | [spec-kit-agent-assign](https://github.com/xymelon/spec-kit-agent-assign) |
+| AI-Driven Engineering (AIDE) | سير عمل منظَّم من 7 خطوات لبناء مشاريع جديدة من الصفر بمساعدة الذكاء الاصطناعي — من الرؤية حتى التنفيذ | `process` | Read+Write | [aide](https://github.com/mnriem/spec-kit-extensions/tree/main/aide) |
+| Architect Impact Previewer | يتنبأ بالأثر المعماري والتعقيد والمخاطر للتغييرات المقترحة قبل التنفيذ. | `visibility` | Read-only | [spec-kit-architect-preview](https://github.com/UmmeHabiba1312/spec-kit-architect-preview) |
+| Archive Extension | أرشفة الميزات المدموجة في الذاكرة الرئيسية للمشروع. | `docs` | Read+Write | [spec-kit-archive](https://github.com/stn1slv/spec-kit-archive) |
+| Azure DevOps Integration | مزامنة قصص المستخدم والمهام إلى عناصر عمل Azure DevOps باستخدام مصادقة OAuth | `integration` | Read+Write | [spec-kit-azure-devops](https://github.com/pragya247/spec-kit-azure-devops) |
+| Blueprint | ابقَ ملمًّا بالكود في التطوير المدفوع بالذكاء الاصطناعي: راجع مخططًا برمجيًا كاملاً لكل مهمة من مصنوعات المواصفة قبل تشغيل /speckit.implement | `docs` | Read+Write | [spec-kit-blueprint](https://github.com/chordpli/spec-kit-blueprint) |
+| Branch Convention | أعراف قابلة للضبط لتسمية الفروع والمجلدات لأمر /specify مع وصفات وأنماط مخصصة | `process` | Read+Write | [spec-kit-branch-convention](https://github.com/Quratulain-bilal/spec-kit-branch-convention) |
+| Brownfield Bootstrap | تهيئة spec-kit لقواعد كود قائمة — اكتشاف تلقائي للمعمارية وتبنّي SDD تدريجيًا | `process` | Read+Write | [spec-kit-brownfield](https://github.com/Quratulain-bilal/spec-kit-brownfield) |
+| Bugfix Workflow | سير عمل منظَّم لإصلاح العلل — التقاط الأعطال وتتبّعها إلى مصنوعات المواصفة وترقيع المواصفات بدقّة | `process` | Read+Write | [spec-kit-bugfix](https://github.com/Quratulain-bilal/spec-kit-bugfix) |
+| Canon | يضيف سير عمل قائمًا على المرجعية (canon-driven): spec-first و code-first و spec-drift. يتطلب تثبيت وصفة Canon Core. | `process` | Read+Write | [spec-kit-canon](https://github.com/maximiliamus/spec-kit-canon/tree/master/extension) |
+| Catalog CI | تحقق آلي من مدخلات كتالوج مجتمع spec-kit — البنية والروابط والفروقات والـ linting | `process` | Read-only | [spec-kit-catalog-ci](https://github.com/Quratulain-bilal/spec-kit-catalog-ci) |
+| CI Guard | بوابات امتثال للمواصفة في CI/CD — التحقق من وجود المواصفات، رصد الانحراف، وحجب الدمج عند الفجوات | `process` | Read-only | [spec-kit-ci-guard](https://github.com/Quratulain-bilal/spec-kit-ci-guard) |
+| Checkpoint Extension | إجراء commit للتغييرات في منتصف التنفيذ حتى لا تنتهي بأمر commit ضخم واحد في النهاية | `code` | Read+Write | [spec-kit-checkpoint](https://github.com/aaronrsun/spec-kit-checkpoint) |
+| Cleanup Extension | بوابة جودة بعد التنفيذ تراجع التغييرات وتصلح المشكلات الصغيرة (scout rule)، وتُنشئ مهامًا للمشكلات المتوسطة، وتولّد تحليلًا للكبيرة | `code` | Read+Write | [spec-kit-cleanup](https://github.com/dsrednicki/spec-kit-cleanup) |
+| Conduct Extension | تنسيق مراحل spec-kit عبر تفويض الوكلاء الفرعيين لتقليل تلوّث السياق. | `process` | Read+Write | [spec-kit-conduct-ext](https://github.com/twbrandon7/spec-kit-conduct-ext) |
+| Confluence Extension | إنشاء مستند في Confluence يلخّص ملفات المواصفة والتخطيط | `integration` | Read+Write | [spec-kit-confluence](https://github.com/aaronrsun/spec-kit-confluence) |
+| DocGuard — CDD Enforcement | فرض التطوير المرجعي (CDD). يتحقق ويقيّم ويتتبع وثائق المشروع بفحوصات آلية وسير عمل مدفوع بالذكاء الاصطناعي وخطافات spec-kit. لا تبعيات NPM وقت التشغيل. | `docs` | Read+Write | [spec-kit-docguard](https://github.com/raccioly/docguard) |
+| Extensify | إنشاء وتحقق من الامتدادات وكتالوجات الامتدادات | `process` | Read+Write | [extensify](https://github.com/mnriem/spec-kit-extensions/tree/main/extensify) |
+| Fix Findings | حلقة آلية تحلل-تُصلح-تعيد التحليل تحلّ ملاحظات المواصفة حتى تخلو من الأخطاء | `code` | Read+Write | [spec-kit-fix-findings](https://github.com/Quratulain-bilal/spec-kit-fix-findings) |
+| FixIt Extension | إصلاح علل بوعي بالمواصفة — ربط الأعطال بمصنوعات المواصفة، اقتراح خطة، وتطبيق أقل تغييرات ممكنة | `code` | Read+Write | [spec-kit-fixit](https://github.com/speckit-community/spec-kit-fixit) |
+| Fleet Orchestrator | تنسيق دورة حياة كاملة لميزة مع بوابات يتدخل فيها الإنسان عبر كل مراحل SpecKit | `process` | Read+Write | [spec-kit-fleet](https://github.com/sharathsatish/spec-kit-fleet) |
+| GitHub Issues Integration 1 | توليد مصنوعات المواصفة من GitHub Issues — استيراد المشاكل، مزامنة التحديثات، وتتبع ثنائي الاتجاه | `integration` | Read+Write | [spec-kit-github-issues](https://github.com/Fatima367/spec-kit-github-issues) |
+| GitHub Issues Integration 2 | إنشاء ومزامنة مواصفات محلية من مشكلة GitHub قائمة | `integration` | Read+Write | [spec-kit-issue](https://github.com/aaronrsun/spec-kit-issue) |
+| Iterate | كرّر على مستندات المواصفة بسير عمل من مرحلتين «تعريف وتطبيق» — صقل المواصفات في منتصف التنفيذ والعودة مباشرةً للبناء | `docs` | Read+Write | [spec-kit-iterate](https://github.com/imviancagrace/spec-kit-iterate) |
+| Jira Integration | إنشاء Epics و Stories و Issues في Jira من مواصفات spec-kit وتقسيمات المهام مع تسلسل هرمي قابل للضبط ودعم الحقول المخصصة | `integration` | Read+Write | [spec-kit-jira](https://github.com/mbachorik/spec-kit-jira) |
+| Learning Extension | توليد أدلة تعليمية من عمليات التنفيذ وإثراء التوضيحات بسياق إرشادي | `docs` | Read+Write | [spec-kit-learn](https://github.com/imviancagrace/spec-kit-learn) |
+| MAQA — Multi-Agent & Quality Assurance | سير عمل بوكيل منسّق ← ميزة ← ضمان جودة مع تنفيذ متوازٍ مبنيٍّ على worktrees. مستقل عن اللغة. يكتشف إضافات اللوحات المثبتة تلقائيًا. بوابة CI اختيارية. | `process` | Read+Write | [spec-kit-maqa-ext](https://github.com/GenieRobot/spec-kit-maqa-ext) |
+| MAQA Azure DevOps Integration | تكامل لوحات Azure DevOps مع MAQA — يزامن قصص المستخدم وأبناء المهام مع تقدّم الميزات | `integration` | Read+Write | [spec-kit-maqa-azure-devops](https://github.com/GenieRobot/spec-kit-maqa-azure-devops) |
+| MAQA CI/CD Gate | يكتشف تلقائيًا GitHub Actions و CircleCI و GitLab CI و Bitbucket Pipelines. يحجب التسليم لـ QA حتى يكتمل الـ pipeline بنجاح. | `process` | Read+Write | [spec-kit-maqa-ci](https://github.com/GenieRobot/spec-kit-maqa-ci) |
+| MAQA GitHub Projects Integration | تكامل GitHub Projects v2 مع MAQA — يزامن المسوّدات وأعمدة الحالة مع تقدّم الميزات | `integration` | Read+Write | [spec-kit-maqa-github-projects](https://github.com/GenieRobot/spec-kit-maqa-github-projects) |
+| MAQA Jira Integration | تكامل Jira مع MAQA — يزامن Stories و Subtasks مع تقدّم الميزات عبر اللوحة | `integration` | Read+Write | [spec-kit-maqa-jira](https://github.com/GenieRobot/spec-kit-maqa-jira) |
+| MAQA Linear Integration | تكامل Linear مع MAQA — يزامن المشاكل والمشاكل الفرعية عبر حالات سير العمل مع تقدّم الميزات | `integration` | Read+Write | [spec-kit-maqa-linear](https://github.com/GenieRobot/spec-kit-maqa-linear) |
+| MAQA Trello Integration | تكامل لوحات Trello مع MAQA — يملأ اللوحة من المواصفات وينقل البطاقات ويعلّم قوائم التحقق في الوقت الحقيقي | `integration` | Read+Write | [spec-kit-maqa-trello](https://github.com/GenieRobot/spec-kit-maqa-trello) |
+| MarkItDown Document Converter | تحويل المستندات (PDF و Word و PowerPoint و Excel وغيرها) إلى Markdown لاستخدامها كمراجع للمواصفة | `docs` | Read+Write | [spec-kit-markitdown](https://github.com/BenBtg/spec-kit-markitdown) |
+| Memory Loader | يحمّل ملفات .specify/memory/ قبل أوامر دورة الحياة لتزويد وكلاء LLM بسياق حوكمة المشروع | `docs` | Read-only | [spec-kit-memory-loader](https://github.com/KevinBrown5280/spec-kit-memory-loader) |
+| Memory MD | ذاكرة دائمة أصيلة داخل المستودع لمشاريع Spec Kit | `docs` | Read+Write | [spec-kit-memory-hub](https://github.com/DyanGalih/spec-kit-memory-hub) |
+| MemoryLint | أداة حوكمة لذاكرة الوكيل: تدقّق وتصلح تلقائيًا تعارضات الحدود بين AGENTS.md ودستور المشروع. | `process` | Read+Write | [memorylint](https://github.com/RbBtSn0w/spec-kit-extensions/tree/main/memorylint) |
+| Microsoft 365 Integration | جلب رسائل Teams ونصوص الاجتماعات وملفات SharePoint/OneDrive كملفات Markdown محلية لتوليد المواصفات | `integration` | Read+Write | [spec-kit-m365](https://github.com/BenBtg/spec-kit-m365) |
+| Onboard | تأهيل سياقي ونمو تدريجي للمطورين الجدد على مشاريع spec-kit. يشرح المواصفات ويرسم الاعتماديات ويتحقق من الفهم ويرشد إلى الخطوة التالية | `process` | Read+Write | [spec-kit-onboard](https://github.com/dmux/spec-kit-onboard) |
+| Optimize | تدقيق وتحسين حوكمة الذكاء الاصطناعي لكفاءة السياق — ميزانيات الرموز، صحة القواعد، القابلية للتفسير، الضغط، التماسك، واكتشاف الترديد | `process` | Read+Write | [spec-kit-optimize](https://github.com/sakitA/spec-kit-optimize) |
+| OWASP LLM Threat Model | تحليل تهديدات OWASP Top 10 لتطبيقات LLM لعام 2025 على مصنوعات الوكيل | `code` | Read-only | [spec-kit-threatmodel](https://github.com/NaviaSamal/spec-kit-threatmodel) |
+| Plan Review Gate | اشتراط دمج spec.md و plan.md عبر MR/PR قبل السماح بتوليد المهام | `process` | Read-only | [spec-kit-plan-review-gate](https://github.com/luno/spec-kit-plan-review-gate) |
+| PR Bridge | توليد تلقائي لأوصاف طلبات الدمج وقوائم التحقق والملخصات من مصنوعات المواصفة | `process` | Read-only | [spec-kit-pr-bridge-](https://github.com/Quratulain-bilal/spec-kit-pr-bridge-) |
+| Presetify | إنشاء وتحقق من الوصفات وكتالوجات الوصفات | `process` | Read+Write | [presetify](https://github.com/mnriem/spec-kit-extensions/tree/main/presetify) |
+| Product Forge | دورة حياة منتج كاملة من البحث إلى الإصدار — محفظة، وضع مبسط، monorepo، V-Model اختياري | `process` | Read+Write | [speckit-product-forge](https://github.com/VaiYav/speckit-product-forge) |
 | Project Health Check | Diagnose a Spec Kit project and report health issues across structure, agents, features, scripts, extensions, and git | `visibility` | Read-only | [spec-kit-doctor](https://github.com/KhawarHabibKhan/spec-kit-doctor) |
 | Project Status | Show current SDD workflow progress — active feature, artifact status, task completion, workflow phase, and extensions summary | `visibility` | Read-only | [spec-kit-status](https://github.com/KhawarHabibKhan/spec-kit-status) |
 | QA Testing Extension | Systematic QA testing with browser-driven or CLI-based validation of acceptance criteria from spec | `code` | Read-only | [spec-kit-qa](https://github.com/arunt14/spec-kit-qa) |

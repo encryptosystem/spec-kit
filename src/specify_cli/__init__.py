@@ -961,23 +961,23 @@ SKILL_DESCRIPTIONS = {
 
 @app.command()
 def init(
-    project_name: str = typer.Argument(None, help="Name for your new project directory (optional if using --here, or use '.' for current directory)"),
+    project_name: str = typer.Argument(None, help="اسم مجلد المشروع الجديد (اختياري مع --here، أو استخدم '.' للمجلد الحالي)"),
     ai_assistant: str = typer.Option(None, "--ai", help=AI_ASSISTANT_HELP),
-    ai_commands_dir: str = typer.Option(None, "--ai-commands-dir", help="Directory for agent command files (required with --ai generic, e.g. .myagent/commands/)"),
-    script_type: str = typer.Option(None, "--script", help="Script type to use: sh or ps"),
-    ignore_agent_tools: bool = typer.Option(False, "--ignore-agent-tools", help="Skip checks for coding agent tools like Claude Code"),
-    no_git: bool = typer.Option(False, "--no-git", help="Skip git repository initialization"),
-    here: bool = typer.Option(False, "--here", help="Initialize project in the current directory instead of creating a new one"),
-    force: bool = typer.Option(False, "--force", help="Force merge/overwrite when using --here (skip confirmation)"),
-    skip_tls: bool = typer.Option(False, "--skip-tls", help="Deprecated (no-op). Previously: skip SSL/TLS verification.", hidden=True),
-    debug: bool = typer.Option(False, "--debug", help="Deprecated (no-op). Previously: show verbose diagnostic output.", hidden=True),
-    github_token: str = typer.Option(None, "--github-token", help="Deprecated (no-op). Previously: GitHub token for API requests.", hidden=True),
-    ai_skills: bool = typer.Option(False, "--ai-skills", help="Install Prompt.MD templates as agent skills (requires --ai)"),
-    offline: bool = typer.Option(False, "--offline", help="Deprecated (no-op). All scaffolding now uses bundled assets.", hidden=True),
-    preset: str = typer.Option(None, "--preset", help="Install a preset during initialization (by preset ID)"),
-    branch_numbering: str = typer.Option(None, "--branch-numbering", help="Branch numbering strategy: 'sequential' (001, 002, …, 1000, … — expands past 999 automatically) or 'timestamp' (YYYYMMDD-HHMMSS)"),
-    integration: str = typer.Option(None, "--integration", help="Use the new integration system (e.g. --integration copilot). Mutually exclusive with --ai."),
-    integration_options: str = typer.Option(None, "--integration-options", help='Options for the integration (e.g. --integration-options="--commands-dir .myagent/cmds")'),
+    ai_commands_dir: str = typer.Option(None, "--ai-commands-dir", help="مجلد ملفات أوامر الوكيل (مطلوب مع --ai generic، مثال: .myagent/commands/)"),
+    script_type: str = typer.Option(None, "--script", help="نوع السكربت المستخدم: sh أو ps"),
+    ignore_agent_tools: bool = typer.Option(False, "--ignore-agent-tools", help="تخطي فحص أدوات وكلاء البرمجة مثل Claude Code"),
+    no_git: bool = typer.Option(False, "--no-git", help="تخطي تهيئة مستودع git"),
+    here: bool = typer.Option(False, "--here", help="تهيئة المشروع في المجلد الحالي بدل إنشاء واحد جديد"),
+    force: bool = typer.Option(False, "--force", help="فرض الدمج/الاستبدال عند استخدام --here (تخطي التأكيد)"),
+    skip_tls: bool = typer.Option(False, "--skip-tls", help="مهمل (بدون تأثير). سابقاً: تخطي تحقق SSL/TLS.", hidden=True),
+    debug: bool = typer.Option(False, "--debug", help="مهمل (بدون تأثير). سابقاً: عرض مخرجات تشخيصية مفصّلة.", hidden=True),
+    github_token: str = typer.Option(None, "--github-token", help="مهمل (بدون تأثير). سابقاً: رمز GitHub لطلبات الـ API.", hidden=True),
+    ai_skills: bool = typer.Option(False, "--ai-skills", help="تثبيت قوالب Prompt.MD كمهارات للوكيل (يتطلب --ai)"),
+    offline: bool = typer.Option(False, "--offline", help="مهمل (بدون تأثير). كل عمليات التهيئة الآن تستخدم الأصول المضمّنة.", hidden=True),
+    preset: str = typer.Option(None, "--preset", help="تثبيت وصفة (preset) أثناء التهيئة (بواسطة معرّف الوصفة)"),
+    branch_numbering: str = typer.Option(None, "--branch-numbering", help="استراتيجية ترقيم الفروع: 'sequential' (001, 002, …, 1000, … — تتوسّع تلقائياً بعد 999) أو 'timestamp' (YYYYMMDD-HHMMSS)"),
+    integration: str = typer.Option(None, "--integration", help="استخدام نظام التكاملات الجديد (مثال: --integration copilot). لا يُستخدم مع --ai."),
+    integration_options: str = typer.Option(None, "--integration-options", help='خيارات التكامل (مثال: --integration-options="--commands-dir .myagent/cmds")'),
 ):
     """
     تبدأ مشروع Specify من الصفر أو داخل مجلد موجود.
@@ -1019,16 +1019,16 @@ def init(
 
     # Detect when option values are likely misinterpreted flags (parameter ordering issue)
     if ai_assistant and ai_assistant.startswith("--"):
-        console.print(f"[red]Error:[/red] Invalid value for --ai: '{ai_assistant}'")
-        console.print("[yellow]Hint:[/yellow] Did you forget to provide a value for --ai?")
-        console.print("[yellow]Example:[/yellow] specify init --integration claude --here")
-        console.print(f"[yellow]Available agents:[/yellow] {', '.join(AGENT_CONFIG.keys())}")
+        console.print(f"[red]خطأ:[/red] قيمة غير صالحة لـ --ai: '{ai_assistant}'")
+        console.print("[yellow]تلميح:[/yellow] هل نسيت تمرير قيمة لـ --ai؟")
+        console.print("[yellow]مثال:[/yellow] specify init --integration claude --here")
+        console.print(f"[yellow]الوكلاء المتاحون:[/yellow] {', '.join(AGENT_CONFIG.keys())}")
         raise typer.Exit(1)
 
     if ai_commands_dir and ai_commands_dir.startswith("--"):
-        console.print(f"[red]Error:[/red] Invalid value for --ai-commands-dir: '{ai_commands_dir}'")
-        console.print("[yellow]Hint:[/yellow] Did you forget to provide a value for --ai-commands-dir?")
-        console.print("[yellow]Example:[/yellow] specify init --integration generic --integration-options=\"--commands-dir .myagent/commands/\"")
+        console.print(f"[red]خطأ:[/red] قيمة غير صالحة لـ --ai-commands-dir: '{ai_commands_dir}'")
+        console.print("[yellow]تلميح:[/yellow] هل نسيت تمرير قيمة لـ --ai-commands-dir؟")
+        console.print("[yellow]مثال:[/yellow] specify init --integration generic --integration-options=\"--commands-dir .myagent/commands/\"")
         raise typer.Exit(1)
 
     if ai_assistant:
@@ -1046,13 +1046,13 @@ def init(
         if not resolved_integration:
             console.print(f"[red]خطأ:[/red] تكامل غير معروف: '{integration}'")
             available = ", ".join(sorted(INTEGRATION_REGISTRY))
-            console.print(f"[yellow]Available integrations:[/yellow] {available}")
+            console.print(f"[yellow]التكاملات المتاحة:[/yellow] {available}")
             raise typer.Exit(1)
         ai_assistant = integration
     elif ai_assistant:
         resolved_integration = get_integration(ai_assistant)
         if not resolved_integration:
-            console.print(f"[red]Error:[/red] Unknown agent '{ai_assistant}'. Choose from: {', '.join(sorted(INTEGRATION_REGISTRY))}")
+            console.print(f"[red]خطأ:[/red] وكيل غير معروف '{ai_assistant}'. اختر من: {', '.join(sorted(INTEGRATION_REGISTRY))}")
             raise typer.Exit(1)
         ai_deprecation_warning = _build_ai_deprecation_warning(
             resolved_integration.key,
@@ -1066,25 +1066,25 @@ def init(
             from .integrations.base import SkillsIntegration as _SkillsCheck
             if isinstance(resolved_integration, _SkillsCheck):
                 console.print(
-                    "[dim]Note: --ai-skills is not needed; "
-                    "skills are the default for this integration.[/dim]"
+                    "[dim]ملاحظة: --ai-skills غير مطلوب؛ "
+                    "المهارات هي الافتراضي لهذا التكامل.[/dim]"
                 )
             else:
                 console.print(
-                    "[dim]Note: --ai-skills has no effect with "
-                    f"{resolved_integration.key}; this integration uses commands, not skills.[/dim]"
+                    "[dim]ملاحظة: --ai-skills لا تأثير له مع "
+                    f"{resolved_integration.key}؛ هذا التكامل يستخدم الأوامر وليس المهارات.[/dim]"
                 )
         if ai_commands_dir and resolved_integration.key != "generic":
             console.print(
-                "[dim]Note: --ai-commands-dir is deprecated; "
-                'use [bold]--integration generic --integration-options="--commands-dir <dir>"[/bold] instead.[/dim]'
+                "[dim]ملاحظة: --ai-commands-dir مهمل؛ "
+                'استخدم [bold]--integration generic --integration-options="--commands-dir <dir>"[/bold] بدلاً منه.[/dim]'
             )
 
     if no_git:
         console.print(
-            "[yellow]⚠️  --no-git is deprecated and will be removed in v0.10.0.[/yellow]\n"
-            "[yellow]The git extension will no longer be enabled by default "
-            "— use the [bold]specify extension[/bold] commands to install or enable the git extension if needed.[/yellow]"
+            "[yellow]⚠️  --no-git مهمل وسيُزال في الإصدار v0.10.0.[/yellow]\n"
+            "[yellow]امتداد git لن يُفعّل افتراضياً بعد الآن "
+            "— استخدم أوامر [bold]specify extension[/bold] لتثبيت أو تفعيل امتداد git عند الحاجة.[/yellow]"
         )
 
     if project_name == ".":
@@ -1092,21 +1092,21 @@ def init(
         project_name = None  # Clear project_name to use existing validation logic
 
     if here and project_name:
-        console.print("[red]Error:[/red] Cannot specify both project name and --here flag")
+        console.print("[red]خطأ:[/red] لا يمكن تحديد اسم مشروع و --here معاً")
         raise typer.Exit(1)
 
     if not here and not project_name:
-        console.print("[red]Error:[/red] Must specify either a project name, use '.' for current directory, or use --here flag")
+        console.print("[red]خطأ:[/red] يجب تحديد اسم مشروع، أو استخدام '.' للمجلد الحالي، أو استخدام --here")
         raise typer.Exit(1)
 
     if ai_skills and not ai_assistant:
-        console.print("[red]Error:[/red] --ai-skills requires --ai to be specified")
-        console.print("[yellow]Usage:[/yellow] specify init <project> --ai <agent> --ai-skills")
+        console.print("[red]خطأ:[/red] --ai-skills يتطلب تحديد --ai")
+        console.print("[yellow]الاستخدام:[/yellow] specify init <project> --ai <agent> --ai-skills")
         raise typer.Exit(1)
 
     BRANCH_NUMBERING_CHOICES = {"sequential", "timestamp"}
     if branch_numbering and branch_numbering not in BRANCH_NUMBERING_CHOICES:
-        console.print(f"[red]Error:[/red] Invalid --branch-numbering value '{branch_numbering}'. Choose from: {', '.join(sorted(BRANCH_NUMBERING_CHOICES))}")
+        console.print(f"[red]خطأ:[/red] قيمة غير صالحة لـ --branch-numbering '{branch_numbering}'. اختر من: {', '.join(sorted(BRANCH_NUMBERING_CHOICES))}")
         raise typer.Exit(1)
 
     dir_existed_before = False
@@ -1117,34 +1117,34 @@ def init(
 
         existing_items = list(project_path.iterdir())
         if existing_items:
-            console.print(f"[yellow]Warning:[/yellow] Current directory is not empty ({len(existing_items)} items)")
-            console.print("[yellow]Template files will be merged with existing content and may overwrite existing files[/yellow]")
+            console.print(f"[yellow]تحذير:[/yellow] المجلد الحالي ليس فارغاً ({len(existing_items)} عناصر)")
+            console.print("[yellow]ملفات القالب ستُدمج مع المحتوى الموجود وقد تستبدل ملفات موجودة[/yellow]")
             if force:
-                console.print("[cyan]--force supplied: skipping confirmation and proceeding with merge[/cyan]")
+                console.print("[cyan]تم تمرير --force: تخطي التأكيد والمتابعة بالدمج[/cyan]")
             else:
-                response = typer.confirm("Do you want to continue?")
+                response = typer.confirm("هل تريد المتابعة؟")
                 if not response:
-                    console.print("[yellow]Operation cancelled[/yellow]")
+                    console.print("[yellow]تم إلغاء العملية[/yellow]")
                     raise typer.Exit(0)
     else:
         project_path = Path(project_name).resolve()
         dir_existed_before = project_path.exists()
         if project_path.exists():
             if not project_path.is_dir():
-                console.print(f"[red]Error:[/red] '{project_name}' exists but is not a directory.")
+                console.print(f"[red]خطأ:[/red] '{project_name}' موجود لكنه ليس مجلداً.")
                 raise typer.Exit(1)
             existing_items = list(project_path.iterdir())
             if force:
                 if existing_items:
-                    console.print(f"[yellow]Warning:[/yellow] Directory '{project_name}' is not empty ({len(existing_items)} items)")
-                    console.print("[yellow]Template files will be merged with existing content and may overwrite existing files[/yellow]")
-                console.print(f"[cyan]--force supplied: merging into existing directory '[cyan]{project_name}[/cyan]'[/cyan]")
+                    console.print(f"[yellow]تحذير:[/yellow] المجلد '{project_name}' ليس فارغاً ({len(existing_items)} عناصر)")
+                    console.print("[yellow]ملفات القالب ستُدمج مع المحتوى الموجود وقد تستبدل ملفات موجودة[/yellow]")
+                console.print(f"[cyan]تم تمرير --force: الدمج داخل المجلد الموجود '[cyan]{project_name}[/cyan]'[/cyan]")
             else:
                 error_panel = Panel(
-                    f"Directory already exists: '[cyan]{project_name}[/cyan]'\n"
-                    "Please choose a different project name or remove the existing directory.\n"
-                    "Use [bold]--force[/bold] to merge into the existing directory.",
-                    title="[red]Directory Conflict[/red]",
+                    f"المجلد موجود مسبقاً: '[cyan]{project_name}[/cyan]'\n"
+                    "يرجى اختيار اسم مشروع آخر أو حذف المجلد الموجود.\n"
+                    "استخدم [bold]--force[/bold] للدمج داخل المجلد الموجود.",
+                    title="[red]تعارض في المجلد[/red]",
                     border_style="red",
                     padding=(1, 2)
                 )
@@ -1154,7 +1154,7 @@ def init(
 
     if ai_assistant:
         if ai_assistant not in AGENT_CONFIG:
-            console.print(f"[red]Error:[/red] Invalid AI assistant '{ai_assistant}'. Choose from: {', '.join(AGENT_CONFIG.keys())}")
+            console.print(f"[red]خطأ:[/red] وكيل AI غير صالح '{ai_assistant}'. اختر من: {', '.join(AGENT_CONFIG.keys())}")
             raise typer.Exit(1)
         selected_ai = ai_assistant
     else:
@@ -1162,7 +1162,7 @@ def init(
         ai_choices = {key: config["name"] for key, config in AGENT_CONFIG.items()}
         selected_ai = select_with_arrows(
             ai_choices,
-            "Choose your coding agent integration:",
+            "اختر تكامل وكيل البرمجة:",
             "copilot"
         )
 
@@ -1170,7 +1170,7 @@ def init(
     if not ai_assistant:
         resolved_integration = get_integration(selected_ai)
         if not resolved_integration:
-            console.print(f"[red]Error:[/red] Unknown agent '{selected_ai}'")
+            console.print(f"[red]خطأ:[/red] وكيل غير معروف '{selected_ai}'")
             raise typer.Exit(1)
 
     # Validate --ai-commands-dir usage.
@@ -1178,21 +1178,21 @@ def init(
     # will validate its own options in setup().
     if selected_ai == "generic" and not integration_options:
         if not ai_commands_dir:
-            console.print("[red]Error:[/red] --ai-commands-dir is required when using --ai generic or --integration generic")
-            console.print('[dim]Example: specify init my-project --integration generic --integration-options="--commands-dir .myagent/commands/"[/dim]')
+            console.print("[red]خطأ:[/red] --ai-commands-dir مطلوب عند استخدام --ai generic أو --integration generic")
+            console.print('[dim]مثال: specify init my-project --integration generic --integration-options="--commands-dir .myagent/commands/"[/dim]')
             raise typer.Exit(1)
 
     current_dir = Path.cwd()
 
     setup_lines = [
-        "[cyan]Specify Project Setup[/cyan]",
+        "[cyan]إعداد مشروع Specify[/cyan]",
         "",
-        f"{'Project':<15} [green]{project_path.name}[/green]",
-        f"{'Working Path':<15} [dim]{current_dir}[/dim]",
+        f"{'المشروع':<15} [green]{project_path.name}[/green]",
+        f"{'مسار العمل':<15} [dim]{current_dir}[/dim]",
     ]
 
     if not here:
-        setup_lines.append(f"{'Target Path':<15} [dim]{project_path}[/dim]")
+        setup_lines.append(f"{'المسار الهدف':<15} [dim]{project_path}[/dim]")
 
     console.print(Panel("\n".join(setup_lines), border_style="cyan", padding=(1, 2)))
 
@@ -1200,7 +1200,7 @@ def init(
     if not no_git:
         should_init_git = check_tool("git")
         if not should_init_git:
-            console.print("[yellow]Git not found - will skip repository initialization[/yellow]")
+            console.print("[yellow]لم يُعثر على Git - سيتم تخطي تهيئة المستودع[/yellow]")
 
     if not ignore_agent_tools:
         agent_config = AGENT_CONFIG.get(selected_ai)
@@ -1208,11 +1208,11 @@ def init(
             install_url = agent_config["install_url"]
             if not check_tool(selected_ai):
                 error_panel = Panel(
-                    f"[cyan]{selected_ai}[/cyan] not found\n"
-                    f"Install from: [cyan]{install_url}[/cyan]\n"
-                    f"{agent_config['name']} is required to continue with this project type.\n\n"
-                    "Tip: Use [cyan]--ignore-agent-tools[/cyan] to skip this check",
-                    title="[red]Agent Detection Error[/red]",
+                    f"[cyan]{selected_ai}[/cyan] غير موجود\n"
+                    f"التثبيت من: [cyan]{install_url}[/cyan]\n"
+                    f"{agent_config['name']} مطلوب للمتابعة مع هذا النوع من المشاريع.\n\n"
+                    "تلميح: استخدم [cyan]--ignore-agent-tools[/cyan] لتخطي هذا الفحص",
+                    title="[red]خطأ في اكتشاف الوكيل[/red]",
                     border_style="red",
                     padding=(1, 2)
                 )
@@ -1222,40 +1222,40 @@ def init(
 
     if script_type:
         if script_type not in SCRIPT_TYPE_CHOICES:
-            console.print(f"[red]Error:[/red] Invalid script type '{script_type}'. Choose from: {', '.join(SCRIPT_TYPE_CHOICES.keys())}")
+            console.print(f"[red]خطأ:[/red] نوع سكربت غير صالح '{script_type}'. اختر من: {', '.join(SCRIPT_TYPE_CHOICES.keys())}")
             raise typer.Exit(1)
         selected_script = script_type
     else:
         default_script = "ps" if os.name == "nt" else "sh"
 
         if sys.stdin.isatty():
-            selected_script = select_with_arrows(SCRIPT_TYPE_CHOICES, "Choose script type (or press Enter)", default_script)
+            selected_script = select_with_arrows(SCRIPT_TYPE_CHOICES, "اختر نوع السكربت (أو اضغط Enter)", default_script)
         else:
             selected_script = default_script
 
-    console.print(f"[cyan]Selected coding agent integration:[/cyan] {selected_ai}")
-    console.print(f"[cyan]Selected script type:[/cyan] {selected_script}")
+    console.print(f"[cyan]تكامل وكيل البرمجة المختار:[/cyan] {selected_ai}")
+    console.print(f"[cyan]نوع السكربت المختار:[/cyan] {selected_script}")
 
-    tracker = StepTracker("Initialize Specify Project")
+    tracker = StepTracker("تهيئة مشروع Specify")
 
     sys._specify_tracker_active = True
 
-    tracker.add("precheck", "Check required tools")
-    tracker.complete("precheck", "ok")
-    tracker.add("ai-select", "Select coding agent integration")
+    tracker.add("precheck", "فحص الأدوات المطلوبة")
+    tracker.complete("precheck", "تم")
+    tracker.add("ai-select", "اختيار تكامل وكيل البرمجة")
     tracker.complete("ai-select", f"{selected_ai}")
-    tracker.add("script-select", "Select script type")
+    tracker.add("script-select", "اختيار نوع السكربت")
     tracker.complete("script-select", selected_script)
 
-    tracker.add("integration", "Install integration")
-    tracker.add("shared-infra", "Install shared infrastructure")
+    tracker.add("integration", "تثبيت التكامل")
+    tracker.add("shared-infra", "تثبيت البنية التحتية المشتركة")
 
     for key, label in [
-        ("chmod", "Ensure scripts executable"),
-        ("constitution", "Constitution setup"),
-        ("git", "Install git extension"),
-        ("workflow", "Install bundled workflow"),
-        ("final", "Finalize"),
+        ("chmod", "التأكد من قابلية تنفيذ السكربتات"),
+        ("constitution", "إعداد الدستور"),
+        ("git", "تثبيت امتداد git"),
+        ("workflow", "تثبيت سير العمل المضمّن"),
+        ("final", "الإنهاء"),
     ]:
         tracker.add(key, label)
 
@@ -1330,21 +1330,21 @@ def init(
                 git_has_error = False
                 # Step 1: Initialize git repo if needed
                 if is_git_repo(project_path):
-                    git_messages.append("existing repo detected")
+                    git_messages.append("تم اكتشاف مستودع موجود")
                 elif should_init_git:
                     success, error_msg = init_git_repo(project_path, quiet=True)
                     if success:
-                        git_messages.append("initialized")
+                        git_messages.append("تمت التهيئة")
                     else:
                         git_has_error = True
                         # Sanitize multi-line error_msg to single line for tracker
                         if error_msg:
                             sanitized = error_msg.replace('\n', ' ').strip()
-                            git_messages.append(f"init failed: {sanitized[:120]}")
+                            git_messages.append(f"فشل التهيئة: {sanitized[:120]}")
                         else:
-                            git_messages.append("init failed")
+                            git_messages.append("فشل التهيئة")
                 else:
-                    git_messages.append("git not available")
+                    git_messages.append("git غير متوفر")
                 # Step 2: Install bundled git extension
                 try:
                     from .extensions import ExtensionManager
@@ -1352,21 +1352,21 @@ def init(
                     if bundled_path:
                         manager = ExtensionManager(project_path)
                         if manager.registry.is_installed("git"):
-                            git_messages.append("extension already installed")
+                            git_messages.append("الامتداد مثبّت مسبقاً")
                         else:
                             manager.install_from_directory(
                                 bundled_path, get_speckit_version()
                             )
                             git_default_notice = True
-                            git_messages.append("extension installed")
+                            git_messages.append("تم تثبيت الامتداد")
                     else:
                         git_has_error = True
-                        git_messages.append("bundled extension not found")
+                        git_messages.append("الامتداد المضمّن غير موجود")
                 except Exception as ext_err:
                     git_has_error = True
                     sanitized_ext = str(ext_err).replace('\n', ' ').strip()
                     git_messages.append(
-                        f"extension install failed: {sanitized_ext[:120]}"
+                        f"فشل تثبيت الامتداد: {sanitized_ext[:120]}"
                     )
                 summary = "; ".join(git_messages)
                 if git_has_error:
@@ -1374,7 +1374,7 @@ def init(
                 else:
                     tracker.complete("git", summary)
             else:
-                tracker.skip("git", "--no-git flag")
+                tracker.skip("git", "العلم --no-git")
 
             # Install bundled speckit workflow
             try:
@@ -1384,7 +1384,7 @@ def init(
                     from .workflows.engine import WorkflowDefinition
                     wf_registry = WorkflowRegistry(project_path)
                     if wf_registry.is_installed("speckit"):
-                        tracker.complete("workflow", "already installed")
+                        tracker.complete("workflow", "مثبّت مسبقاً")
                     else:
                         import shutil as _shutil
                         dest_wf = project_path / ".specify" / "workflows" / "speckit"
@@ -1400,12 +1400,12 @@ def init(
                             "description": definition.description,
                             "source": "bundled",
                         })
-                        tracker.complete("workflow", "speckit installed")
+                        tracker.complete("workflow", "تم تثبيت speckit")
                 else:
-                    tracker.skip("workflow", "bundled workflow not found")
+                    tracker.skip("workflow", "سير العمل المضمّن غير موجود")
             except Exception as wf_err:
                 sanitized_wf = str(wf_err).replace('\n', ' ').strip()
-                tracker.error("workflow", f"install failed: {sanitized_wf[:120]}")
+                tracker.error("workflow", f"فشل التثبيت: {sanitized_wf[:120]}")
 
             # Fix permissions after all installs (scripts + extensions)
             ensure_executable_scripts(project_path, tracker=tracker)
