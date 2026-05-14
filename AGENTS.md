@@ -1,18 +1,18 @@
 # AGENTS.md
 
-## About Spec Kit and Specify
+## حول Spec Kit و Specify
 
-**GitHub Spec Kit** is a comprehensive toolkit for implementing Spec-Driven Development (SDD) - a methodology that emphasizes creating clear specifications before implementation. The toolkit includes templates, scripts, and workflows that guide development teams through a structured approach to building software.
+**GitHub Spec Kit** هو مجموعة أدوات شاملة لتطبيق التطوير المعتمد على المواصفات (SDD) - منهجية تُركّز على إنشاء مواصفات واضحة قبل التنفيذ. تتضمن مجموعة الأدوات قوالب وسكربتات وسير عمل تُرشد فرق التطوير عبر نهج منظم لبناء البرمجيات.
 
-**Specify CLI** is the command-line interface that bootstraps projects with the Spec Kit framework. It sets up the necessary directory structures, templates, and AI agent integrations to support the Spec-Driven Development workflow.
+**Specify CLI** هو واجهة سطر الأوامر التي تُنشئ المشاريع باستخدام إطار عمل Spec Kit. يُعدّ هياكل المجلدات والقوالب وتكاملات وكلاء الذكاء الاصطناعي اللازمة لدعم سير عمل التطوير المعتمد على المواصفات.
 
-The toolkit supports multiple AI coding assistants, allowing teams to use their preferred tools while maintaining consistent project structure and development practices.
+تدعم مجموعة الأدوات العديد من مساعدي البرمجة بالذكاء الاصطناعي، مما يسمح للفرق باستخدام الأدوات المفضّلة لديها مع الحفاظ على بنية مشروع وممارسات تطوير متّسقة.
 
 ---
 
-## Integration Architecture
+## بنية التكامل
 
-Each AI agent is a self-contained **integration subpackage** under `src/specify_cli/integrations/<key>/`. The subpackage exposes a single class that declares all metadata and inherits setup/teardown logic from a base class. Built-in integrations are then instantiated and added to the global `INTEGRATION_REGISTRY` by `src/specify_cli/integrations/__init__.py` via `_register_builtins()`.
+كل وكيل برمجة بالذكاء الاصطناعي هو **حزمة فرعية للتكامل** قائمة بذاتها ضمن `src/specify_cli/integrations/<key>/`. تكشف الحزمة الفرعية عن صنف واحد يُصرّح بجميع البيانات الوصفية ويرث منطق الإعداد والإلغاء من صنف أساسي. ثم يتم إنشاء التكاملات المُدمجة وإضافتها إلى السجل العام `INTEGRATION_REGISTRY` بواسطة `src/specify_cli/integrations/__init__.py` عبر `_register_builtins()`.
 
 ```
 src/specify_cli/integrations/
@@ -30,29 +30,29 @@ src/specify_cli/integrations/
 └── ...                    # One subpackage per supported agent
 ```
 
-The registry is the **single source of truth for Python integration metadata**. Supported agents, their directories, formats, capabilities, and context files are derived from the integration classes for the Python integration layer.
+السجل هو **المصدر الوحيد للحقيقة فيما يخص البيانات الوصفية لتكامل Python**. الوكلاء المدعومون ومجلداتهم وصيغهم وقدراتهم وملفات سياقهم مُشتقّة من أصناف التكامل في طبقة تكامل Python.
 
 ---
 
-## Adding a New Integration
+## إضافة تكامل جديد
 
-### 1. Choose a base class
+### 1. اختر صنفاً أساسياً
 
-| Your agent needs… | Subclass |
+| ما يحتاجه وكيلك… | الصنف الفرعي |
 |---|---|
-| Standard markdown commands (`.md`) | `MarkdownIntegration` |
-| TOML-format commands (`.toml`) | `TomlIntegration` |
-| YAML recipe files (`.yaml`) | `YamlIntegration` |
-| Skill directories (`speckit-<name>/SKILL.md`) | `SkillsIntegration` |
-| Fully custom output (companion files, settings merge, etc.) | `IntegrationBase` directly |
+| أوامر markdown قياسية (`.md`) | `MarkdownIntegration` |
+| أوامر بصيغة TOML (`.toml`) | `TomlIntegration` |
+| ملفات وصفات YAML (`.yaml`) | `YamlIntegration` |
+| مجلدات مهارات (`speckit-<name>/SKILL.md`) | `SkillsIntegration` |
+| مُخرَج مخصّص بالكامل (ملفات مرافقة، دمج إعدادات، إلخ.) | `IntegrationBase` مباشرةً |
 
-Most agents only need `MarkdownIntegration` — a minimal subclass with zero method overrides.
+معظم الوكلاء يحتاجون فقط إلى `MarkdownIntegration` — صنف فرعي مُبسّط دون أي تجاوز للدوال.
 
-### 2. Create the subpackage
+### 2. أنشئ الحزمة الفرعية
 
-Create `src/specify_cli/integrations/<package_dir>/__init__.py`, where `<package_dir>` is the Python-safe directory name derived from `<key>`: use the key as-is when it contains no hyphens (e.g., key `"gemini"` → `gemini/`), or replace hyphens with underscores when it does (e.g., key `"kiro-cli"` → `kiro_cli/`). The `IntegrationBase.key` class attribute always retains the original hyphenated value, since that is what the CLI and registry use. For CLI-based integrations (`requires_cli: True`), the `key` should match the actual CLI tool name (the executable users install and run) so CLI checks can resolve it correctly. For IDE-based integrations (`requires_cli: False`), use the canonical integration identifier instead.
+أنشئ `src/specify_cli/integrations/<package_dir>/__init__.py`، حيث `<package_dir>` هو اسم المجلد المتوافق مع Python والمشتق من `<key>`: استخدم المفتاح كما هو عندما لا يحتوي على شرطات (مثلاً، المفتاح `"gemini"` ← `gemini/`)، أو استبدل الشرطات بشرطات سفلية عندما يحتوي عليها (مثلاً، المفتاح `"kiro-cli"` ← `kiro_cli/`). تحتفظ سمة الصنف `IntegrationBase.key` دائماً بالقيمة الأصلية المحتوية على الشرطات، لأن ذلك هو ما يستخدمه CLI والسجل. بالنسبة للتكاملات القائمة على CLI (`requires_cli: True`)، يجب أن يتطابق `key` مع اسم أداة CLI الفعلية (الملف التنفيذي الذي يقوم المستخدمون بتثبيته وتشغيله) حتى تتمكن فحوصات CLI من تحديده بشكل صحيح. بالنسبة للتكاملات القائمة على IDE (`requires_cli: False`)، استخدم المعرّف القانوني للتكامل بدلاً من ذلك.
 
-**Minimal example — Markdown agent (Windsurf):**
+**مثال مُبسّط — وكيل Markdown (Windsurf):**
 
 ```python
 """Windsurf IDE integration."""
@@ -78,7 +78,7 @@ class WindsurfIntegration(MarkdownIntegration):
     context_file = ".windsurf/rules/specify-rules.md"
 ```
 
-**TOML agent (Gemini):**
+**وكيل TOML (Gemini):**
 
 ```python
 """Gemini CLI integration."""
@@ -104,7 +104,7 @@ class GeminiIntegration(TomlIntegration):
     context_file = "GEMINI.md"
 ```
 
-**Skills agent (Codex):**
+**وكيل المهارات (Codex):**
 
 ```python
 """Codex CLI integration — skills-based agent."""

@@ -21,24 +21,24 @@
 
 - [🤔 ما هو التطوير المعتمد على المواصفات؟](#-what-is-spec-driven-development)
 - [⚡ البدء السريع](#-get-started)
-- [📽️ Video Overview](#️-video-overview)
-- [🧩 Community Extensions](#-community-extensions)
-- [🎨 Community Presets](#-community-presets)
-- [🚶 Community Walkthroughs](#-community-walkthroughs)
-- [🛠️ Community Friends](#️-community-friends)
-- [🤖 Supported AI Coding Agent Integrations](#-supported-ai-coding-agent-integrations)
-- [🔧 Specify CLI Reference](#-specify-cli-reference)
-- [🧩 Making Spec Kit Your Own: Extensions & Presets](#-making-spec-kit-your-own-extensions--presets)
-- [📚 Core Philosophy](#-core-philosophy)
-- [🌟 Development Phases](#-development-phases)
-- [🎯 Experimental Goals](#-experimental-goals)
-- [🔧 Prerequisites](#-prerequisites)
-- [📖 Learn More](#-learn-more)
-- [📋 Detailed Process](#-detailed-process)
-- [🔍 Troubleshooting](#-troubleshooting)
-- [💬 Support](#-support)
-- [🙏 Acknowledgements](#-acknowledgements)
-- [📄 License](#-license)
+- [📽️ نظرة عامة بالفيديو](#️-video-overview)
+- [🧩 امتدادات المجتمع](#-community-extensions)
+- [🎨 وصفات المجتمع](#-community-presets)
+- [🚶 جولات المجتمع](#-community-walkthroughs)
+- [🛠️ أصدقاء المجتمع](#️-community-friends)
+- [🤖 وكلاء البرمجة بالذكاء الاصطناعي المدعومون](#-supported-ai-coding-agent-integrations)
+- [🔧 مرجع Specify CLI](#-specify-cli-reference)
+- [🧩 خصّص Spec Kit حسب احتياجك: الامتدادات والوصفات](#-making-spec-kit-your-own-extensions--presets)
+- [📚 الفلسفة الأساسية](#-core-philosophy)
+- [🌟 مراحل التطوير](#-development-phases)
+- [🎯 الأهداف التجريبية](#-experimental-goals)
+- [🔧 المتطلبات الأساسية](#-prerequisites)
+- [📖 تعلّم المزيد](#-learn-more)
+- [📋 الخطوات التفصيلية](#-detailed-process)
+- [🔍 حل المشكلات](#-troubleshooting)
+- [💬 الدعم](#-support)
+- [🙏 شكر وتقدير](#-acknowledgements)
+- [📄 الترخيص](#-license)
 
 ## 🤔 ما هو التطوير المعتمد على المواصفات (Spec-Driven Development)؟
 
@@ -52,112 +52,112 @@
 
 > **مهم:** الحزم الرسمية والمدعومة لـ Spec Kit تُنشر من هذا المستودع على GitHub فقط. أي حزم بنفس الاسم على PyPI **ليست** تابعة لهذا المشروع. ثبّت دائماً من GitHub كما يلي.
 
-#### Option 1: Persistent Installation (Recommended)
+#### الخيار 1: تثبيت دائم (موصى به)
 
-Install once and use everywhere. Pin a specific release tag for stability (check [Releases](https://github.com/github/spec-kit/releases) for the latest):
+ثبّت مرة واحدة واستخدم في كل مكان. ثبّت إصدارًا محددًا من أجل الاستقرار (راجع [Releases](https://github.com/github/spec-kit/releases) لمعرفة الأحدث):
 
 ```bash
-# Install a specific stable release (recommended — replace vX.Y.Z with the latest tag)
+# تثبيت إصدار مستقر محدد (موصى به — استبدل vX.Y.Z بأحدث إصدار)
 uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z
 
-# Or install latest from main (may include unreleased changes)
+# أو ثبّت أحدث نسخة من main (قد تتضمن تغييرات لم تُصدر بعد)
 uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
 
-# Alternative: using pipx (also works)
+# بديل: باستخدام pipx (يعمل أيضًا)
 pipx install git+https://github.com/github/spec-kit.git@vX.Y.Z
 pipx install git+https://github.com/github/spec-kit.git
 ```
 
-Then verify the correct version is installed:
+ثم تحقق من تثبيت الإصدار الصحيح:
 
 ```bash
 specify version
 ```
 
-And use the tool directly:
+واستخدم الأداة مباشرة:
 
 ```bash
-# Create new project
+# إنشاء مشروع جديد
 specify init <PROJECT_NAME>
 
-# Or initialize in existing project
+# أو التهيئة في مشروع قائم
 specify init . --integration copilot
-# or
+# أو
 specify init --here --integration copilot
 
-# Check installed tools
+# فحص الأدوات المثبتة
 specify check
 ```
 
-To upgrade Specify, see the [Upgrade Guide](./docs/upgrade.md) for detailed instructions. Quick upgrade:
+لترقية Specify، راجع [دليل الترقية](./docs/upgrade.md) للحصول على تعليمات مفصّلة. ترقية سريعة:
 
 ```bash
 uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git@vX.Y.Z
-# pipx users: pipx install --force git+https://github.com/github/spec-kit.git@vX.Y.Z
+# لمستخدمي pipx: pipx install --force git+https://github.com/github/spec-kit.git@vX.Y.Z
 ```
 
-#### Option 2: One-time Usage
+#### الخيار 2: استخدام لمرة واحدة
 
-Run directly without installing:
+شغّل الأداة مباشرة دون تثبيت:
 
 ```bash
-# Create new project (pinned to a stable release — replace vX.Y.Z with the latest tag)
+# إنشاء مشروع جديد (مرتبط بإصدار مستقر — استبدل vX.Y.Z بأحدث إصدار)
 uvx --from git+https://github.com/github/spec-kit.git@vX.Y.Z specify init <PROJECT_NAME>
 
-# Or initialize in existing project
+# أو التهيئة في مشروع قائم
 uvx --from git+https://github.com/github/spec-kit.git@vX.Y.Z specify init . --integration copilot
-# or
+# أو
 uvx --from git+https://github.com/github/spec-kit.git@vX.Y.Z specify init --here --integration copilot
 ```
 
-**Benefits of persistent installation:**
+**مزايا التثبيت الدائم:**
 
-- Tool stays installed and available in PATH
-- No need to create shell aliases
-- Better tool management with `uv tool list`, `uv tool upgrade`, `uv tool uninstall`
-- Cleaner shell configuration
+- تبقى الأداة مثبّتة ومتاحة في PATH
+- لا حاجة لإنشاء اختصارات في الـ shell
+- إدارة أفضل للأدوات عبر `uv tool list`، `uv tool upgrade`، `uv tool uninstall`
+- إعدادات أنظف للـ shell
 
-#### Option 3: Enterprise / Air-Gapped Installation
+#### الخيار 3: تثبيت للمؤسسات / البيئات المعزولة
 
-If your environment blocks access to PyPI or GitHub, see the [Enterprise / Air-Gapped Installation](./docs/installation.md#enterprise--air-gapped-installation) guide for step-by-step instructions on using `pip download` to create portable, OS-specific wheel bundles on a connected machine.
+إذا كانت بيئتك تحجب الوصول إلى PyPI أو GitHub، راجع دليل [التثبيت في المؤسسات / البيئات المعزولة](./docs/installation.md#enterprise--air-gapped-installation) للحصول على إرشادات خطوة بخطوة لاستخدام `pip download` وإنشاء حزم wheel قابلة للنقل ومخصصة لكل نظام تشغيل على جهاز متصل بالإنترنت.
 
-### 2. Establish project principles
+### 2. أرسِ مبادئ المشروع
 
-Launch your coding agent in the project directory. Most agents expose spec-kit as `/speckit.*` slash commands; Codex CLI in skills mode uses `$speckit-*` instead.
+شغّل وكيل البرمجة الخاص بك داخل مجلد المشروع. معظم الوكلاء يكشفون spec-kit عبر أوامر `/speckit.*`؛ بينما يستخدم Codex CLI في وضع المهارات `$speckit-*` بدلاً منها.
 
-Use the **`/speckit.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
+استخدم أمر **`/speckit.constitution`** لإنشاء المبادئ الحاكمة لمشروعك وإرشادات التطوير التي ستوجّه كل ما يليها من تطوير.
 
 ```bash
 /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 ```
 
-### 3. Create the spec
+### 3. أنشئ المواصفة
 
-Use the **`/speckit.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
+استخدم أمر **`/speckit.specify`** لوصف ما تريد بناءه. ركّز على **ماذا** و**لماذا**، لا على المكدّس التقني.
 
 ```bash
 /speckit.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
 ```
 
-### 4. Create a technical implementation plan
+### 4. أنشئ خطة تنفيذ تقنية
 
-Use the **`/speckit.plan`** command to provide your tech stack and architecture choices.
+استخدم أمر **`/speckit.plan`** لتقديم اختياراتك للمكدّس التقني والمعمارية.
 
 ```bash
 /speckit.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
 ```
 
-### 5. Break down into tasks
+### 5. قسّم العمل إلى مهام
 
-Use **`/speckit.tasks`** to create an actionable task list from your implementation plan.
+استخدم **`/speckit.tasks`** لإنشاء قائمة مهام قابلة للتنفيذ من خطة التنفيذ.
 
 ```bash
 /speckit.tasks
 ```
 
-### 6. Execute implementation
+### 6. نفّذ
 
-Use **`/speckit.implement`** to execute all tasks and build your feature according to the plan.
+استخدم **`/speckit.implement`** لتنفيذ كل المهام وبناء الميزة وفق الخطة.
 
 ```bash
 /speckit.implement
